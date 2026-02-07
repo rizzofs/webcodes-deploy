@@ -1,0 +1,331 @@
+/* ========================================
+   MOBILE FIXES - RESPONSIVE IMPROVEMENTS
+   ======================================== */
+
+/* Asegurar que los contenedores no se salgan de la pantalla en móvil */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, 
+  .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+  .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
+  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
+  .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, 
+  .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+  .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
+  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
+  .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}
+
+/* Asegurar que las imágenes del blog se vean correctamente */
+@media (max-width: 768px) {
+  .blog-card .card-image img,
+  .featured-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+}
+
+/* Mejorar la visualización de los formularios en móvil */
+@media (max-width: 768px) {
+  .newsletter-form-container,
+  .contact-form-container {
+    margin: 0 0.5rem;
+    border-radius: 15px;
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .newsletter-form-container .newsletter-header,
+  .contact-form-container .contact-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .newsletter-form-container .newsletter-header h3,
+  .contact-form-container .contact-header h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .newsletter-form-container .newsletter-header p,
+  .contact-form-container .contact-header p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .newsletter-form-container,
+  .contact-form-container {
+    margin: 0 0.25rem;
+    border-radius: 10px;
+    padding: 1rem 0.75rem !important;
+  }
+  
+  .newsletter-form-container .newsletter-header,
+  .contact-form-container .contact-header {
+    margin-bottom: 1rem;
+  }
+  
+  .newsletter-form-container .newsletter-header h3,
+  .contact-form-container .contact-header h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .newsletter-form-container .newsletter-header p,
+  .contact-form-container .contact-header p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Asegurar que los botones sean táctiles en móvil */
+@media (max-width: 768px) {
+  .btn, .filter-btn, .read-more-btn, .submit-btn, .newsletter-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mejorar los inputs en móvil */
+  .form-input, .form-select, .form-textarea {
+    font-size: 16px !important; /* Evita zoom en iOS */
+    padding: 0.75rem 1rem !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Mejorar los grupos de formulario */
+  .form-group {
+    margin-bottom: 1.25rem !important;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Mejorar las opciones de interés */
+  .interest-option {
+    padding: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .interest-content {
+    font-size: 0.85rem !important;
+  }
+  
+  /* Mejorar el grid de intereses */
+  .interests-grid {
+    gap: 0.75rem !important;
+  }
+  
+  /* Mejorar el select de categorías */
+  .form-select {
+    font-size: 16px !important;
+    padding: 0.75rem 1rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Ajustes específicos para móviles pequeños */
+  .form-input, .form-select, .form-textarea {
+    font-size: 16px !important;
+    padding: 0.6rem 0.8rem !important;
+    border-radius: 6px !important;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem !important;
+  }
+  
+  .form-group label {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  
+  .interest-option {
+    padding: 0.6rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  
+  .interest-content {
+    font-size: 0.8rem !important;
+  }
+  
+  .interests-grid {
+    gap: 0.5rem !important;
+  }
+  
+  /* Mejorar el select de categorías en móvil pequeño */
+  .form-select {
+    font-size: 16px !important;
+    padding: 0.6rem 0.8rem !important;
+  }
+  
+  /* Mejorar el footer del formulario */
+  .form-footer {
+    margin-top: 1.5rem !important;
+    padding-top: 1rem !important;
+  }
+  
+  .submit-btn {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Mejorar la legibilidad del texto en móvil */
+@media (max-width: 768px) {
+  .section-title {
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  .section-subtitle {
+    line-height: 1.4;
+    margin-bottom: 2rem;
+  }
+  
+  .card-title {
+    line-height: 1.3;
+  }
+  
+  .card-excerpt {
+    line-height: 1.5;
+  }
+}
+
+/* Asegurar que los filtros del blog funcionen bien en móvil */
+@media (max-width: 576px) {
+  .filters-container {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .filter-btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Mejorar la visualización de las tarjetas de contacto */
+@media (max-width: 768px) {
+  .contact-info-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Asegurar que el footer se vea bien en móvil */
+@media (max-width: 768px) {
+  .footer-newsletter-container {
+    margin: 0 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-newsletter-container {
+    margin: 0 0.25rem;
+  }
+}
+
+/* Mejoras específicas para dispositivos móviles */
+.mobile-device .newsletter-form-container,
+.mobile-device .contact-form-container,
+.mobile-device .footer-newsletter-container {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(57, 192, 195, 0.2);
+}
+
+.mobile-device .form-input:focus,
+.mobile-device .form-select:focus,
+.mobile-device .form-textarea:focus {
+  box-shadow: 0 0 0 3px rgba(57, 192, 195, 0.2);
+  border-color: #39c0c3;
+}
+
+.mobile-device .interest-option:hover {
+  transform: none; /* Desactivar transform en hover para móvil */
+}
+
+.mobile-device .interest-option:active {
+  transform: scale(0.98);
+  background: rgba(57, 192, 195, 0.1);
+}
+
+.mobile-device .btn:active,
+.mobile-device .filter-btn:active,
+.mobile-device .read-more-btn:active,
+.mobile-device .submit-btn:active,
+.mobile-device .newsletter-btn:active {
+  transform: scale(0.95);
+}
+
+/* Mejorar la visualización de alertas en móvil */
+@media (max-width: 768px) {
+  .newsletter-alert,
+  .contact-alert {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .newsletter-alert,
+  .contact-alert {
+    font-size: 0.8rem;
+    padding: 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Mejorar la visualización de validaciones en móvil */
+@media (max-width: 768px) {
+  .invalid-feedback {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+  
+  .character-count {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .invalid-feedback {
+    font-size: 0.75rem;
+    margin-top: 0.2rem;
+  }
+  
+  .character-count {
+    font-size: 0.7rem;
+    margin-top: 0.2rem;
+  }
+}

@@ -1,0 +1,247 @@
+.admin-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
+  padding: 2rem 0;
+}
+
+.admin-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.admin-page h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.admin-section {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.admin-section h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  border-bottom: 3px solid #39c0c3;
+  padding-bottom: 0.5rem;
+}
+
+.verificar-numero {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.verificar-numero input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.verificar-numero input:focus {
+  outline: none;
+  border-color: #39c0c3;
+}
+
+.verificar-numero button {
+  background: #39c0c3;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.verificar-numero button:hover:not(:disabled) {
+  background: #2a8a8d;
+}
+
+.verificar-numero button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.estado-resultado {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border-left: 5px solid #28a745;
+}
+
+.estado-resultado.vendido {
+  border-left-color: #dc3545;
+  background: #fff5f5;
+}
+
+.estado-resultado h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.estado-resultado p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #39c0c3, #2a8a8d);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.stat-card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.stat-number.vendidos {
+  color: #28a745;
+}
+
+.stat-number.disponibles {
+  color: #17a2b8;
+}
+
+.stat-number.recaudado {
+  color: #ffc107;
+}
+
+.stat-number.porcentaje {
+  color: #2a8a8d;
+}
+
+.numeros-vendidos {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.numeros-vendidos table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.numeros-vendidos th {
+  background: #39c0c3;
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.numeros-vendidos td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.numeros-vendidos tr:hover {
+  background: #f8f9fa;
+}
+
+.estado.pagado {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.estado.pendiente {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.estado.cancelado {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.enlaces {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.enlaces a {
+  background: #39c0c3;
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: background 0.3s;
+  display: inline-block;
+}
+
+.enlaces a:hover {
+  background: #2a8a8d;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-page h1 {
+    font-size: 2rem;
+  }
+  
+  .admin-section {
+    padding: 1.5rem;
+  }
+  
+  .verificar-numero {
+    flex-direction: column;
+  }
+  
+  .verificar-numero input {
+    min-width: auto;
+  }
+  
+  .estadisticas {
+    grid-template-columns: 1fr;
+  }
+  
+  .enlaces {
+    flex-direction: column;
+  }
+  
+  .numeros-vendidos {
+    font-size: 0.9rem;
+  }
+  
+  .numeros-vendidos th,
+  .numeros-vendidos td {
+    padding: 0.75rem 0.5rem;
+  }
+}

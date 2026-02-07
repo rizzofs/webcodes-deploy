@@ -1,0 +1,192 @@
+/* ========================================
+   BACK TO TOP BUTTON - MODERN DESIGN
+   ======================================== */
+
+#backToTop {
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  z-index: 9999 !important;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50% !important;
+  background: var(--gradient) !important;
+  border: none !important;
+  color: white !important;
+  font-size: 1.2rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(20px) scale(0.8) !important;
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+#backToTop.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+#backToTop:hover {
+  transform: translateY(-5px) scale(1.1) !important;
+  box-shadow: 0 15px 35px rgba(57, 192, 195, 0.4) !important;
+  background: var(--gradient-light) !important;
+}
+
+#backToTop:active {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 10px 25px rgba(57, 192, 195, 0.5) !important;
+}
+
+#backToTop i {
+  font-size: 1.3rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.3s ease !important;
+}
+
+#backToTop:hover i {
+  transform: translateY(-2px) !important;
+}
+
+/* Pulse animation when visible */
+#backToTop.show::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 2px solid rgba(57, 192, 195, 0.3);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Glow effect on hover */
+#backToTop:hover::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(circle, rgba(57, 192, 195, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #backToTop {
+    width: 55px !important;
+    height: 55px !important;
+    bottom: 25px !important;
+    right: 25px !important;
+    font-size: 1.1rem !important;
+  }
+  
+  #backToTop i {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  #backToTop {
+    width: 50px !important;
+    height: 50px !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    font-size: 1rem !important;
+  }
+  
+  #backToTop i {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] #backToTop {
+  background: var(--gradient) !important;
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.4) !important;
+}
+
+[data-theme="dark"] #backToTop:hover {
+  background: var(--gradient-light) !important;
+  box-shadow: 0 15px 35px rgba(57, 192, 195, 0.5) !important;
+}
+
+[data-theme="dark"] #backToTop.show::before {
+  border-color: rgba(57, 192, 195, 0.4);
+}
+
+/* Accessibility improvements */
+#backToTop:focus {
+  outline: 3px solid rgba(57, 192, 195, 0.5) !important;
+  outline-offset: 2px !important;
+}
+
+/* Smooth entrance animation */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#backToTop.show {
+  animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Loading state (if needed) */
+#backToTop.loading {
+  pointer-events: none !important;
+  opacity: 0.7 !important;
+}
+
+#backToTop.loading i {
+  animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

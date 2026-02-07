@@ -1,0 +1,321 @@
+{
+  "organization": {
+    "name": "CODES++",
+    "fullName": "Centro Organizado de Estudiantes de Sistemas",
+    "university": "Universidad Nacional de Luján",
+    "career": "Licenciatura en Sistemas de Información",
+    "location": "Representamos la carrera en las tres sedes: Luján, Chivilcoy y San Miguel",
+    "founded": "14 de octubre de 2022",
+    "mission": "Representar y ayudar a los estudiantes y graduados de nuestra carrera, así como también impulsar mejoras",
+    "vision": "Que el centro sea algo útil, que genere valor a nuestra carrera"
+  },
+  "leadership": {
+    "president": {
+      "name": "Federico Sebastián Rizzo",
+      "role": "Presidente",
+      "email": "codes.unlu@gmail.com",
+      "description": "Responsable de la coordinación general y representación estudiantil"
+    },
+    "vicePresident": {
+      "name": "Juan Cruz Rodriguez",
+      "role": "Vicepresidente",
+      "email": "codes.unlu@gmail.com",
+      "description": "Apoyo en la gestión y coordinación de actividades"
+    },
+    "secretary": {
+      "name": "Romina Ortiz",
+      "role": "Secretaria",
+      "email": "codes.unlu@gmail.com",
+      "description": "Gestión documental y comunicación institucional"
+    },
+    "treasurer": {
+      "name": "Bautista Pereyra Buch",
+      "role": "Tesorero",
+      "email": "codes.unlu@gmail.com",
+      "description": "Administración de recursos y presupuesto"
+    },
+    "vocals": {
+      "description": "Vocales de la comisión directiva"
+    }
+  },
+  "studyGroups": [
+    {
+      "id": "tutorias-generales",
+      "name": "Tutorías Académicas",
+      "subject": "Cualquier materia de la carrera",
+      "schedule": "Flexible según demanda - se coordina mediante cuestionario",
+      "location": "Virtual en Discord",
+      "coordinator": "Federico Sebastián Rizzo (Presidente) y Juan Cruz Rodriguez (Vicepresidente)",
+      "level": "Todos los años (principalmente años iniciales)",
+      "description": "Tutorías personalizadas para cualquier materia de la carrera de Sistemas. Se organizan según la demanda y disponibilidad de los estudiantes.",
+      "topics": ["Todas las materias de la carrera", "Apoyo académico general", "Resolución de dudas"],
+      "contact": "codes.unlu@gmail.com",
+      "discord": "Servidor de Discord de CODES++"
+    }
+  ],
+  "events": [
+    {
+      "id": "hackathon-realizado",
+      "name": "Hackathon CODES++",
+      "type": "Competencia de programación",
+      "date": "Recientemente realizado",
+      "time": "Virtual",
+      "location": "Virtual",
+      "description": "Hackathon organizado por CODES++ para estudiantes de la carrera de Sistemas.",
+      "activities": [
+        "Desarrollo de soluciones tecnológicas",
+        "Competencia de programación",
+        "Networking entre estudiantes"
+      ],
+      "targetAudience": "Estudiantes de Sistemas",
+      "registration": "Gratuita",
+      "contact": "codes.unlu@gmail.com",
+      "status": "Realizado"
+    },
+    {
+      "id": "hackathon-futuro",
+      "name": "Hackathon CODES++ a Mayor Escala",
+      "type": "Competencia de programación",
+      "date": "En evaluación",
+      "time": "Por definir",
+      "location": "Virtual",
+      "description": "Hackathon de mayor escala que se está evaluando para organizar próximamente.",
+      "activities": [
+        "Competencia de programación ampliada",
+        "Mayor convocatoria",
+        "Premios y reconocimientos"
+      ],
+      "targetAudience": "Estudiantes de Sistemas",
+      "registration": "Gratuita (formulario por desplegar)",
+      "contact": "codes.unlu@gmail.com",
+      "status": "En evaluación"
+    },
+    {
+      "id": "equipo-esport",
+      "name": "Equipo de E-Sports CODES++",
+      "type": "Equipo de gaming",
+      "date": "En desarrollo",
+      "time": "Por definir",
+      "location": "Virtual",
+      "description": "Formación de un equipo de E-Sports representativo de CODES++.",
+      "activities": [
+        "Competencias de videojuegos",
+        "Entrenamientos",
+        "Participación en torneos"
+      ],
+      "targetAudience": "Estudiantes de Sistemas interesados en gaming",
+      "registration": "Por definir",
+      "contact": "codes.unlu@gmail.com",
+      "status": "En desarrollo"
+    },
+    {
+      "id": "proyecto-estudio",
+      "name": "Proyecto de Estudio Avanzado",
+      "type": "Proyecto académico",
+      "date": "En evaluación",
+      "time": "Por definir",
+      "location": "Por definir",
+      "description": "Proyecto en evaluación para llevar el estudio a otro nivel.",
+      "activities": [
+        "Metodologías de estudio avanzadas",
+        "Herramientas tecnológicas para el aprendizaje",
+        "Innovación educativa"
+      ],
+      "targetAudience": "Estudiantes de Sistemas",
+      "registration": "Por definir",
+      "contact": "codes.unlu@gmail.com",
+      "status": "En evaluación"
+    },
+    {
+      "id": "charlas-futuras",
+      "name": "Charlas y Conferencias",
+      "type": "Charlas técnicas",
+      "date": "Planificadas",
+      "time": "Por definir",
+      "location": "Virtual",
+      "description": "Charlas técnicas y conferencias que se están planificando para el futuro.",
+      "activities": [
+        "Charlas sobre tecnología",
+        "Conferencias de la industria",
+        "Networking profesional"
+      ],
+      "targetAudience": "Estudiantes de Sistemas",
+      "registration": "Gratuita",
+      "contact": "codes.unlu@gmail.com",
+      "status": "Planificadas"
+    },
+    {
+      "id": "streaming-proyecto",
+      "name": "Proyecto de Streaming",
+      "type": "Contenido en vivo",
+      "date": "En desarrollo temprano",
+      "time": "Por definir",
+      "location": "Virtual",
+      "description": "Proyecto de streaming que está en fase inicial de desarrollo.",
+      "activities": [
+        "Streaming de contenido educativo",
+        "Transmisiones en vivo",
+        "Contenido interactivo"
+      ],
+      "targetAudience": "Comunidad estudiantil",
+      "registration": "Por definir",
+      "contact": "codes.unlu@gmail.com",
+      "status": "En desarrollo temprano"
+    }
+  ],
+  "resources": {
+    "academic": [
+      {
+        "name": "Repositorio GitHub CODES++",
+        "description": "Repositorio organizado por materias con teoría, práctica, exámenes, cursos y libros.",
+        "access": "Gratuito para todos los estudiantes",
+        "content": [
+          "Teoría por materias",
+          "Ejercicios prácticos",
+          "Exámenes de años anteriores",
+          "Cursos online",
+          "Libros digitales",
+          "Recursos de estudio"
+        ],
+        "url": "GitHub de CODES++",
+        "organization": "Ordenado por materias de la carrera"
+      },
+      {
+        "name": "Tutorías Académicas",
+        "description": "Apoyo académico personalizado para cualquier materia de la carrera.",
+        "subjects": [
+          "Todas las materias de la carrera",
+          "Apoyo general en Sistemas",
+          "Resolución de dudas específicas"
+        ],
+        "schedule": "Siempre que sea necesario",
+        "contact": "codes.unlu@gmail.com",
+        "platform": "Discord"
+      }
+    ],
+    "career": [
+      {
+        "name": "Bolsa de Trabajo CODES++",
+        "description": "Bolsa de trabajo en desarrollo para conectar estudiantes con oportunidades laborales.",
+        "status": "En desarrollo",
+        "features": [
+          "Ofertas laborales para estudiantes",
+          "Conexión con empresas",
+          "Oportunidades de pasantías",
+          "Proyectos freelance"
+        ],
+        "contact": "codes.unlu@gmail.com"
+      }
+    ]
+  },
+  "contact": {
+    "email": "codes.unlu@gmail.com",
+    "phone": "No disponible",
+    "address": "No tenemos ubicación física, pero nos pueden contactar por nuestras redes",
+    "whatsapp": "https://chat.whatsapp.com/C3i38DQvAT0JD0tBoC0YxV",
+    "socialMedia": {
+      "instagram": "Principal red social activa",
+      "facebook": "Disponible",
+      "linkedin": "No especificado",
+      "discord": "No especificado",
+      "github": "No especificado"
+    },
+    "officeHours": "Estamos siempre que lo necesiten",
+    "officeLocation": "No tenemos oficina, pero siempre nos encuentran virtualmente"
+  },
+  "faq": [
+    {
+      "question": "¿Cómo puedo unirme a CODES++?",
+      "answer": "Para unirte a CODES++, puedes contactarnos por email (codes.unlu@gmail.com), unirte a nuestro grupo de WhatsApp o seguirnos en Instagram. La membresía es gratuita para todos los estudiantes de la carrera de Sistemas."
+    },
+    {
+      "question": "¿Qué beneficios obtengo al ser miembro?",
+      "answer": "Como miembro de CODES++ tienes acceso a: tutorías académicas, repositorio GitHub con recursos organizados por materias, participación en hackathons, eventos virtuales, y próximamente bolsa de trabajo."
+    },
+    {
+      "question": "¿Cómo puedo acceder a las tutorías?",
+      "answer": "Las tutorías están disponibles para cualquier materia de la carrera. Simplemente contacta por email (codes.unlu@gmail.com) o únete al servidor de Discord. Se coordinan según la demanda mediante cuestionarios."
+    },
+    {
+      "question": "¿Cómo accedo al repositorio de GitHub?",
+      "answer": "El repositorio está organizado por materias con teoría, práctica, exámenes, cursos y libros. Es gratuito para todos los estudiantes. Contacta por email para obtener acceso."
+    },
+    {
+      "question": "¿Cómo puedo participar en los eventos?",
+      "answer": "Los eventos se realizan virtualmente para mayor convocatoria. Cuando hay eventos disponibles, se publica un formulario de inscripción. Mantente atento a nuestras redes sociales."
+    },
+    {
+      "question": "¿Cómo puedo proponer una nueva actividad?",
+      "answer": "Puedes proponer nuevas actividades contactando a la comisión directiva por email (codes.unlu@gmail.com) o a través del grupo de WhatsApp. Valoramos las propuestas de todos los miembros."
+    },
+    {
+      "question": "¿Ofrecen ayuda para encontrar trabajo?",
+      "answer": "Estamos trabajando en la creación de una bolsa de trabajo. Mientras tanto, puedes contactarnos para oportunidades laborales y networking con empresas del sector."
+    }
+  ],
+  "calendar": {
+    "academicYear": "2025",
+    "importantDates": [
+      {
+        "date": "2025-03-01",
+        "event": "Inicio de clases",
+        "type": "Académico"
+      },
+      {
+        "date": "2025-04-15",
+        "event": "Expo UNLu 2025",
+        "type": "Evento CODES++"
+      },
+      {
+        "date": "2025-05-20",
+        "event": "Hackathon CODES++",
+        "type": "Competencia"
+      },
+      {
+        "date": "2025-07-15",
+        "event": "Receso de invierno",
+        "type": "Académico"
+      },
+      {
+        "date": "2025-08-01",
+        "event": "Reinicio de clases",
+        "type": "Académico"
+      },
+      {
+        "date": "2025-11-30",
+        "event": "Fin de clases",
+        "type": "Académico"
+      }
+    ]
+  },
+  "partnerships": [
+    {
+      "name": "MercadoLibre",
+      "type": "Empresa tecnológica",
+      "benefits": [
+        "Charlas técnicas",
+        "Oportunidades de pasantías",
+        "Descuentos en cursos"
+      ]
+    },
+    {
+      "name": "Globant",
+      "type": "Consultora IT",
+      "benefits": [
+        "Workshops de desarrollo",
+        "Mentorías profesionales",
+        "Ofertas laborales"
+      ]
+    },
+    {
+      "name": "Google Developer Group",
+      "type": "Comunidad tecnológica",
+      "benefits": [
+        "Eventos de Google",
+        "Certificaciones gratuitas",
+        "Recursos de desarrollo"
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,497 @@
+/* ========================================
+   MODERN APP STYLES
+   ======================================== */
+
+* {
+  cursor: none !important;
+}
+
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+/* Remove any top spacing that might be caused by fixed header */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide or reset the fixed header that's causing white space */
+header {
+  display: none !important;
+}
+
+/* Ensure hero starts at the very top */
+.hero {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-light);
+}
+
+/* Smooth transitions */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Modern focus styles */
+*:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Improved button styles */
+.btn {
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Override Bootstrap primary button colors to use turquoise */
+.btn-primary {
+  background: var(--gradient, linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%));
+  border-color: var(--primary, #39c0c3);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--gradient, linear-gradient(135deg, #2a8a8d 0%, #1e6b6e 100%));
+  border-color: var(--primary-dark, #2a8a8d);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3);
+}
+
+.btn-primary:focus {
+  background: var(--gradient, linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%));
+  border-color: var(--primary, #39c0c3);
+  color: white;
+  box-shadow: 0 0 0 0.2rem rgba(57, 192, 195, 0.25);
+}
+
+.btn-primary:active {
+  background: var(--gradient, linear-gradient(135deg, #2a8a8d 0%, #1e6b6e 100%));
+  border-color: var(--primary-dark, #2a8a8d);
+  color: white;
+}
+
+/* Override Bootstrap outline primary button colors */
+.btn-outline-primary {
+  color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3);
+}
+
+.btn-outline-primary:focus {
+  color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  background-color: transparent;
+  box-shadow: 0 0 0 0.2rem rgba(57, 192, 195, 0.25);
+}
+
+.btn-outline-primary:active {
+  background-color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  color: white;
+}
+
+/* Dark mode support for buttons */
+[data-theme="dark"] .btn-primary {
+  background: var(--gradient, linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%));
+  border-color: var(--primary, #39c0c3);
+  color: white;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: var(--gradient, linear-gradient(135deg, #2a8a8d 0%, #1e6b6e 100%));
+  border-color: var(--primary-dark, #2a8a8d);
+  color: white;
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.4);
+}
+
+[data-theme="dark"] .btn-outline-primary {
+  color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  background-color: transparent;
+}
+
+[data-theme="dark"] .btn-outline-primary:hover {
+  background-color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  color: white;
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.4);
+}
+
+/* Override other button variants to use turquoise for primary actions */
+.btn-outline-info {
+  color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  background-color: transparent;
+}
+
+.btn-outline-info:hover {
+  background-color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3);
+}
+
+.btn-outline-info:focus {
+  color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  background-color: transparent;
+  box-shadow: 0 0 0 0.2rem rgba(57, 192, 195, 0.25);
+}
+
+.btn-outline-info:active {
+  background-color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  color: white;
+}
+
+/* Dark mode support for info buttons */
+[data-theme="dark"] .btn-outline-info {
+  color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  background-color: transparent;
+}
+
+[data-theme="dark"] .btn-outline-info:hover {
+  background-color: var(--primary, #39c0c3);
+  border-color: var(--primary, #39c0c3);
+  color: white;
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.4);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Modern card styles */
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--background-card);
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Modern form styles */
+.form-control {
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  background: var(--background);
+  color: var(--text);
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem rgba(57, 192, 195, 0.25);
+  background: var(--background);
+  color: var(--text);
+}
+
+/* Modern section spacing */
+section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+section:nth-child(even) {
+  background: var(--background-alt);
+}
+
+/* Modern typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+p {
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+/* Modern animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation classes */
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.fade-in-left {
+  animation: fadeInLeft 0.6s ease-out;
+}
+
+.fade-in-right {
+  animation: fadeInRight 0.6s ease-out;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  section {
+    padding: 3rem 0;
+  }
+
+  .card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  section {
+    padding: 2rem 0;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ========================================
+   ENHANCED SECTION TITLES
+   ======================================== */
+
+.section-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 50%, #1e6b6e 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center !important;
+  margin-bottom: 1rem;
+  position: relative;
+  display: block;
+  width: 100%;
+  line-height: 1.2;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #39c0c3, #2a8a8d);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-light, #6c757d);
+  text-align: center !important;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Dark mode support for section titles */
+[data-theme="dark"] .section-title {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 50%, #1e6b6e 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] .section-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Section separation improvements */
+section {
+  position: relative;
+  border-bottom: 1px solid transparent;
+}
+
+/* Light mode section separation */
+[data-theme="light"] section {
+  border-bottom: 1px solid rgba(57, 192, 195, 0.1);
+  background: linear-gradient(180deg,
+      rgba(57, 192, 195, 0.02) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(57, 192, 195, 0.02) 100%);
+}
+
+[data-theme="light"] section:nth-child(even) {
+  background: linear-gradient(180deg,
+      rgba(57, 192, 195, 0.05) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(57, 192, 195, 0.05) 100%);
+}
+
+/* Section dividers for light mode */
+[data-theme="light"] section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #39c0c3, transparent);
+  opacity: 0.3;
+}
+
+[data-theme="light"] section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #39c0c3, transparent);
+  opacity: 0.3;
+}
+
+/* Dark mode keeps existing separation */
+[data-theme="dark"] section {
+  border-bottom: 1px solid rgba(57, 192, 195, 0.2);
+}
+
+/* Responsive section titles */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-title {
+    font-size: 1.9rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-title::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  /* Adjust section dividers for mobile */
+  [data-theme="light"] section::before,
+  [data-theme="light"] section::after {
+    width: 60px;
+    height: 2px;
+  }
+}

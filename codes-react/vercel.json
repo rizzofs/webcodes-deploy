@@ -1,0 +1,22 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "VITE_GOOGLE_SHEETS_URL": "https://script.google.com/macros/s/AKfycbxpV04uR6UJCSTrDMxsTM52HmU5HxDcm52ww51nTkCZVbe1Oy11XQWWAkDY77yWPi9s/exec"
+  }
+}

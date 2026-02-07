@@ -1,0 +1,179 @@
+/* ========================================
+   CUSTOM CURSOR - SPECTACULAR DESIGN
+   ======================================== */
+
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: all 0.1s ease-out;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #39c0c3 0%, #ffffff 100%);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px rgba(57, 192, 195, 0.8);
+  transition: all 0.3s ease;
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(57, 192, 195, 0.3);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  animation: cursorPulse 2s ease-in-out infinite;
+}
+
+.cursor-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+}
+
+.cursor-particles::before,
+.cursor-particles::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(57, 192, 195, 0.6);
+  border-radius: 50%;
+  animation: particleOrbit 3s linear infinite;
+}
+
+.cursor-particles::before {
+  animation-delay: 0s;
+}
+
+.cursor-particles::after {
+  animation-delay: 1.5s;
+}
+
+@keyframes cursorPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+@keyframes particleOrbit {
+  0% {
+    transform: rotate(0deg) translateX(30px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg) translateX(30px) rotate(-360deg);
+    opacity: 0;
+  }
+}
+
+/* Hover States */
+.custom-cursor.hover .cursor-dot {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #39c0c3 100%);
+  box-shadow: 0 0 30px rgba(57, 192, 195, 1);
+}
+
+.custom-cursor.hover .cursor-ring {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(57, 192, 195, 0.6);
+  border-width: 3px;
+}
+
+.custom-cursor.hover .cursor-particles {
+  width: 80px;
+  height: 80px;
+}
+
+.custom-cursor.hover .cursor-particles::before,
+.custom-cursor.hover .cursor-particles::after {
+  width: 6px;
+  height: 6px;
+  background: rgba(57, 192, 195, 0.8);
+}
+
+/* Clicking State */
+.custom-cursor.clicking .cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, #ffffff 0%, #39c0c3 100%);
+  box-shadow: 0 0 40px rgba(57, 192, 195, 1);
+}
+
+.custom-cursor.clicking .cursor-ring {
+  width: 20px;
+  height: 20px;
+  border-color: rgba(57, 192, 195, 0.8);
+  border-width: 4px;
+  animation: cursorClick 0.3s ease-out;
+}
+
+@keyframes cursorClick {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+  .custom-cursor {
+    display: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .cursor-dot {
+    background: #ffffff;
+    border: 2px solid #000000;
+  }
+  
+  .cursor-ring {
+    border-color: #ffffff;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-ring {
+    animation: none;
+  }
+  
+  .cursor-particles::before,
+  .cursor-particles::after {
+    animation: none;
+  }
+}

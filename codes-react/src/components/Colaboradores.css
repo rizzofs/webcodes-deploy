@@ -1,0 +1,267 @@
+/* Colaboradores Section Styles */
+#colaboradores {
+  padding: 4rem 0;
+  background: var(--background-alt, linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%));
+  margin: 2rem 0;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light mode colaboradores section */
+[data-theme="light"] #colaboradores {
+  background: linear-gradient(180deg, 
+    rgba(57, 192, 195, 0.05) 0%, 
+    rgba(255, 255, 255, 0.9) 50%, 
+    rgba(57, 192, 195, 0.05) 100%
+  );
+  border: 2px solid rgba(57, 192, 195, 0.2);
+}
+
+#colaboradores::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  pointer-events: none;
+}
+
+.collaborator-card {
+  background: var(--background, white);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow, 0 8px 32px rgba(0, 0, 0, 0.1));
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid var(--border, #e9ecef);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.collaborator-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #39c0c3, #28a745, #ffc107, #dc3545);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.collaborator-card:hover::before {
+  transform: scaleX(1);
+}
+
+.collaborator-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Iconos de rol */
+.role-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+.social-media-role .role-icon {
+  background: linear-gradient(135deg, #e91e63, #f06292);
+  color: white;
+  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
+}
+
+.coming-soon .role-icon {
+  background: linear-gradient(135deg, #6c757d, #adb5bd);
+  color: white;
+  box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.collaborator-info h4 {
+  color: var(--text, #2c3e50);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  position: relative;
+}
+
+.collaborator-role {
+  color: var(--text-light, #6c757d);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.collaborator-description {
+  color: var(--text-light, #495057);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.social-link:hover::before {
+  transform: translateX(100%);
+}
+
+.social-link.linkedin {
+  background: linear-gradient(135deg, #0077b5, #005885);
+  color: white;
+}
+
+.social-link.instagram {
+  background: linear-gradient(135deg, #e4405f, #c13584, #833ab4);
+  color: white;
+}
+
+.social-link:hover {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.social-link i {
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card de "Únete" */
+.coming-soon {
+  border: 2px dashed var(--border, #dee2e6);
+  background: var(--background-alt, linear-gradient(135deg, #f8f9fa, #e9ecef));
+}
+
+.coming-soon:hover {
+  border-color: var(--primary, #39c0c3);
+  background: var(--background-alt, linear-gradient(135deg, #e3f2fd, #bbdefb));
+}
+
+.cta-button .btn {
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cta-button .btn {
+  background: transparent;
+  border: 2px solid var(--primary, #39c0c3);
+  color: var(--primary, #39c0c3);
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cta-button .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(57, 192, 195, 0.3);
+  background: var(--primary, #39c0c3);
+  color: white;
+}
+
+/* Responsive para colaboradores */
+@media (max-width: 768px) {
+  #colaboradores {
+    padding: 3rem 0;
+    margin: 1rem 0;
+  }
+
+  .collaborator-card {
+    padding: 1.5rem;
+  }
+
+  .role-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .collaborator-info h4 {
+    font-size: 1.2rem;
+  }
+
+  .collaborator-role {
+    font-size: 0.9rem;
+  }
+
+  .collaborator-description {
+    font-size: 0.85rem;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Dark mode support for colaboradores */
+[data-theme="dark"] .cta-button .btn {
+  background: transparent;
+  border: 2px solid var(--primary, #39c0c3);
+  color: var(--primary, #39c0c3);
+}
+
+[data-theme="dark"] .cta-button .btn:hover {
+  background: var(--primary, #39c0c3);
+  color: white;
+  box-shadow: 0 5px 15px rgba(57, 192, 195, 0.4);
+}

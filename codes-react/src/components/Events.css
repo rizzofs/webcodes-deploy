@@ -1,0 +1,473 @@
+/* Tarjeta del Sorteo */
+.sorteo-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #0f3460;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.sorteo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border-color: #0f3460;
+}
+
+.sorteo-card .event-content h3 {
+  color: #64b5f6;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.sorteo-card .event-content p {
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+.sorteo-card .event-content ul li {
+  color: #e0e0e0;
+  margin-bottom: 8px;
+}
+
+.sorteo-card .event-button .btn {
+  background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+  border: 2px solid #64b5f6;
+  color: #64b5f6;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.sorteo-card .event-button .btn:hover {
+  background: linear-gradient(135deg, #64b5f6 0%, #0f3460 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 181, 246, 0.3);
+}
+
+/* Carrusel de Actividades Mejorado */
+.activities-carousel-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.activities-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.activities-carousel .carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.activities-carousel .carousel-item {
+  position: relative;
+  display: none;
+  width: 100%;
+  flex: 0 0 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.activities-carousel .carousel-item.active {
+  display: block;
+}
+
+/* Deshabilitar cualquier animación automática */
+.activities-carousel.carousel {
+  --bs-carousel-transition: none;
+}
+
+/* Event Card Styles */
+.event-card {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid #e9ecef;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #39c0c3, #28a745, #ffc107, #dc3545);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover::before {
+  transform: scaleX(1);
+}
+
+.event-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.event-content h3 {
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  position: relative;
+}
+
+.event-content p {
+  color: #495057;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.event-content ul {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.event-content ul li {
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+.event-button {
+  margin-top: auto;
+}
+
+.event-button .btn {
+  border-radius: 25px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  background: var(--gradient, linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%));
+  border: none;
+  color: white;
+}
+
+.event-button .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3);
+  background: linear-gradient(135deg, #2a8a8d 0%, #1e6b6e 100%);
+  color: white;
+}
+
+/* Indicadores personalizados */
+.carousel-indicators-custom {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #39c0c3;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.indicator:hover {
+  background: rgba(57, 192, 195, 0.3);
+  transform: scale(1.2);
+}
+
+.indicator.active {
+  background: #39c0c3;
+  transform: scale(1.3);
+  box-shadow: 0 0 0 3px rgba(57, 192, 195, 0.2);
+}
+
+/* Navegación por teclado */
+.keyboard-navigation {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.keyboard-navigation:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.keyboard-navigation.prev {
+  left: 10px;
+}
+
+.keyboard-navigation.next {
+  right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .event-card {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .event-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .event-content p {
+    font-size: 0.9rem;
+  }
+
+  .event-button .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Animaciones suaves */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel-item.active .event-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Efecto de pausa en hover */
+.activities-carousel:hover .carousel-item {
+  transition: none;
+}
+
+/* Mejoras de accesibilidad */
+.indicator:focus {
+  outline: 2px solid #39c0c3;
+  outline-offset: 2px;
+}
+
+.event-button .btn:focus {
+  outline: 2px solid #39c0c3;
+  outline-offset: 2px;
+  background: var(--gradient, linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%));
+  color: white;
+}
+
+/* Dark mode support for event buttons */
+[data-theme="dark"] .event-button .btn {
+  background: var(--gradient, linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%));
+  border: none;
+  color: white;
+}
+
+[data-theme="dark"] .event-button .btn:hover {
+  background: linear-gradient(135deg, #2a8a8d 0%, #1e6b6e 100%);
+  color: white;
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.4);
+}
+
+/* Loading state */
+.event-card.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.event-card.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #39c0c3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] #eventos {
+  background: var(--background);
+  color: var(--text);
+  position: relative;
+}
+
+/* Light mode events section */
+[data-theme="light"] #eventos {
+  background: linear-gradient(180deg, 
+    rgba(57, 192, 195, 0.03) 0%, 
+    rgba(255, 255, 255, 0.8) 50%, 
+    rgba(57, 192, 195, 0.03) 100%
+  );
+  border-top: 2px solid rgba(57, 192, 195, 0.2);
+  border-bottom: 2px solid rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="dark"] .activities-carousel-container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .event-card {
+  background: rgba(45, 45, 45, 0.8);
+  border-color: rgba(57, 192, 195, 0.2);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .event-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .event-content h3 {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .event-content p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="dark"] .event-content ul li {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="dark"] .indicator {
+  border-color: #39c0c3;
+}
+
+[data-theme="dark"] .indicator:hover {
+  background: rgba(57, 192, 195, 0.3);
+}
+
+[data-theme="dark"] .indicator.active {
+  background: #39c0c3;
+  box-shadow: 0 0 0 3px rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="dark"] .text-muted {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Light Mode Styles */
+[data-theme="light"] #eventos {
+  background: linear-gradient(135deg, 
+    #f8f9fa 0%, 
+    #e3f2fd 25%, 
+    #bbdefb 50%, 
+    #90caf9 75%, 
+    #39c0c3 100%);
+  color: #2c3e50;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add animated background patterns for events section */
+[data-theme="light"] #eventos::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(57, 192, 195, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(57, 192, 195, 0.08) 0%, transparent 50%);
+  animation: eventsPulse 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes eventsPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.03);
+  }
+}
+
+[data-theme="light"] .activities-carousel-container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .event-card {
+  background: #ffffff;
+  border-color: #e9ecef;
+  color: #212529;
+}
+
+[data-theme="light"] .event-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .event-content h3 {
+  color: #212529;
+}
+
+[data-theme="light"] .event-content p {
+  color: #495057;
+}
+
+[data-theme="light"] .event-content ul li {
+  color: #495057;
+}
+
+[data-theme="light"] .indicator {
+  border-color: #39c0c3;
+}
+
+[data-theme="light"] .indicator:hover {
+  background: rgba(57, 192, 195, 0.3);
+}
+
+[data-theme="light"] .indicator.active {
+  background: #39c0c3;
+  box-shadow: 0 0 0 3px rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="light"] .text-muted {
+  color: #6c757d !important;
+}

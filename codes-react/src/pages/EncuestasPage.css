@@ -1,0 +1,287 @@
+/* Encuestas Page Styles */
+.encuestas-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+  padding: 100px 0 50px;
+  color: #ffffff;
+}
+
+/* Hero Section */
+.encuestas-hero {
+  padding: 40px 20px;
+  margin-bottom: 40px;
+}
+
+.encuestas-hero h1 {
+  font-weight: 700;
+  background: linear-gradient(135deg, #00d4ff 0%, #7b2ff7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.encuestas-hero .lead {
+  color: #b0b0b0;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Tabs Card */
+.tabs-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-out 0.3s both;
+}
+
+.encuestas-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  flex-wrap: wrap;
+}
+
+.encuestas-tabs .nav-link {
+  color: #b0b0b0;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.encuestas-tabs .nav-link:hover {
+  color: #00d4ff;
+  border-color: rgba(0, 212, 255, 0.3);
+  background: rgba(0, 212, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.encuestas-tabs .nav-link.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #00d4ff 0%, #7b2ff7 100%);
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+}
+
+/* Encuesta Info Card */
+.encuesta-info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.6s ease-out 0.4s both;
+}
+
+.encuesta-info-card .card-body {
+  padding: 25px;
+}
+
+.encuesta-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #00d4ff 0%, #7b2ff7 100%);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.encuesta-info-card h3 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.encuesta-info-card .text-muted {
+  color: #b0b0b0 !important;
+}
+
+.encuesta-actions {
+  margin-top: 15px;
+}
+
+.encuesta-actions .btn {
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.encuesta-actions .btn-outline-primary {
+  color: #00d4ff;
+  border-color: #00d4ff;
+}
+
+.encuesta-actions .btn-outline-primary:hover {
+  background: #00d4ff;
+  color: #0f0f0f;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+}
+
+/* Form Embed Card */
+.form-embed-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-out 0.5s both;
+}
+
+.form-container {
+  position: relative;
+  width: 100%;
+  min-height: 1200px;
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+.google-form-iframe {
+  border-radius: 15px;
+  display: block;
+}
+
+/* Info Card */
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.6s ease-out 0.6s both;
+}
+
+.info-card .card-body {
+  padding: 40px;
+}
+
+.info-card h4 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.info-card p {
+  color: #b0b0b0;
+  font-size: 1.1rem;
+}
+
+.info-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-card ul li {
+  color: #b0b0b0;
+  padding-left: 0;
+  position: relative;
+}
+
+.info-card ul li strong {
+  color: #00d4ff;
+}
+
+.info-card .text-muted {
+  color: #808080 !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .encuestas-page {
+    padding: 80px 0 30px;
+  }
+
+  .encuestas-hero h1 {
+    font-size: 2rem;
+  }
+
+  .encuestas-hero .lead {
+    font-size: 1rem;
+  }
+
+  .encuestas-tabs {
+    flex-direction: column;
+  }
+
+  .encuestas-tabs .nav-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .encuesta-info-card .d-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .encuesta-icon {
+    margin: 0 auto 15px;
+  }
+
+  .info-card .card-body {
+    padding: 25px;
+  }
+
+  .form-container {
+    min-height: 1400px;
+  }
+}
+
+@media (max-width: 576px) {
+  .encuestas-hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .encuesta-info-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .form-container {
+    min-height: 1600px;
+  }
+}

@@ -1,0 +1,466 @@
+/* Discord Live Component Styles */
+.discord-live {
+  padding: 0;
+}
+
+/* Loading State */
+.discord-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.discord-loading .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #7289da;
+}
+
+.discord-loading p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+/* Error State */
+.discord-error {
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.discord-error .btn {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.discord-error .btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Header Card */
+.discord-header-card {
+  background: linear-gradient(135deg, #7289da, #5865f2);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 8px 32px rgba(114, 137, 218, 0.3);
+}
+
+.discord-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.discord-server-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.server-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  backdrop-filter: blur(10px);
+}
+
+.server-details h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.server-description {
+  margin: 0.5rem 0 0 0;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+.discord-stats {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.discord-stats .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.discord-stats .stat-item i {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.discord-stats .stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.discord-stats .stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.online-indicator {
+  color: #43b581 !important;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Channels Card */
+.channels-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.channels-card .card-header {
+  background: linear-gradient(135deg, #39c0c3, #2a8a8d);
+  color: white;
+  border: none;
+  border-radius: 15px 15px 0 0;
+  padding: 1.25rem;
+}
+
+.channels-card .card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.channels-list {
+  padding: 0;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.channel-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.channel-item:hover {
+  background: rgba(57, 192, 195, 0.1);
+}
+
+.channel-item.active {
+  background: linear-gradient(135deg, rgba(57, 192, 195, 0.2), rgba(42, 138, 141, 0.2));
+  border-left: 4px solid #39c0c3;
+}
+
+.channel-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #39c0c3, #2a8a8d);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.channel-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.channel-name {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.channel-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.activity-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+}
+
+.no-channels {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+}
+
+.no-channels i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* Messages Card */
+.messages-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-card .card-header {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border: none;
+  border-radius: 15px 15px 0 0;
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.messages-card .card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.messages-list {
+  flex: 1;
+  padding: 0;
+  overflow-y: auto;
+  background: var(--background);
+}
+
+.message-item {
+  display: flex;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.2s ease;
+}
+
+.message-item:hover {
+  background: rgba(57, 192, 195, 0.05);
+}
+
+.message-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #7289da, #5865f2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.message-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.message-author {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.message-time {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+.message-text {
+  color: var(--text);
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.messages-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--text-light);
+}
+
+.no-messages,
+.select-channel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--text-light);
+  height: 100%;
+}
+
+.no-messages i,
+.select-channel i {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* Quick Actions Card */
+.quick-actions-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.quick-actions-card .card-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.action-btn.btn-primary {
+  background: linear-gradient(135deg, #7289da, #5865f2);
+  border-color: #7289da;
+}
+
+.action-btn.btn-primary:hover {
+  background: linear-gradient(135deg, #5865f2, #4752c4);
+  border-color: #5865f2;
+}
+
+.action-btn.btn-outline-primary {
+  border-color: #39c0c3;
+  color: #39c0c3;
+}
+
+.action-btn.btn-outline-primary:hover {
+  background: #39c0c3;
+  border-color: #39c0c3;
+  color: white;
+}
+
+.action-btn.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.action-btn.btn-outline-secondary:hover {
+  background: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .discord-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .discord-stats {
+    justify-content: center;
+  }
+  
+  .quick-actions {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .channels-card,
+  .messages-card {
+    margin-bottom: 1rem;
+  }
+  
+  .messages-card {
+    height: 400px;
+  }
+}
+
+@media (max-width: 576px) {
+  .discord-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .discord-stats .stat-item {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
+  .channel-item {
+    padding: 0.75rem 1rem;
+  }
+  
+  .message-item {
+    padding: 0.75rem 1rem;
+  }
+}

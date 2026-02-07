@@ -1,0 +1,437 @@
+/* ========================================
+   COLABORAR PAGE - ESTILOS
+   ======================================== */
+
+.colaborar-page {
+  min-height: 100vh;
+  padding: 120px 0 50px;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  color: #ffffff;
+}
+
+/* Hero Section */
+.colaborar-hero {
+  margin-bottom: 3rem;
+}
+
+.colaborar-hero h1 {
+  color: #39c0c3;
+  font-weight: 700;
+}
+
+.colaborar-hero .lead {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+}
+
+/* Info Card */
+.info-card {
+  background: rgba(45, 45, 45, 0.6);
+  border: 2px solid rgba(57, 192, 195, 0.3);
+  border-radius: 15px;
+}
+
+.info-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.info-header h4 {
+  color: #39c0c3;
+  margin: 0;
+}
+
+.project-type-card {
+  background: rgba(15, 15, 15, 0.4);
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.project-type-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(57, 192, 195, 0.4);
+  box-shadow: 0 5px 20px rgba(57, 192, 195, 0.15);
+}
+
+.project-type-card.paid {
+  border-left: 4px solid #28a745;
+}
+
+.project-type-card.volunteer {
+  border-left: 4px solid #39c0c3;
+}
+
+.type-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.project-type-card.paid .type-icon {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.project-type-card.volunteer .type-icon {
+  background: rgba(57, 192, 195, 0.2);
+  color: #39c0c3;
+}
+
+.project-type-card h5 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.project-type-card p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.project-type-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-type-card ul li {
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.project-type-card ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #39c0c3;
+  font-weight: bold;
+}
+
+.payment-info {
+  padding: 1rem;
+  background: rgba(57, 192, 195, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid rgba(57, 192, 195, 0.3);
+  margin-top: 1rem;
+}
+
+.payment-info small {
+  display: block;
+  line-height: 1.6;
+}
+
+.payment-info strong {
+  color: #39c0c3;
+}
+
+/* Benefit Cards */
+.benefit-card {
+  background: linear-gradient(135deg, rgba(57, 192, 195, 0.1) 0%, rgba(42, 138, 141, 0.05) 100%);
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(57, 192, 195, 0.2);
+  border-color: rgba(57, 192, 195, 0.4);
+}
+
+.benefit-card .fa-3x {
+  color: #39c0c3;
+}
+
+.benefit-card h4 {
+  color: #ffffff;
+  margin-top: 1rem;
+}
+
+.benefit-card p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0;
+}
+
+/* Form Card */
+.colaborar-form-card {
+  background: rgba(45, 45, 45, 0.8);
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.colaborar-form-card .card-header {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
+  border: none;
+  border-radius: 20px 20px 0 0 !important;
+  padding: 2rem;
+}
+
+.colaborar-form-card .card-header h3 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.colaborar-form-card .card-body {
+  padding: 2.5rem;
+}
+
+/* Form Sections */
+.form-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(57, 192, 195, 0.1);
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.colaborar-page .section-title {
+  color: #39c0c3;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.section-title i {
+  margin-right: 0.5rem;
+}
+
+/* Form Controls */
+.form-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-control,
+.form-select {
+  background: rgba(15, 15, 15, 0.6);
+  border: 1px solid rgba(57, 192, 195, 0.3);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: rgba(15, 15, 15, 0.8);
+  border-color: #39c0c3;
+  color: #ffffff;
+  box-shadow: 0 0 0 0.2rem rgba(57, 192, 195, 0.25);
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-control:disabled {
+  background: rgba(15, 15, 15, 0.3);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Checkboxes */
+.disponibilidad-check,
+.tech-checkbox,
+.tipo-proyecto-check {
+  background: rgba(15, 15, 15, 0.4);
+  border: 1px solid rgba(57, 192, 195, 0.3);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.disponibilidad-check:hover,
+.tech-checkbox:hover,
+.tipo-proyecto-check:hover {
+  background: rgba(15, 15, 15, 0.6);
+  border-color: #39c0c3;
+}
+
+.disponibilidad-check input[type="checkbox"]:checked+label,
+.tech-checkbox input[type="checkbox"]:checked+label,
+.tipo-proyecto-check input[type="checkbox"]:checked+label {
+  color: #39c0c3;
+  font-weight: 600;
+}
+
+/* Tipo Proyecto Options */
+.tipo-proyecto-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.tipo-proyecto-option i {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+}
+
+.tipo-proyecto-option strong {
+  display: block;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.tipo-proyecto-option small {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-check-input:checked {
+  background-color: #39c0c3;
+  border-color: #39c0c3;
+}
+
+.form-check-label {
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+}
+
+/* Tecnologías Grid */
+.tecnologias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+/* Niveles de experiencia */
+.niveles-experiencia {
+  background: rgba(57, 192, 195, 0.05);
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.niveles-experiencia h6 {
+  color: #39c0c3;
+  font-weight: 600;
+}
+
+/* Submit Button */
+.form-footer {
+  margin-top: 2rem;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
+  border: none;
+  padding: 0.75rem 3rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(57, 192, 195, 0.3);
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.4);
+  background: linear-gradient(135deg, #2a8a8d 0%, #1e6b6e 100%);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 10px;
+  border: none;
+}
+
+.alert-success {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+  border-left: 4px solid #28a745;
+}
+
+.alert-danger {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+  border-left: 4px solid #dc3545;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .colaborar-page {
+    padding: 100px 0 30px;
+  }
+
+  .colaborar-hero h1 {
+    font-size: 2rem;
+  }
+
+  .colaborar-form-card .card-body {
+    padding: 1.5rem;
+  }
+
+  .tecnologias-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    margin-bottom: 2rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.75rem 2rem;
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .colaborar-page {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+}
+
+/* Light mode support (si se implementa) */
+[data-theme="light"] .colaborar-page {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #2c3e50;
+}
+
+[data-theme="light"] .benefit-card {
+  background: linear-gradient(135deg, rgba(57, 192, 195, 0.05) 0%, rgba(42, 138, 141, 0.02) 100%);
+  border-color: rgba(57, 192, 195, 0.1);
+}
+
+[data-theme="light"] .colaborar-form-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="light"] .form-control,
+[data-theme="light"] .form-select {
+  background: #ffffff;
+  border-color: #e9ecef;
+  color: #2c3e50;
+}
+
+[data-theme="light"] .form-control:focus,
+[data-theme="light"] .form-select:focus {
+  background: #ffffff;
+  border-color: #39c0c3;
+  color: #2c3e50;
+}

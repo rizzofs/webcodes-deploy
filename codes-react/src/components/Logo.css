@@ -1,0 +1,284 @@
+/* ========================================
+   LOGO - SPECTACULAR DESIGN
+   ======================================== */
+
+.logo-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9997;
+  opacity: 0;
+  transform: translateX(100px) scale(0.8);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-container.visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.logo-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, 
+    rgba(15, 15, 15, 0.9) 0%, 
+    rgba(26, 26, 26, 0.95) 50%, 
+    rgba(45, 45, 45, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  border-radius: 20px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.logo-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(57, 192, 195, 0.1) 50%, 
+    transparent 100%);
+  transition: left 0.6s ease;
+}
+
+.logo-button:hover::before {
+  left: 100%;
+}
+
+.logo-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 45px rgba(57, 192, 195, 0.2);
+  border-color: rgba(57, 192, 195, 0.4);
+}
+
+.logo-image {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #39c0c3 0%, #ffffff 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, 
+    transparent 30%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.logo-button:hover .logo-image::before {
+  transform: translateX(100%);
+}
+
+.logo-button:hover .logo-image {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 35px rgba(57, 192, 195, 0.4);
+}
+
+.logo-svg {
+  width: 35px;
+  height: 35px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3)) brightness(0);
+  transition: all 0.3s ease;
+}
+
+.logo-button:hover .logo-svg {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4)) brightness(0);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.logo-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #39c0c3 50%, #ffffff 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: logoGlow 3s ease-in-out infinite;
+  line-height: 1;
+}
+
+.logo-subtitle {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(57, 192, 195, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+
+.logo-button:hover .logo-glow {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Dark Theme */
+[data-theme="dark"] .logo-button {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.9) 0%, 
+    rgba(15, 15, 15, 0.95) 50%, 
+    rgba(30, 30, 30, 0.9) 100%);
+  border-color: rgba(57, 192, 195, 0.3);
+}
+
+[data-theme="dark"] .logo-button:hover {
+  border-color: rgba(57, 192, 195, 0.5);
+  box-shadow: 0 15px 45px rgba(57, 192, 195, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logo-container {
+    top: 15px;
+    right: 15px;
+  }
+  
+  .logo-button {
+    padding: 0.5rem 1rem;
+    gap: 0.75rem;
+  }
+  
+  .logo-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .logo-svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .logo-title {
+    font-size: 1rem;
+  }
+  
+  .logo-subtitle {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo-container {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .logo-button {
+    padding: 0.4rem 0.8rem;
+    gap: 0.5rem;
+    border-radius: 15px;
+  }
+  
+  .logo-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+  }
+  
+  .logo-svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .logo-title {
+    font-size: 0.9rem;
+  }
+  
+  .logo-subtitle {
+    font-size: 0.55rem;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .logo-button {
+    background: #000000;
+    border-color: #ffffff;
+  }
+  
+  .logo-title {
+    color: #ffffff;
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+  }
+  
+  .logo-subtitle {
+    color: #ffffff;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .logo-container,
+  .logo-button,
+  .logo-image,
+  .logo-svg {
+    transition: none;
+  }
+  
+  .logo-container {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .logo-title {
+    animation: none;
+  }
+  
+  .logo-button::before,
+  .logo-image::before {
+    display: none;
+  }
+}

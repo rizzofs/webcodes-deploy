@@ -1,0 +1,308 @@
+/* ========================================
+   FAQ - MODERN DESIGN
+   ======================================== */
+
+#faq {
+  background: var(--background);
+  color: var(--text);
+  position: relative;
+}
+
+/* Light mode FAQ section */
+[data-theme="light"] #faq {
+  background: linear-gradient(180deg,
+      rgba(57, 192, 195, 0.05) 0%,
+      rgba(255, 255, 255, 0.9) 50%,
+      rgba(57, 192, 195, 0.05) 100%);
+  border-top: 2px solid rgba(57, 192, 195, 0.2);
+  border-bottom: 2px solid rgba(57, 192, 195, 0.2);
+}
+
+.section-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 50%, #1e6b6e 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+
+  line-height: 1.2;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #39c0c3, #2a8a8d);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-light, #6c757d);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Accordion Styles */
+.accordion {
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.accordion-item {
+  border: none;
+  border-bottom: 1px solid rgba(57, 192, 195, 0.1);
+  background: var(--card-background);
+  transition: all 0.3s ease;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-item:hover {
+  background: rgba(57, 192, 195, 0.02);
+}
+
+.accordion-header {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.accordion-button {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 1.5rem 2rem;
+  text-align: left;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.accordion-button:not(.collapsed) {
+  background: rgba(57, 192, 195, 0.1);
+  color: var(--primary);
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.accordion-button::after {
+  content: '+';
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--primary);
+  transition: all 0.3s ease;
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.accordion-button:not(.collapsed)::after {
+  content: '−';
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.accordion-button:hover {
+  background: rgba(57, 192, 195, 0.05);
+  color: var(--primary);
+}
+
+.accordion-body {
+  background: transparent;
+  color: var(--text);
+  padding: 0 2rem 1.5rem 2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  border: none;
+}
+
+.accordion-body p {
+  margin: 0;
+  color: var(--text-light);
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] #faq {
+  background: var(--background);
+}
+
+[data-theme="dark"] .accordion {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .accordion-item {
+  background: rgba(45, 45, 45, 0.8);
+  border-bottom-color: rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="dark"] .accordion-item:hover {
+  background: rgba(57, 192, 195, 0.05);
+}
+
+[data-theme="dark"] .accordion-button {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+  background: rgba(57, 192, 195, 0.15);
+  color: #39c0c3;
+}
+
+[data-theme="dark"] .accordion-button:hover {
+  background: rgba(57, 192, 195, 0.08);
+  color: #39c0c3;
+}
+
+[data-theme="dark"] .accordion-body {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .accordion-body p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Light Mode Styles */
+[data-theme="light"] #faq {
+  background: linear-gradient(135deg,
+      #f8f9fa 0%,
+      #e3f2fd 25%,
+      #bbdefb 50%,
+      #90caf9 75%,
+      #39c0c3 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add animated background patterns for FAQ section */
+[data-theme="light"] #faq::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 40% 40%, rgba(57, 192, 195, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 60% 60%, rgba(57, 192, 195, 0.08) 0%, transparent 50%);
+  animation: faqPulse 14s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes faqPulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.04);
+  }
+}
+
+[data-theme="light"] .accordion {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .accordion-item {
+  background: #ffffff;
+  border-bottom-color: rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="light"] .accordion-item:hover {
+  background: rgba(57, 192, 195, 0.02);
+}
+
+[data-theme="light"] .accordion-button {
+  color: #212529;
+}
+
+[data-theme="light"] .accordion-button:not(.collapsed) {
+  background: rgba(57, 192, 195, 0.1);
+  color: #2a8a8d;
+}
+
+[data-theme="light"] .accordion-button:hover {
+  background: rgba(57, 192, 195, 0.05);
+  color: #2a8a8d;
+}
+
+[data-theme="light"] .accordion-body {
+  color: #212529;
+}
+
+[data-theme="light"] .accordion-body p {
+  color: #6c757d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  .accordion-button {
+    font-size: 1rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .accordion-button::after {
+    right: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .accordion-body {
+    padding: 0 1.5rem 1.25rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .accordion-button {
+    font-size: 0.95rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .accordion-button::after {
+    right: 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  .accordion-body {
+    padding: 0 1.25rem 1rem 1.25rem;
+    font-size: 0.85rem;
+  }
+}
