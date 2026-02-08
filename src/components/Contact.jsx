@@ -29,8 +29,8 @@ const Contact = () => {
                 <i className="fas fa-envelope"></i>
               </div>
               <h5>Email</h5>
-              <p>codes.unlu@gmail.com</p>
-              <a href="mailto:codes.unlu@gmail.com" className="contact-link">
+              <p>sistemas@codesunlu.tech</p>
+              <a href="mailto:sistemas@codesunlu.tech" className="contact-link">
                 Enviar email
               </a>
             </div>
@@ -77,7 +77,7 @@ const Contact = () => {
                   </div>
                   <span className="social-card-label">Instagram</span>
                 </a>
-                <a href="https://www.facebook.com/groups/codesUNLu" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="Facebook" data-network="facebook">
+                <a href="https://www.facebook.com/profile.php?id=61585314745245" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="Facebook" data-network="facebook">
                   <div className="social-card-icon">
                     <i className="fab fa-facebook-f"></i>
                   </div>
