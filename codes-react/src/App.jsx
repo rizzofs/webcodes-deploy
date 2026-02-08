@@ -24,6 +24,7 @@ import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop';
 import ScrollIndicator from './components/ScrollIndicator';
 import MobileFormEnhancer from './components/MobileFormEnhancer';
+import WorkshopRegistration from './components/WorkshopRegistration';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import TestDashboard from './components/TestDashboard';
@@ -90,6 +91,7 @@ function AppContent() {
         <Route path="/encuestas" element={<EncuestasPage />} />
         <Route path="/charlas" element={<CharlasPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/taller" element={<WorkshopRegistration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/test-dashboard" element={<TestDashboard />} />
         <Route path="/dashboard" element={

@@ -125,6 +125,11 @@ const Sidebar = () => {
       window.open('/cacic', '_blank');
       return;
     }
+
+    if (sectionId === 'taller') {
+      window.open('/taller', '_blank');
+      return;
+    }
     
     // Wait for sidebar to close, then scroll
     setTimeout(() => {
@@ -163,6 +168,7 @@ const Sidebar = () => {
     { id: 'faq', label: 'FAQ', icon: 'fas fa-question-circle' },
     { id: 'contacto', label: 'Contacto', icon: 'fas fa-envelope' },
     { id: 'grupos', label: 'Grupos de Estudio', icon: 'fas fa-graduation-cap', external: true, href: '/grupos' },
+    { id: 'taller', label: 'Inscripción Taller', icon: 'fas fa-laptop-code', external: true, href: '/taller' },
     ...(isAuthenticated ? [
       { id: 'dashboard', label: 'Dashboard', icon: 'fas fa-tachometer-alt', external: true, href: '/dashboard' }
     ] : [])
