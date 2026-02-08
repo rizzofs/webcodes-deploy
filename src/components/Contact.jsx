@@ -62,25 +62,44 @@ const Contact = () => {
         </Row>
 
         {/* Redes Sociales */}
-        <Row className="mt-4">
-          <Col className="text-center">
-            <div className="social-links">
-              <h5 className="mb-3">Síguenos en nuestras redes</h5>
-              <div className="social-icons">
-                <a href="#" className="social-link" aria-label="Instagram">
-                  <i className="fab fa-instagram"></i>
+        <Row className="mt-5">
+          <Col lg={8} className="mx-auto">
+            <div className="social-section">
+              <div className="social-section-header">
+                <span className="social-badge">Comunidad</span>
+                <h4>Síguenos en nuestras redes</h4>
+                <p>Conectá con nosotros y mantenete al día con todas las novedades</p>
+              </div>
+              <div className="social-icons-grid">
+                <a href="https://www.instagram.com/codes_unlu/" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="Instagram" data-network="instagram">
+                  <div className="social-card-icon">
+                    <i className="fab fa-instagram"></i>
+                  </div>
+                  <span className="social-card-label">Instagram</span>
                 </a>
-                <a href="#" className="social-link" aria-label="Facebook">
-                  <i className="fab fa-facebook"></i>
+                <a href="https://www.facebook.com/groups/codesUNLu" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="Facebook" data-network="facebook">
+                  <div className="social-card-icon">
+                    <i className="fab fa-facebook-f"></i>
+                  </div>
+                  <span className="social-card-label">Facebook</span>
                 </a>
-                <a href="#" className="social-link" aria-label="Twitter">
-                  <i className="fab fa-twitter"></i>
+                <a href="https://x.com/codes_unlu" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="Twitter" data-network="twitter">
+                  <div className="social-card-icon">
+                    <i className="fab fa-twitter"></i>
+                  </div>
+                  <span className="social-card-label">X / Twitter</span>
                 </a>
-                <a href="#" className="social-link" aria-label="LinkedIn">
-                  <i className="fab fa-linkedin"></i>
+                <a href="https://www.linkedin.com/groups/10006340/" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="LinkedIn" data-network="linkedin">
+                  <div className="social-card-icon">
+                    <i className="fab fa-linkedin-in"></i>
+                  </div>
+                  <span className="social-card-label">LinkedIn</span>
                 </a>
-                <a href="#" className="social-link" aria-label="Discord">
-                  <i className="fab fa-discord"></i>
+                <a href="https://discord.gg/fKsVT9bzSQ" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="Discord" data-network="discord">
+                  <div className="social-card-icon">
+                    <i className="fab fa-discord"></i>
+                  </div>
+                  <span className="social-card-label">Discord</span>
                 </a>
               </div>
             </div>
