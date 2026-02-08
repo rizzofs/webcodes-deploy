@@ -70,7 +70,7 @@ function AppContent() {
         <Route path="/" element={
           <>
             <Hero />
-            <NewsCarousel />
+            {/* <NewsCarousel /> */}
             <About />
             <Members />
             <Events />
