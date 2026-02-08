@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Nav } from 'react-bootstrap';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import './Sidebar.css';
 
@@ -8,6 +9,8 @@ const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('');
   const [isScrolling, setIsScrolling] = useState(false);
   const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,71 +85,6 @@ const Sidebar = () => {
     };
   }, [isOpen]);
 
-  const scrollToSection = (sectionId) => {
-    // Cerrar sidebar inmediatamente al hacer click en cualquier opción
-    setIsOpen(false);
-    
-    // Verificar si estamos en una página fuera de la home (grupos, cacic, etc)
-    const isExternalPage = window.location.pathname !== '/';
-    
-    if (sectionId === 'hero' && isExternalPage) {
-      // Si estamos fuera de la home y clickean inicio, redirigir a la home
-      window.location.href = '/';
-      return;
-    }
-    
-    if (sectionId === 'grupos') {
-      window.open('/grupos', '_blank');
-      return;
-    }
-    
-    if (sectionId === 'calendario') {
-      window.open('/calendario', '_blank');
-      return;
-    }
-    
-    
-    if (sectionId === 'colaborar') {
-      window.open('/colaborar', '_blank');
-      return;
-    }
-    
-    if (sectionId === 'encuestas') {
-      window.open('/encuestas', '_blank');
-      return;
-    }
-    
-    if (sectionId === 'charlas') {
-      window.open('/charlas', '_blank');
-      return;
-    }
-    
-    if (sectionId === 'cacic') {
-      window.open('/cacic', '_blank');
-      return;
-    }
-    
-    // Wait for sidebar to close, then scroll
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        // Calculate offset for fixed elements
-        const headerOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }, 300); // Reduced wait time for better UX
-  };
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
   const navItems = [
     { id: 'hero', label: 'Inicio', icon: 'fas fa-home' },
     { id: 'nosotros', label: 'Nosotros', icon: 'fas fa-users' },
@@ -167,6 +105,64 @@ const Sidebar = () => {
       { id: 'dashboard', label: 'Dashboard', icon: 'fas fa-tachometer-alt', external: true, href: '/dashboard' }
     ] : [])
   ];
+
+  // Secciones que solo existen en la página principal
+  const homeSections = ['hero', 'nosotros', 'integrantes', 'eventos', 'extra', 'blog', 'faq', 'colaboradores', 'contacto'];
+
+  const scrollToElement = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollToSection = (sectionId) => {
+    // Cerrar sidebar inmediatamente al hacer click en cualquier opción
+    setIsOpen(false);
+    
+    const isHomePage = location.pathname === '/';
+
+    // Buscar si el item tiene href (es una página interna separada)
+    const navItem = navItems.find(item => item.id === sectionId);
+    if (navItem?.external && navItem?.href) {
+      navigate(navItem.href);
+      return;
+    }
+    
+    // Si es una sección de la home
+    if (homeSections.includes(sectionId)) {
+      if (isHomePage) {
+        // Estamos en la home: simplemente hacer scroll
+        setTimeout(() => scrollToElement(sectionId), 300);
+      } else {
+        // Estamos en otra página: navegar a la home y luego scroll
+        navigate('/');
+        // Esperar a que la home se renderice y luego hacer scroll
+        setTimeout(() => {
+          if (sectionId === 'hero') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            scrollToElement(sectionId);
+          }
+        }, 500);
+      }
+      return;
+    }
+    
+    // Fallback: intentar scroll directo
+    setTimeout(() => scrollToElement(sectionId), 300);
+  };
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
@@ -217,9 +213,6 @@ const Sidebar = () => {
                     <i className={item.icon}></i>
                   </div>
                   <span className="nav-label">{item.label}</span>
-                  {item.external && (
-                    <i className="fas fa-external-link-alt external-icon"></i>
-                  )}
                   <div className="nav-indicator"></div>
                 </button>
               </Nav.Item>
