@@ -1,437 +1,1270 @@
 /* ========================================
-   COLABORAR PAGE - ESTILOS
+   COLABORAR PAGE - REDISEÑO COMPLETO
+   Estética alineada con Hero/Index
    ======================================== */
 
+/* ---- BASE ---- */
 .colaborar-page {
   min-height: 100vh;
-  padding: 120px 0 50px;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  background:
+    radial-gradient(circle at 20% 80%, rgba(57, 192, 195, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(57, 192, 195, 0.12) 0%, transparent 50%),
+    linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 30%, #2d2d2d 70%, #1a5f61 100%);
   color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 0;
 }
 
-/* Hero Section */
-.colaborar-hero {
-  margin-bottom: 3rem;
-}
-
-.colaborar-hero h1 {
-  color: #39c0c3;
-  font-weight: 700;
-}
-
-.colaborar-hero .lead {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.2rem;
-}
-
-/* Info Card */
-.info-card {
-  background: rgba(45, 45, 45, 0.6);
-  border: 2px solid rgba(57, 192, 195, 0.3);
-  border-radius: 15px;
-}
-
-.info-header {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-}
-
-.info-header h4 {
-  color: #39c0c3;
-  margin: 0;
-}
-
-.project-type-card {
-  background: rgba(15, 15, 15, 0.4);
-  border: 1px solid rgba(57, 192, 195, 0.2);
-  border-radius: 12px;
-  padding: 1.5rem;
+/* ---- PARTÍCULAS ---- */
+.colab-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
 }
 
-.project-type-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(57, 192, 195, 0.4);
-  box-shadow: 0 5px 20px rgba(57, 192, 195, 0.15);
-}
-
-.project-type-card.paid {
-  border-left: 4px solid #28a745;
-}
-
-.project-type-card.volunteer {
-  border-left: 4px solid #39c0c3;
-}
-
-.type-icon {
-  width: 60px;
-  height: 60px;
+.colab-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(57, 192, 195, 0.5);
   border-radius: 50%;
+  animation: colabParticleFloat 15s infinite linear;
+}
+
+.colab-particle:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.colab-particle:nth-child(3n) {
+  background: rgba(57, 192, 195, 0.7);
+}
+
+@keyframes colabParticleFloat {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ---- FORMAS GEOMÉTRICAS ---- */
+.colab-geometric-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.colab-shape {
+  position: absolute;
+  border: 2px solid rgba(57, 192, 195, 0.08);
+  border-radius: 50%;
+  animation: colabShapeFloat 8s ease-in-out infinite;
+}
+
+.colab-shape-1 {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.colab-shape-2 {
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  right: 8%;
+  animation-delay: 2s;
+  border-radius: 30%;
+}
+
+.colab-shape-3 {
+  width: 100px;
+  height: 100px;
+  bottom: 15%;
+  left: 15%;
+  animation-delay: 4s;
+}
+
+@keyframes colabShapeFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+  50% { transform: translateY(-25px) rotate(180deg); opacity: 0.8; }
+}
+
+/* ---- OVERLAY DE GRADIENTE ---- */
+.colab-gradient-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at top, rgba(57,192,195,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(57,192,195,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+.colab-hero-section {
+  position: relative;
+  z-index: 1;
+  padding: 140px 0 60px;
+  text-align: center;
+}
+
+.colab-hero-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.colab-hero-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.colab-badge {
+  display: inline-block;
+  background: rgba(57, 192, 195, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(57, 192, 195, 0.3);
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #39c0c3;
+}
+
+.colab-hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #39c0c3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.colab-hero-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 650px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   BENEFICIOS SECTION
+   ======================================== */
+.colab-benefits-section {
+  position: relative;
+  z-index: 1;
+  padding: 40px 0 60px;
+}
+
+.colab-benefit-card {
+  background: rgba(57, 192, 195, 0.06);
+  border: 1px solid rgba(57, 192, 195, 0.15);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  height: 100%;
+  animation: colabFadeInUp 0.6s ease-out both;
+}
+
+.colab-benefit-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(57, 192, 195, 0.4);
+  box-shadow: 0 20px 40px rgba(57, 192, 195, 0.15);
+  background: rgba(57, 192, 195, 0.1);
+}
+
+.benefit-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(57, 192, 195, 0.2) 0%, rgba(42, 138, 141, 0.1) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-.project-type-card.paid .type-icon {
-  background: rgba(40, 167, 69, 0.2);
-  color: #28a745;
-}
-
-.project-type-card.volunteer .type-icon {
-  background: rgba(57, 192, 195, 0.2);
+  margin: 0 auto 1.2rem;
+  font-size: 1.8rem;
   color: #39c0c3;
-}
-
-.project-type-card h5 {
-  color: #ffffff;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.project-type-card p {
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.project-type-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.project-type-card ul li {
-  color: rgba(255, 255, 255, 0.7);
-  padding: 0.5rem 0;
-  padding-left: 1.5rem;
-  position: relative;
-  font-size: 0.95rem;
-}
-
-.project-type-card ul li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: #39c0c3;
-  font-weight: bold;
-}
-
-.payment-info {
-  padding: 1rem;
-  background: rgba(57, 192, 195, 0.05);
-  border-radius: 8px;
-  border-left: 3px solid rgba(57, 192, 195, 0.3);
-  margin-top: 1rem;
-}
-
-.payment-info small {
-  display: block;
-  line-height: 1.6;
-}
-
-.payment-info strong {
-  color: #39c0c3;
-}
-
-/* Benefit Cards */
-.benefit-card {
-  background: linear-gradient(135deg, rgba(57, 192, 195, 0.1) 0%, rgba(42, 138, 141, 0.05) 100%);
-  border: 1px solid rgba(57, 192, 195, 0.2);
-  border-radius: 15px;
   transition: all 0.3s ease;
-  height: 100%;
 }
 
-.benefit-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(57, 192, 195, 0.2);
-  border-color: rgba(57, 192, 195, 0.4);
-}
-
-.benefit-card .fa-3x {
-  color: #39c0c3;
-}
-
-.benefit-card h4 {
-  color: #ffffff;
-  margin-top: 1rem;
-}
-
-.benefit-card p {
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 0;
-}
-
-/* Form Card */
-.colaborar-form-card {
-  background: rgba(45, 45, 45, 0.8);
-  border: 1px solid rgba(57, 192, 195, 0.2);
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-}
-
-.colaborar-form-card .card-header {
+.colab-benefit-card:hover .benefit-icon-wrapper {
   background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
-  border: none;
-  border-radius: 20px 20px 0 0 !important;
-  padding: 2rem;
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3);
 }
 
-.colaborar-form-card .card-header h3 {
+.colab-benefit-card h4 {
   color: #ffffff;
   font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
 }
 
-.colaborar-form-card .card-body {
+.colab-benefit-card p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.92rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* ========================================
+   FORMULARIO SECTION
+   ======================================== */
+.colab-form-section {
+  position: relative;
+  z-index: 1;
+  padding: 40px 0 60px;
+}
+
+.colab-form-wrapper {
+  max-width: 850px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 80px rgba(57, 192, 195, 0.05);
+  backdrop-filter: blur(20px);
+}
+
+.colab-form-header {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 50%, #1e6b6e 100%);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.colab-form-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  animation: colabHeaderShine 6s ease-in-out infinite;
+}
+
+@keyframes colabHeaderShine {
+  0%, 100% { transform: translate(-30%, -30%); }
+  50% { transform: translate(30%, 30%); }
+}
+
+.form-header-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.colab-form-header h2 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.colab-form-header p {
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 1;
+}
+
+.colab-form-body {
+  background: rgba(20, 20, 20, 0.85);
   padding: 2.5rem;
 }
 
-/* Form Sections */
-.form-section {
+/* ---- ALERTAS ---- */
+.colab-alert {
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+}
+
+.colab-alert.alert-success {
+  background: rgba(40, 167, 69, 0.15);
+  color: #5dd47d;
+  border-left: 4px solid #28a745;
+}
+
+.colab-alert.alert-danger {
+  background: rgba(220, 53, 69, 0.15);
+  color: #f78d97;
+  border-left: 4px solid #dc3545;
+}
+
+/* ---- BLOQUES DEL FORM ---- */
+.colab-form-block {
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid rgba(57, 192, 195, 0.1);
 }
 
-.form-section:last-child {
+.colab-form-block:last-of-type {
   border-bottom: none;
 }
 
-.colaborar-page .section-title {
-  color: #39c0c3;
-  font-weight: 600;
+.form-block-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
   margin-bottom: 1.5rem;
+}
+
+.form-block-number {
+  min-width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
+  color: #ffffff;
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
 }
 
-.section-title i {
-  margin-right: 0.5rem;
+.form-block-title h5 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 0.15rem;
 }
 
-/* Form Controls */
-.form-label {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
+.form-block-title p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+/* ---- INPUTS ---- */
+.colab-input-group {
+  margin-bottom: 0;
+}
+
+.colab-input-group label {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
 }
 
-.form-control,
-.form-select {
-  background: rgba(15, 15, 15, 0.6);
-  border: 1px solid rgba(57, 192, 195, 0.3);
-  color: #ffffff;
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  transition: all 0.3s ease;
+.colab-input-group label i {
+  color: #39c0c3;
 }
 
-.form-control:focus,
-.form-select:focus {
+.colab-input-group input,
+.colab-input-group select,
+.colab-input-group textarea {
+  width: 100%;
+  background: rgba(15, 15, 15, 0.6);
+  border: 1.5px solid rgba(57, 192, 195, 0.2);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.colab-input-group input::placeholder,
+.colab-input-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.colab-input-group input:focus,
+.colab-input-group select:focus,
+.colab-input-group textarea:focus {
+  outline: none;
   background: rgba(15, 15, 15, 0.8);
   border-color: #39c0c3;
+  box-shadow: 0 0 0 3px rgba(57, 192, 195, 0.15);
+}
+
+.colab-input-group select option {
+  background: #1a1a1a;
   color: #ffffff;
-  box-shadow: 0 0 0 0.2rem rgba(57, 192, 195, 0.25);
 }
 
-.form-control::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+.colab-input-group.has-error input,
+.colab-input-group.has-error select,
+.colab-input-group.has-error textarea,
+.colab-input-group input.is-invalid,
+.colab-input-group select.is-invalid,
+.colab-input-group textarea.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
 }
 
-.form-control:disabled {
-  background: rgba(15, 15, 15, 0.3);
-  opacity: 0.5;
-  cursor: not-allowed;
+.colab-error {
+  display: block;
+  color: #f78d97;
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
 }
 
-/* Checkboxes */
-.disponibilidad-check,
-.tech-checkbox,
-.tipo-proyecto-check {
-  background: rgba(15, 15, 15, 0.4);
-  border: 1px solid rgba(57, 192, 195, 0.3);
+.colab-inline-error {
+  background: rgba(220, 53, 69, 0.1);
+  color: #f78d97;
+  padding: 0.6rem 1rem;
   border-radius: 8px;
-  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-left: 3px solid #dc3545;
+}
+
+.char-counter {
+  text-align: right;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+/* ---- TARJETAS DE DISPONIBILIDAD ---- */
+.colab-time-card {
+  background: rgba(15, 15, 15, 0.5);
+  border: 1.5px solid rgba(57, 192, 195, 0.15);
+  border-radius: 14px;
+  padding: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  user-select: none;
+}
+
+.colab-time-card i {
+  display: block;
+  font-size: 1.8rem;
+  color: rgba(57, 192, 195, 0.5);
+  margin-bottom: 0.5rem;
   transition: all 0.3s ease;
 }
 
-.disponibilidad-check:hover,
-.tech-checkbox:hover,
-.tipo-proyecto-check:hover {
-  background: rgba(15, 15, 15, 0.6);
+.colab-time-card strong {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.colab-time-card small {
+  display: block;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+}
+
+.colab-time-card:hover {
+  border-color: rgba(57, 192, 195, 0.4);
+  background: rgba(57, 192, 195, 0.05);
+}
+
+.colab-time-card.selected {
   border-color: #39c0c3;
+  background: rgba(57, 192, 195, 0.1);
+  box-shadow: 0 0 20px rgba(57, 192, 195, 0.1);
 }
 
-.disponibilidad-check input[type="checkbox"]:checked+label,
-.tech-checkbox input[type="checkbox"]:checked+label,
-.tipo-proyecto-check input[type="checkbox"]:checked+label {
+.colab-time-card.selected i {
   color: #39c0c3;
-  font-weight: 600;
 }
 
-/* Tipo Proyecto Options */
-.tipo-proyecto-option {
+.time-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #39c0c3;
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  animation: colabPopIn 0.3s ease;
 }
 
-.tipo-proyecto-option i {
-  font-size: 1.5rem;
-  margin-right: 0.75rem;
-}
-
-.tipo-proyecto-option strong {
-  display: block;
+.time-check i {
+  font-size: 0.7rem;
   color: #ffffff;
-  margin-bottom: 0.25rem;
+  margin: 0;
 }
 
-.tipo-proyecto-option small {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+@keyframes colabPopIn {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
-.form-check-input:checked {
-  background-color: #39c0c3;
-  border-color: #39c0c3;
+/* ---- GRID DE TECNOLOGÍAS ---- */
+.colab-tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
 }
 
-.form-check-label {
-  color: rgba(255, 255, 255, 0.9);
+.colab-tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(15, 15, 15, 0.5);
+  border: 1.5px solid rgba(57, 192, 195, 0.15);
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
-/* Tecnologías Grid */
-.tecnologias-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 0.5rem;
+.colab-tech-chip i {
+  font-size: 1rem;
+  color: rgba(57, 192, 195, 0.5);
+  transition: color 0.3s ease;
 }
 
-/* Niveles de experiencia */
-.niveles-experiencia {
+.colab-tech-chip:hover:not(.disabled) {
+  border-color: rgba(57, 192, 195, 0.5);
   background: rgba(57, 192, 195, 0.05);
-  border: 1px solid rgba(57, 192, 195, 0.2);
-  border-radius: 10px;
-  padding: 1.5rem;
-  margin-top: 1rem;
+  color: #ffffff;
 }
 
-.niveles-experiencia h6 {
+.colab-tech-chip.selected {
+  border-color: #39c0c3;
+  background: rgba(57, 192, 195, 0.15);
+  color: #ffffff;
+}
+
+.colab-tech-chip.selected i {
+  color: #39c0c3;
+}
+
+.colab-chip-check {
+  font-size: 0.7rem;
+  color: #39c0c3;
+  animation: colabPopIn 0.3s ease;
+}
+
+.colab-tech-chip.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.colab-counter {
   color: #39c0c3;
   font-weight: 600;
 }
 
-/* Submit Button */
-.form-footer {
-  margin-top: 2rem;
+/* ---- NIVELES DE EXPERIENCIA ---- */
+.colab-levels-section {
+  background: rgba(57, 192, 195, 0.04);
+  border: 1px solid rgba(57, 192, 195, 0.15);
+  border-radius: 14px;
+  padding: 1.5rem;
 }
 
-.submit-btn {
-  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
-  border: none;
-  padding: 0.75rem 3rem;
-  font-weight: 600;
-  font-size: 1.1rem;
+.colab-levels-section h6 {
+  color: #39c0c3;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.colab-level-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(57, 192, 195, 0.08);
+}
+
+.colab-level-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.level-tech-name {
+  min-width: 140px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+}
+
+.level-tech-name i {
+  color: #39c0c3;
+}
+
+.level-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.level-btn {
+  background: rgba(15, 15, 15, 0.5);
+  border: 1.5px solid rgba(57, 192, 195, 0.15);
   border-radius: 50px;
+  padding: 0.4rem 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.82rem;
+  cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(57, 192, 195, 0.3);
+  font-family: inherit;
+  font-weight: 500;
 }
 
-.submit-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.4);
-  background: linear-gradient(135deg, #2a8a8d 0%, #1e6b6e 100%);
+.level-btn:hover {
+  border-color: rgba(57, 192, 195, 0.4);
+  color: #ffffff;
 }
 
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.level-btn.active {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
+  border-color: #39c0c3;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(57, 192, 195, 0.25);
 }
 
-/* Alerts */
-.alert {
-  border-radius: 10px;
-  border: none;
+/* ---- SUBMIT ---- */
+.colab-submit-area {
+  text-align: center;
+  padding-top: 1.5rem;
 }
 
-.alert-success {
-  background: rgba(40, 167, 69, 0.2);
-  color: #28a745;
-  border-left: 4px solid #28a745;
+.colab-submit-btn {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 0.85rem 3rem !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(57, 192, 195, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
 }
 
-.alert-danger {
-  background: rgba(220, 53, 69, 0.2);
-  color: #dc3545;
-  border-left: 4px solid #dc3545;
+.colab-submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .colaborar-page {
-    padding: 100px 0 30px;
+.colab-submit-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.colab-submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 30px rgba(57, 192, 195, 0.4) !important;
+}
+
+.colab-submit-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+.submit-hint {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* ========================================
+   VOLUNTARIOS SECTION
+   ======================================== */
+.colab-volunteer-section {
+  position: relative;
+  z-index: 1;
+  padding: 20px 0 80px;
+}
+
+.colab-volunteer-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(57, 192, 195, 0.04);
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.colab-volunteer-card:hover {
+  border-color: rgba(57, 192, 195, 0.35);
+  box-shadow: 0 15px 40px rgba(57, 192, 195, 0.1);
+}
+
+.volunteer-icon-float {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(57, 192, 195, 0.2) 0%, rgba(42, 138, 141, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  font-size: 1.8rem;
+  color: #39c0c3;
+  animation: colabPulse 3s ease-in-out infinite;
+}
+
+@keyframes colabPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(57, 192, 195, 0.2); }
+  50% { box-shadow: 0 0 0 15px rgba(57, 192, 195, 0); }
+}
+
+.colab-volunteer-card h3 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.volunteer-desc {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  max-width: 550px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.volunteer-desc strong {
+  color: #39c0c3;
+}
+
+.volunteer-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.volunteer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+}
+
+.volunteer-item i {
+  color: #39c0c3;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+@keyframes colabFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-
-  .colaborar-hero h1 {
-    font-size: 2rem;
-  }
-
-  .colaborar-form-card .card-body {
-    padding: 1.5rem;
-  }
-
-  .tecnologias-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-section {
-    margin-bottom: 2rem;
-  }
-
-  .submit-btn {
-    width: 100%;
-    padding: 0.75rem 2rem;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Dark mode adjustments */
-[data-theme="dark"] .colaborar-page {
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-}
-
-/* Light mode support (si se implementa) */
+/* ========================================
+   LIGHT MODE
+   ======================================== */
 [data-theme="light"] .colaborar-page {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background:
+    radial-gradient(circle at 20% 80%, rgba(57, 192, 195, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(57, 192, 195, 0.04) 0%, transparent 50%),
+    linear-gradient(135deg, #f8f9fa 0%, #e9ecef 30%, #dee2e6 70%, #e0f4f5 100%);
   color: #2c3e50;
 }
 
-[data-theme="light"] .benefit-card {
-  background: linear-gradient(135deg, rgba(57, 192, 195, 0.05) 0%, rgba(42, 138, 141, 0.02) 100%);
+[data-theme="light"] .colab-particle {
+  background: rgba(57, 192, 195, 0.3);
+}
+
+[data-theme="light"] .colab-particle:nth-child(odd) {
+  background: rgba(57, 192, 195, 0.15);
+}
+
+[data-theme="light"] .colab-shape {
   border-color: rgba(57, 192, 195, 0.1);
 }
 
-[data-theme="light"] .colaborar-form-card {
+[data-theme="light"] .colab-badge {
+  background: rgba(57, 192, 195, 0.1);
+  border-color: rgba(57, 192, 195, 0.25);
+}
+
+[data-theme="light"] .colab-hero-title {
+  background: linear-gradient(135deg, #2c3e50 0%, #39c0c3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .colab-hero-subtitle {
+  color: #6c757d;
+}
+
+[data-theme="light"] .colab-benefit-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(57, 192, 195, 0.15);
+}
+
+[data-theme="light"] .colab-benefit-card:hover {
   background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .colab-benefit-card h4 {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .colab-benefit-card p {
+  color: #6c757d;
+}
+
+[data-theme="light"] .colab-form-wrapper {
+  border-color: rgba(57, 192, 195, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .colab-form-body {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="light"] .form-block-title h5 {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .form-block-title p {
+  color: #6c757d;
+}
+
+[data-theme="light"] .colab-input-group label {
+  color: #495057;
+}
+
+[data-theme="light"] .colab-input-group input,
+[data-theme="light"] .colab-input-group select,
+[data-theme="light"] .colab-input-group textarea {
+  background: #ffffff;
+  border-color: #dee2e6;
+  color: #2c3e50;
+}
+
+[data-theme="light"] .colab-input-group input::placeholder,
+[data-theme="light"] .colab-input-group textarea::placeholder {
+  color: #adb5bd;
+}
+
+[data-theme="light"] .colab-input-group input:focus,
+[data-theme="light"] .colab-input-group select:focus,
+[data-theme="light"] .colab-input-group textarea:focus {
+  background: #ffffff;
+  border-color: #39c0c3;
+}
+
+[data-theme="light"] .colab-input-group select option {
+  background: #ffffff;
+  color: #2c3e50;
+}
+
+[data-theme="light"] .colab-time-card {
+  background: #ffffff;
+  border-color: #dee2e6;
+}
+
+[data-theme="light"] .colab-time-card strong {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .colab-time-card small {
+  color: #6c757d;
+}
+
+[data-theme="light"] .colab-time-card:hover {
+  border-color: rgba(57, 192, 195, 0.4);
+}
+
+[data-theme="light"] .colab-time-card.selected {
+  background: rgba(57, 192, 195, 0.05);
+}
+
+[data-theme="light"] .colab-tech-chip {
+  background: #ffffff;
+  border-color: #dee2e6;
+  color: #495057;
+}
+
+[data-theme="light"] .colab-tech-chip.selected {
+  background: rgba(57, 192, 195, 0.1);
+  color: #2c3e50;
+}
+
+[data-theme="light"] .colab-levels-section {
+  background: rgba(57, 192, 195, 0.03);
+  border-color: rgba(57, 192, 195, 0.15);
+}
+
+[data-theme="light"] .level-btn {
+  background: #ffffff;
+  border-color: #dee2e6;
+  color: #495057;
+}
+
+[data-theme="light"] .level-tech-name {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .colab-form-block {
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .char-counter {
+  color: #adb5bd;
+}
+
+[data-theme="light"] .submit-hint {
+  color: #adb5bd;
+}
+
+[data-theme="light"] .colab-volunteer-card {
+  background: rgba(255, 255, 255, 0.8);
   border-color: rgba(57, 192, 195, 0.2);
 }
 
-[data-theme="light"] .form-control,
-[data-theme="light"] .form-select {
-  background: #ffffff;
-  border-color: #e9ecef;
+[data-theme="light"] .colab-volunteer-card h3 {
   color: #2c3e50;
 }
 
-[data-theme="light"] .form-control:focus,
-[data-theme="light"] .form-select:focus {
-  background: #ffffff;
-  border-color: #39c0c3;
-  color: #2c3e50;
+[data-theme="light"] .volunteer-desc {
+  color: #6c757d;
+}
+
+[data-theme="light"] .volunteer-item {
+  color: #495057;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+/* Tablet */
+@media (max-width: 991px) {
+  .colab-hero-section {
+    padding: 120px 0 40px;
+  }
+
+  .colab-hero-title {
+    font-size: 2.8rem;
+  }
+
+  .colab-hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .colab-form-body {
+    padding: 2rem;
+  }
+
+  .colab-volunteer-card {
+    padding: 2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .colab-hero-section {
+    padding: 110px 0 30px;
+  }
+
+  .colab-hero-title {
+    font-size: 2.2rem;
+  }
+
+  .colab-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .colab-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 1.2rem;
+  }
+
+  .colab-benefits-section {
+    padding: 20px 0 40px;
+  }
+
+  .colab-benefit-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .benefit-icon-wrapper {
+    width: 55px;
+    height: 55px;
+    font-size: 1.4rem;
+  }
+
+  .colab-form-section {
+    padding: 20px 0 40px;
+  }
+
+  .colab-form-wrapper {
+    border-radius: 18px;
+    margin: 0 -0.5rem;
+  }
+
+  .colab-form-header {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .colab-form-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .colab-form-body {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .form-block-title {
+    gap: 0.75rem;
+  }
+
+  .form-block-number {
+    min-width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+
+  .form-block-title h5 {
+    font-size: 1.05rem;
+  }
+
+  .colab-tech-grid {
+    gap: 0.5rem;
+  }
+
+  .colab-tech-chip {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .colab-time-card {
+    padding: 1rem;
+  }
+
+  .colab-time-card i {
+    font-size: 1.4rem;
+  }
+
+  .colab-level-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .level-options {
+    width: 100%;
+  }
+
+  .level-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.78rem;
+  }
+
+  .colab-submit-btn {
+    width: 100% !important;
+    padding: 0.85rem 2rem !important;
+  }
+
+  .colab-volunteer-section {
+    padding: 10px 0 60px;
+  }
+
+  .colab-volunteer-card {
+    padding: 1.8rem 1.2rem;
+    border-radius: 16px;
+  }
+
+  .colab-volunteer-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .volunteer-desc {
+    font-size: 0.92rem;
+  }
+
+  .volunteer-items {
+    gap: 0.5rem;
+  }
+
+  .volunteer-item {
+    font-size: 0.88rem;
+  }
+
+  /* Ocultar formas geométricas en mobile */
+  .colab-shape-1,
+  .colab-shape-2,
+  .colab-shape-3 {
+    display: none;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .colab-hero-section {
+    padding: 100px 0 25px;
+  }
+
+  .colab-hero-title {
+    font-size: 1.8rem;
+  }
+
+  .colab-hero-subtitle {
+    font-size: 0.92rem;
+  }
+
+  .colab-form-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .form-header-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .colab-form-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .colab-form-body {
+    padding: 1.2rem 1rem;
+  }
+
+  .colab-form-block {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .colab-benefit-card h4 {
+    font-size: 1rem;
+  }
+
+  .colab-benefit-card p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Landscape mobile fix */
+@media (max-height: 500px) and (orientation: landscape) {
+  .colab-hero-section {
+    padding: 90px 0 20px;
+  }
+
+  .colab-hero-title {
+    font-size: 2rem;
+  }
+}
+
+/* ========================================
+   SCOPED OVERRIDES - evitar conflictos
+   con estilos globales
+   ======================================== */
+.colaborar-page .colab-form-block .form-block-title h5 {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+  text-align: left;
+  font-size: 1.15rem;
+  position: static;
+  display: inline;
+  width: auto;
+}
+
+.colaborar-page .colab-form-block .form-block-title h5::after {
+  display: none;
+}
+
+.colaborar-page .colab-levels-section h6 {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+  text-align: left;
+  position: static;
+  display: inline;
+  width: auto;
+}
+
+.colaborar-page .colab-levels-section h6::after {
+  display: none;
 }

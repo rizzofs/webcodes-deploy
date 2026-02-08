@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, Card, Alert, Spinner } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from 'react';
+import { Container, Row, Col, Form, Button, Alert, Spinner } from 'react-bootstrap';
 import './ColaborarPage.css';
 
 const ColaborarPage = () => {
@@ -17,6 +17,28 @@ const ColaborarPage = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const particlesRef = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), 300);
+
+    // Crear partículas dinámicas
+    if (particlesRef.current) {
+      const container = particlesRef.current;
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'colab-particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        container.appendChild(particle);
+      }
+    }
+  }, []);
 
   // Opciones para el año de ingreso (últimos 10 años)
   const anosIngreso = [];
@@ -25,56 +47,46 @@ const ColaborarPage = () => {
     anosIngreso.push(i);
   }
 
-  // Disponibilidades horarias
   const disponibilidades = [
-    { value: 'mañana', label: 'Mañana', icon: 'fas fa-sun' },
-    { value: 'tarde', label: 'Tarde', icon: 'fas fa-sun' },
-    { value: 'noche', label: 'Noche', icon: 'fas fa-moon' }
+    { value: 'mañana', label: 'Mañana', icon: 'fas fa-sun', desc: '8:00 - 12:00' },
+    { value: 'tarde', label: 'Tarde', icon: 'fas fa-cloud-sun', desc: '12:00 - 18:00' },
+    { value: 'noche', label: 'Noche', icon: 'fas fa-moon', desc: '18:00 - 22:00' }
   ];
 
-  // Tecnologías disponibles
   const tecnologiasDisponibles = [
-    { value: 'react', label: 'React' },
-    { value: 'nodejs', label: 'Node.js' },
-    { value: 'python', label: 'Python' },
-    { value: 'javascript', label: 'JavaScript' },
-    { value: 'typescript', label: 'TypeScript' },
-    { value: 'java', label: 'Java' },
-    { value: 'php', label: 'PHP' },
-    { value: 'csharp', label: 'C#' },
-    { value: 'vue', label: 'Vue.js' },
-    { value: 'angular', label: 'Angular' },
-    { value: 'html', label: 'HTML/CSS' },
-    { value: 'sql', label: 'SQL' },
-    { value: 'mongodb', label: 'MongoDB' },
-    { value: 'postgresql', label: 'PostgreSQL' },
-    { value: 'git', label: 'Git' },
-    { value: 'docker', label: 'Docker' },
-    { value: 'aws', label: 'AWS' },
-    { value: 'firebase', label: 'Firebase' },
-    { value: 'flutter', label: 'Flutter' },
-    { value: 'react-native', label: 'React Native' }
+    { value: 'react', label: 'React', icon: 'fab fa-react' },
+    { value: 'nodejs', label: 'Node.js', icon: 'fab fa-node-js' },
+    { value: 'python', label: 'Python', icon: 'fab fa-python' },
+    { value: 'javascript', label: 'JavaScript', icon: 'fab fa-js-square' },
+    { value: 'typescript', label: 'TypeScript', icon: 'fas fa-code' },
+    { value: 'java', label: 'Java', icon: 'fab fa-java' },
+    { value: 'php', label: 'PHP', icon: 'fab fa-php' },
+    { value: 'csharp', label: 'C#', icon: 'fas fa-hashtag' },
+    { value: 'vue', label: 'Vue.js', icon: 'fab fa-vuejs' },
+    { value: 'angular', label: 'Angular', icon: 'fab fa-angular' },
+    { value: 'html', label: 'HTML/CSS', icon: 'fab fa-html5' },
+    { value: 'sql', label: 'SQL', icon: 'fas fa-database' },
+    { value: 'mongodb', label: 'MongoDB', icon: 'fas fa-leaf' },
+    { value: 'postgresql', label: 'PostgreSQL', icon: 'fas fa-database' },
+    { value: 'git', label: 'Git', icon: 'fab fa-git-alt' },
+    { value: 'docker', label: 'Docker', icon: 'fab fa-docker' },
+    { value: 'aws', label: 'AWS', icon: 'fab fa-aws' },
+    { value: 'firebase', label: 'Firebase', icon: 'fas fa-fire' },
+    { value: 'flutter', label: 'Flutter', icon: 'fas fa-mobile-alt' },
+    { value: 'react-native', label: 'React Native', icon: 'fab fa-react' }
   ];
 
   const nivelesExperiencia = [
-    { value: 'principiante', label: 'Principiante' },
-    { value: 'intermedio', label: 'Intermedio' },
-    { value: 'avanzado', label: 'Avanzado' }
+    { value: 'principiante', label: 'Principiante', icon: 'fas fa-seedling' },
+    { value: 'intermedio', label: 'Intermedio', icon: 'fas fa-chart-line' },
+    { value: 'avanzado', label: 'Avanzado', icon: 'fas fa-rocket' }
   ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    // Limpiar errores cuando el usuario empiece a escribir
+    setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
@@ -90,22 +102,13 @@ const ColaborarPage = () => {
   const handleTecnologiaChange = (techValue) => {
     setFormData(prev => {
       if (prev.tecnologias.includes(techValue)) {
-        // Remover tecnología y su nivel de experiencia
         const nuevasTecnologias = prev.tecnologias.filter(t => t !== techValue);
         const nuevosNiveles = { ...prev.nivelesExperiencia };
         delete nuevosNiveles[techValue];
-        return {
-          ...prev,
-          tecnologias: nuevasTecnologias,
-          nivelesExperiencia: nuevosNiveles
-        };
+        return { ...prev, tecnologias: nuevasTecnologias, nivelesExperiencia: nuevosNiveles };
       } else {
-        // Agregar tecnología si no se ha alcanzado el máximo de 3
         if (prev.tecnologias.length < 3) {
-          return {
-            ...prev,
-            tecnologias: [...prev.tecnologias, techValue]
-          };
+          return { ...prev, tecnologias: [...prev.tecnologias, techValue] };
         }
       }
       return prev;
@@ -115,83 +118,50 @@ const ColaborarPage = () => {
   const handleNivelExperienciaChange = (techValue, nivel) => {
     setFormData(prev => ({
       ...prev,
-      nivelesExperiencia: {
-        ...prev.nivelesExperiencia,
-        [techValue]: nivel
-      }
+      nivelesExperiencia: { ...prev.nivelesExperiencia, [techValue]: nivel }
     }));
   };
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.nombre.trim()) {
-      newErrors.nombre = 'El nombre es requerido';
-    }
-
-    if (!formData.email) {
-      newErrors.email = 'El email es requerido';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'El email no es válido';
-    }
-
-    if (!formData.telefono.trim()) {
-      newErrors.telefono = 'El teléfono es requerido';
-    }
-
-    if (!formData.anoIngreso) {
-      newErrors.anoIngreso = 'El año de ingreso es requerido';
-    }
-
-    if (formData.disponibilidad.length === 0) {
-      newErrors.disponibilidad = 'Selecciona al menos una disponibilidad horaria';
-    }
-
+    if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es requerido';
+    if (!formData.email) newErrors.email = 'El email es requerido';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'El email no es válido';
+    if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es requerido';
+    if (!formData.anoIngreso) newErrors.anoIngreso = 'El año de ingreso es requerido';
+    if (formData.disponibilidad.length === 0) newErrors.disponibilidad = 'Selecciona al menos una disponibilidad horaria';
     if (formData.tecnologias.length === 0) {
       newErrors.tecnologias = 'Selecciona al menos una tecnología';
     } else {
-      // Validar que cada tecnología tenga su nivel de experiencia
       formData.tecnologias.forEach(tech => {
         if (!formData.nivelesExperiencia[tech]) {
-          newErrors[`nivel_${tech}`] = 'Selecciona el nivel de experiencia para ' + 
+          newErrors[`nivel_${tech}`] = 'Selecciona el nivel de experiencia para ' +
             tecnologiasDisponibles.find(t => t.value === tech)?.label;
         }
       });
     }
-
-    if (!formData.motivacion.trim()) {
-      newErrors.motivacion = 'La motivación/intereses son requeridos';
-    }
-
+    if (!formData.motivacion.trim()) newErrors.motivacion = 'La motivación/intereses son requeridos';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateForm()) {
       setSubmitStatus({ type: 'error', message: 'Por favor corrige los errores en el formulario' });
       return;
     }
-
     setIsSubmitting(true);
     setSubmitStatus(null);
-
     try {
-      // Formatear las tecnologías con sus niveles de experiencia
       const tecnologiasConNiveles = formData.tecnologias.map(tech => {
         const techLabel = tecnologiasDisponibles.find(t => t.value === tech)?.label || tech;
         const nivel = formData.nivelesExperiencia[tech] || 'No especificado';
         return `${techLabel} (${nivel})`;
       }).join(', ');
-
-      // Formatear disponibilidades
       const disponibilidadesTexto = formData.disponibilidad
         .map(disp => disponibilidades.find(d => d.value === disp)?.label || disp)
         .join(', ');
-
-      // Construir el mensaje completo
       const mensajeCompleto = `
 INFORMACIÓN PERSONAL:
 - Nombre: ${formData.nombre}
@@ -211,9 +181,7 @@ ${formData.motivacion}
 
       const response = await fetch('https://formspree.io/f/xkgpnnzr', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.nombre,
           email: formData.email,
@@ -227,30 +195,22 @@ ${formData.motivacion}
       });
 
       if (response.ok) {
-        setSubmitStatus({ 
-          type: 'success', 
-          message: '¡Gracias por tu interés! Tu solicitud se ha registrado correctamente. Te contactaremos pronto.' 
+        setSubmitStatus({
+          type: 'success',
+          message: '¡Gracias por tu interés! Tu solicitud se ha registrado correctamente. Te contactaremos pronto.'
         });
-        
-        // Limpiar formulario
         setFormData({
-          nombre: '',
-          email: '',
-          telefono: '',
-          anoIngreso: '',
-          disponibilidad: [],
-          tecnologias: [],
-          nivelesExperiencia: {},
-          motivacion: ''
+          nombre: '', email: '', telefono: '', anoIngreso: '',
+          disponibilidad: [], tecnologias: [], nivelesExperiencia: {}, motivacion: ''
         });
       } else {
         throw new Error('Error al enviar el formulario');
       }
     } catch (error) {
       console.error('Error al enviar formulario:', error);
-      setSubmitStatus({ 
-        type: 'error', 
-        message: 'Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente.' 
+      setSubmitStatus({
+        type: 'error',
+        message: 'Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente.'
       });
     } finally {
       setIsSubmitting(false);
@@ -259,371 +219,356 @@ ${formData.motivacion}
 
   return (
     <div className="colaborar-page">
-      <Container>
-        {/* Hero Section */}
-        <Row className="mb-5">
-          <Col>
-            <div className="colaborar-hero text-center">
-              <h1 className="display-4 mb-3">
-                <i className="fas fa-users-cog me-3"></i>
-                Colabora en Proyectos CODES++
-              </h1>
-              <p className="lead">
-                Únete a proyectos reales, gana experiencia y fortalece tu portafolio mientras colaboras con la comunidad estudiantil
-              </p>
+      {/* Elementos decorativos de fondo */}
+      <div className="colab-particles" ref={particlesRef}></div>
+      <div className="colab-geometric-shapes">
+        <div className="colab-shape colab-shape-1"></div>
+        <div className="colab-shape colab-shape-2"></div>
+        <div className="colab-shape colab-shape-3"></div>
+      </div>
+      <div className="colab-gradient-overlay"></div>
+
+      {/* Hero Section */}
+      <section className="colab-hero-section">
+        <Container>
+          <div className={`colab-hero-content ${isVisible ? 'visible' : ''}`}>
+            <div className="colab-badge">
+              <span><i className="fas fa-hands-helping me-2"></i>Comunidad CODES++</span>
             </div>
-          </Col>
-        </Row>
+            <h1 className="colab-hero-title">
+              Colabora en Proyectos
+            </h1>
+            <p className="colab-hero-subtitle">
+              Únete a proyectos reales, gana experiencia y fortalece tu portafolio 
+              mientras colaboras con la comunidad estudiantil
+            </p>
+          </div>
+        </Container>
+      </section>
 
-        {/* Beneficios Section */}
-        <Row className="mb-5">
-          <Col md={4}>
-            <Card className="benefit-card mb-3">
-              <Card.Body className="text-center">
-                <i className="fas fa-briefcase fa-3x mb-3 text-primary"></i>
-                <h4>Portafolio Real</h4>
-                <p>Proyectos reales que podrás agregar a tu portafolio profesional</p>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card className="benefit-card mb-3">
-              <Card.Body className="text-center">
-                <i className="fas fa-code fa-3x mb-3 text-primary"></i>
-                <h4>Experiencia Práctica</h4>
-                <p>Aplica lo que aprendes en la universidad en proyectos reales</p>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card className="benefit-card mb-3">
-              <Card.Body className="text-center">
-                <i className="fas fa-network-wired fa-3x mb-3 text-primary"></i>
-                <h4>Networking</h4>
-                <p>Conecta con otros estudiantes y profesionales del área</p>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        {/* Formulario */}
-        <Row>
-          <Col lg={10} className="mx-auto">
-            <Card className="colaborar-form-card">
-              <Card.Header className="text-center">
-                <h3 className="mb-0">
-                  <i className="fas fa-user-plus me-2"></i>
-                  Formulario de Registro
-                </h3>
-                <p className="text-muted mb-0 mt-2">
-                  Completa el siguiente formulario para comenzar a colaborar en proyectos
-                </p>
-              </Card.Header>
-              <Card.Body>
-                {submitStatus && (
-                  <Alert variant={submitStatus.type === 'success' ? 'success' : 'danger'}>
-                    {submitStatus.message}
-                  </Alert>
-                )}
-
-                <Form onSubmit={handleSubmit}>
-                  {/* Información Personal */}
-                  <div className="form-section">
-                    <h5 className="section-title">
-                      <i className="fas fa-user me-2"></i>
-                      Información Personal
-                    </h5>
-
-                    <Row>
-                      <Col md={6}>
-                        <Form.Group className="mb-3">
-                          <Form.Label>
-                            Nombre completo *
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="nombre"
-                            value={formData.nombre}
-                            onChange={handleInputChange}
-                            placeholder="Tu nombre completo"
-                            isInvalid={!!errors.nombre}
-                            required
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            {errors.nombre}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-
-                      <Col md={6}>
-                        <Form.Group className="mb-3">
-                          <Form.Label>
-                            Email *
-                          </Form.Label>
-                          <Form.Control
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="tu@email.com"
-                            isInvalid={!!errors.email}
-                            required
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            {errors.email}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col md={6}>
-                        <Form.Group className="mb-3">
-                          <Form.Label>
-                            Teléfono *
-                          </Form.Label>
-                          <Form.Control
-                            type="tel"
-                            name="telefono"
-                            value={formData.telefono}
-                            onChange={handleInputChange}
-                            placeholder="+54 9 2346 123456"
-                            isInvalid={!!errors.telefono}
-                            required
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            {errors.telefono}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-
-                      <Col md={6}>
-                        <Form.Group className="mb-3">
-                          <Form.Label>
-                            Año de ingreso a la carrera *
-                          </Form.Label>
-                          <Form.Select
-                            name="anoIngreso"
-                            value={formData.anoIngreso}
-                            onChange={handleInputChange}
-                            isInvalid={!!errors.anoIngreso}
-                            required
-                          >
-                            <option value="">Selecciona un año</option>
-                            {anosIngreso.map(ano => (
-                              <option key={ano} value={ano}>{ano}</option>
-                            ))}
-                          </Form.Select>
-                          <Form.Control.Feedback type="invalid">
-                            {errors.anoIngreso}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                    </Row>
+      {/* Beneficios Section */}
+      <section className="colab-benefits-section">
+        <Container>
+          <Row className="g-4">
+            {[
+              { icon: 'fas fa-briefcase', title: 'Portafolio Real', desc: 'Proyectos reales que podrás agregar a tu portafolio profesional', delay: '0.1s' },
+              { icon: 'fas fa-code', title: 'Experiencia Práctica', desc: 'Aplica lo que aprendes en la universidad en proyectos reales', delay: '0.2s' },
+              { icon: 'fas fa-network-wired', title: 'Networking', desc: 'Conecta con otros estudiantes y profesionales del área', delay: '0.3s' },
+              { icon: 'fas fa-graduation-cap', title: 'Crecimiento', desc: 'Aprende nuevas tecnologías y metodologías de trabajo en equipo', delay: '0.4s' }
+            ].map((benefit, idx) => (
+              <Col lg={3} md={6} sm={6} xs={12} key={idx}>
+                <div className="colab-benefit-card" style={{ animationDelay: benefit.delay }}>
+                  <div className="benefit-icon-wrapper">
+                    <i className={benefit.icon}></i>
                   </div>
+                  <h4>{benefit.title}</h4>
+                  <p>{benefit.desc}</p>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
 
-                  {/* Disponibilidad */}
-                  <div className="form-section">
-                    <h5 className="section-title">
-                      <i className="fas fa-clock me-2"></i>
-                      Disponibilidad Horaria *
-                    </h5>
-                    <Form.Text className="text-muted mb-3 d-block">
-                      Selecciona todos los horarios en los que estás disponible (puedes seleccionar varios)
-                    </Form.Text>
-                    {errors.disponibilidad && (
-                      <Alert variant="danger" className="mb-3">
-                        {errors.disponibilidad}
-                      </Alert>
-                    )}
-                    <Row>
-                      {disponibilidades.map(disp => (
-                        <Col md={4} key={disp.value}>
-                          <Form.Check
-                            type="checkbox"
-                            id={`disp-${disp.value}`}
-                            label={
-                              <>
-                                <i className={disp.icon}></i> {disp.label}
-                              </>
-                            }
-                            checked={formData.disponibilidad.includes(disp.value)}
-                            onChange={() => handleDisponibilidadChange(disp.value)}
-                            className="mb-3 disponibilidad-check"
-                          />
-                        </Col>
-                      ))}
-                    </Row>
-                  </div>
+      {/* Formulario Section */}
+      <section className="colab-form-section">
+        <Container>
+          <div className="colab-form-wrapper">
+            {/* Header del formulario */}
+            <div className="colab-form-header">
+              <div className="form-header-icon">
+                <i className="fas fa-user-plus"></i>
+              </div>
+              <h2>Formulario de Registro</h2>
+              <p>Completa el siguiente formulario para comenzar a colaborar en proyectos</p>
+            </div>
 
-                  {/* Tecnologías */}
-                  <div className="form-section">
-                    <h5 className="section-title">
-                      <i className="fas fa-laptop-code me-2"></i>
-                      Tecnologías e Intereses *
-                    </h5>
-                    <Form.Text className="text-muted mb-3 d-block">
-                      Selecciona hasta 3 tecnologías de tu interés. Para cada una deberás indicar tu nivel de experiencia.
-                      {formData.tecnologias.length > 0 && ` (${formData.tecnologias.length}/3 seleccionadas)`}
-                    </Form.Text>
-                    {errors.tecnologias && (
-                      <Alert variant="danger" className="mb-3">
-                        {errors.tecnologias}
-                      </Alert>
-                    )}
+            <div className="colab-form-body">
+              {submitStatus && (
+                <Alert
+                  variant={submitStatus.type === 'success' ? 'success' : 'danger'}
+                  className="colab-alert"
+                  dismissible
+                  onClose={() => setSubmitStatus(null)}
+                >
+                  <i className={`fas ${submitStatus.type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2`}></i>
+                  {submitStatus.message}
+                </Alert>
+              )}
 
-                    <div className="tecnologias-grid mb-4">
-                      {tecnologiasDisponibles.map(tech => (
-                        <Form.Check
-                          key={tech.value}
-                          type="checkbox"
-                          id={`tech-${tech.value}`}
-                          label={tech.label}
-                          checked={formData.tecnologias.includes(tech.value)}
-                          onChange={() => handleTecnologiaChange(tech.value)}
-                          disabled={!formData.tecnologias.includes(tech.value) && formData.tecnologias.length >= 3}
-                          className="tech-checkbox mb-2"
-                        />
-                      ))}
+              <Form onSubmit={handleSubmit} noValidate>
+                {/* Información Personal */}
+                <div className="colab-form-block">
+                  <div className="form-block-title">
+                    <span className="form-block-number">1</span>
+                    <div>
+                      <h5>Información Personal</h5>
+                      <p>Datos básicos de contacto</p>
                     </div>
+                  </div>
 
-                    {/* Niveles de experiencia para tecnologías seleccionadas */}
-                    {formData.tecnologias.length > 0 && (
-                      <div className="niveles-experiencia">
-                        <h6 className="mb-3">
-                          <i className="fas fa-signal me-2"></i>
-                          Nivel de experiencia por tecnología:
-                        </h6>
-                        {formData.tecnologias.map(techValue => {
-                          const tech = tecnologiasDisponibles.find(t => t.value === techValue);
-                          return (
-                            <Row key={techValue} className="mb-3">
-                              <Col md={4}>
-                                <Form.Label>
-                                  <strong>{tech?.label}</strong>
-                                </Form.Label>
-                              </Col>
-                              <Col md={8}>
-                                <Form.Select
-                                  value={formData.nivelesExperiencia[techValue] || ''}
-                                  onChange={(e) => handleNivelExperienciaChange(techValue, e.target.value)}
-                                  isInvalid={!!errors[`nivel_${techValue}`]}
-                                  required
-                                >
-                                  <option value="">Selecciona nivel...</option>
-                                  {nivelesExperiencia.map(nivel => (
-                                    <option key={nivel.value} value={nivel.value}>
-                                      {nivel.label}
-                                    </option>
-                                  ))}
-                                </Form.Select>
-                                {errors[`nivel_${techValue}`] && (
-                                  <Form.Control.Feedback type="invalid" className="d-block">
-                                    {errors[`nivel_${techValue}`]}
-                                  </Form.Control.Feedback>
-                                )}
-                              </Col>
-                            </Row>
-                          );
-                        })}
+                  <Row className="g-3">
+                    <Col md={6}>
+                      <div className={`colab-input-group ${errors.nombre ? 'has-error' : ''}`}>
+                        <label><i className="fas fa-user me-2"></i>Nombre completo</label>
+                        <input
+                          type="text"
+                          name="nombre"
+                          value={formData.nombre}
+                          onChange={handleInputChange}
+                          placeholder="Tu nombre completo"
+                          className={errors.nombre ? 'is-invalid' : ''}
+                        />
+                        {errors.nombre && <span className="colab-error">{errors.nombre}</span>}
                       </div>
+                    </Col>
+                    <Col md={6}>
+                      <div className={`colab-input-group ${errors.email ? 'has-error' : ''}`}>
+                        <label><i className="fas fa-envelope me-2"></i>Email</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          placeholder="tu@email.com"
+                          className={errors.email ? 'is-invalid' : ''}
+                        />
+                        {errors.email && <span className="colab-error">{errors.email}</span>}
+                      </div>
+                    </Col>
+                    <Col md={6}>
+                      <div className={`colab-input-group ${errors.telefono ? 'has-error' : ''}`}>
+                        <label><i className="fas fa-phone me-2"></i>Teléfono</label>
+                        <input
+                          type="tel"
+                          name="telefono"
+                          value={formData.telefono}
+                          onChange={handleInputChange}
+                          placeholder="+54 9 2346 123456"
+                          className={errors.telefono ? 'is-invalid' : ''}
+                        />
+                        {errors.telefono && <span className="colab-error">{errors.telefono}</span>}
+                      </div>
+                    </Col>
+                    <Col md={6}>
+                      <div className={`colab-input-group ${errors.anoIngreso ? 'has-error' : ''}`}>
+                        <label><i className="fas fa-calendar-alt me-2"></i>Año de ingreso a la carrera</label>
+                        <select
+                          name="anoIngreso"
+                          value={formData.anoIngreso}
+                          onChange={handleInputChange}
+                          className={errors.anoIngreso ? 'is-invalid' : ''}
+                        >
+                          <option value="">Selecciona un año</option>
+                          {anosIngreso.map(ano => (
+                            <option key={ano} value={ano}>{ano}</option>
+                          ))}
+                        </select>
+                        {errors.anoIngreso && <span className="colab-error">{errors.anoIngreso}</span>}
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+
+                {/* Disponibilidad */}
+                <div className="colab-form-block">
+                  <div className="form-block-title">
+                    <span className="form-block-number">2</span>
+                    <div>
+                      <h5>Disponibilidad Horaria</h5>
+                      <p>Selecciona los horarios en los que estás disponible</p>
+                    </div>
+                  </div>
+                  {errors.disponibilidad && (
+                    <div className="colab-inline-error mb-3">
+                      <i className="fas fa-exclamation-triangle me-2"></i>
+                      {errors.disponibilidad}
+                    </div>
+                  )}
+                  <Row className="g-3">
+                    {disponibilidades.map(disp => (
+                      <Col md={4} sm={4} xs={12} key={disp.value}>
+                        <div
+                          className={`colab-time-card ${formData.disponibilidad.includes(disp.value) ? 'selected' : ''}`}
+                          onClick={() => handleDisponibilidadChange(disp.value)}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => e.key === 'Enter' && handleDisponibilidadChange(disp.value)}
+                        >
+                          <i className={disp.icon}></i>
+                          <strong>{disp.label}</strong>
+                          <small>{disp.desc}</small>
+                          {formData.disponibilidad.includes(disp.value) && (
+                            <div className="time-check">
+                              <i className="fas fa-check"></i>
+                            </div>
+                          )}
+                        </div>
+                      </Col>
+                    ))}
+                  </Row>
+                </div>
+
+                {/* Tecnologías */}
+                <div className="colab-form-block">
+                  <div className="form-block-title">
+                    <span className="form-block-number">3</span>
+                    <div>
+                      <h5>Tecnologías e Intereses</h5>
+                      <p>Selecciona hasta 3 tecnologías de tu interés
+                        {formData.tecnologias.length > 0 && (
+                          <span className="colab-counter"> ({formData.tecnologias.length}/3)</span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  {errors.tecnologias && (
+                    <div className="colab-inline-error mb-3">
+                      <i className="fas fa-exclamation-triangle me-2"></i>
+                      {errors.tecnologias}
+                    </div>
+                  )}
+
+                  <div className="colab-tech-grid">
+                    {tecnologiasDisponibles.map(tech => {
+                      const isSelected = formData.tecnologias.includes(tech.value);
+                      const isDisabled = !isSelected && formData.tecnologias.length >= 3;
+                      return (
+                        <div
+                          key={tech.value}
+                          className={`colab-tech-chip ${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}`}
+                          onClick={() => !isDisabled && handleTecnologiaChange(tech.value)}
+                          role="button"
+                          tabIndex={isDisabled ? -1 : 0}
+                          onKeyDown={(e) => e.key === 'Enter' && !isDisabled && handleTecnologiaChange(tech.value)}
+                        >
+                          <i className={tech.icon}></i>
+                          <span>{tech.label}</span>
+                          {isSelected && <i className="fas fa-check colab-chip-check"></i>}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Niveles de experiencia */}
+                  {formData.tecnologias.length > 0 && (
+                    <div className="colab-levels-section">
+                      <h6><i className="fas fa-signal me-2"></i>Nivel de experiencia</h6>
+                      {formData.tecnologias.map(techValue => {
+                        const tech = tecnologiasDisponibles.find(t => t.value === techValue);
+                        return (
+                          <div key={techValue} className="colab-level-row">
+                            <div className="level-tech-name">
+                              <i className={tech?.icon + ' me-2'}></i>
+                              <strong>{tech?.label}</strong>
+                            </div>
+                            <div className="level-options">
+                              {nivelesExperiencia.map(nivel => (
+                                <button
+                                  key={nivel.value}
+                                  type="button"
+                                  className={`level-btn ${formData.nivelesExperiencia[techValue] === nivel.value ? 'active' : ''}`}
+                                  onClick={() => handleNivelExperienciaChange(techValue, nivel.value)}
+                                >
+                                  <i className={nivel.icon + ' me-1'}></i>
+                                  {nivel.label}
+                                </button>
+                              ))}
+                            </div>
+                            {errors[`nivel_${techValue}`] && (
+                              <span className="colab-error d-block mt-1">{errors[`nivel_${techValue}`]}</span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {/* Motivación */}
+                <div className="colab-form-block">
+                  <div className="form-block-title">
+                    <span className="form-block-number">4</span>
+                    <div>
+                      <h5>Motivación e Intereses</h5>
+                      <p>Cuéntanos por qué quieres colaborar y qué te interesa</p>
+                    </div>
+                  </div>
+                  <div className={`colab-input-group ${errors.motivacion ? 'has-error' : ''}`}>
+                    <textarea
+                      name="motivacion"
+                      value={formData.motivacion}
+                      onChange={handleInputChange}
+                      placeholder="Ejemplo: Me interesa colaborar en proyectos web porque quiero aplicar lo que aprendo en la universidad. Me gustaría trabajar con React y Node.js para mejorar mis habilidades..."
+                      rows={5}
+                      className={errors.motivacion ? 'is-invalid' : ''}
+                    />
+                    {errors.motivacion && <span className="colab-error">{errors.motivacion}</span>}
+                    <div className="char-counter">
+                      {formData.motivacion.length} caracteres
+                    </div>
+                  </div>
+                </div>
+
+                {/* Submit */}
+                <div className="colab-submit-area">
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="colab-submit-btn"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Spinner animation="border" size="sm" className="me-2" />
+                        Enviando...
+                      </>
+                    ) : (
+                      <>
+                        <i className="fas fa-paper-plane me-2"></i>
+                        Enviar Solicitud
+                      </>
                     )}
-                  </div>
-
-                  {/* Motivación */}
-                  <div className="form-section">
-                    <h5 className="section-title">
-                      <i className="fas fa-comment-alt me-2"></i>
-                      Motivación e Intereses *
-                    </h5>
-                                          <Form.Text className="text-muted mb-3 d-block">
-                        Cuéntanos por qué quieres colaborar en proyectos y qué te interesa.
-                      </Form.Text>
-                    <Form.Group className="mb-3">
-                      <Form.Control
-                        as="textarea"
-                        name="motivacion"
-                        value={formData.motivacion}
-                        onChange={handleInputChange}
-                        placeholder="Ejemplo: Me interesa colaborar en proyectos web porque quiero aplicar lo que aprendo en la universidad. Me gustaría trabajar con React y Node.js para mejorar mis habilidades..."
-                        rows={5}
-                        isInvalid={!!errors.motivacion}
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {errors.motivacion}
-                      </Form.Control.Feedback>
-                      <Form.Text className="text-muted mt-2">
-                        {formData.motivacion.length} caracteres
-                      </Form.Text>
-                    </Form.Group>
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="form-footer text-center mt-4">
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      size="lg"
-                      disabled={isSubmitting}
-                      className="submit-btn"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Spinner animation="border" size="sm" className="me-2" />
-                          Enviando...
-                        </>
-                      ) : (
-                        <>
-                          <i className="fas fa-paper-plane me-2"></i>
-                          Enviar Solicitud
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        {/* Información sobre Proyectos Voluntarios */}
-        <Row className="mb-5 mt-5">
-          <Col lg={8} className="mx-auto">
-            <Card className="info-card mb-4">
-              <Card.Body className="text-center">
-                <div className="info-header justify-content-center mb-4">
-                  <i className="fas fa-heart fa-3x me-3 text-primary"></i>
-                  <div>
-                    <h4 className="mb-2">Proyectos Voluntarios</h4>
-                    <p className="mb-0 text-muted">
-                      Contribuye de forma voluntaria a proyectos comunitarios y de código abierto
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="project-type-card volunteer mx-auto" style={{ maxWidth: '600px' }}>
-                  <div className="type-icon mx-auto mb-3">
-                    <i className="fas fa-heart"></i>
-                  </div>
-                  <p className="lead">
-                    Proyectos comunitarios y de <strong>código abierto</strong> donde contribuyes 
-                    de forma voluntaria. Ideal para ganar experiencia y construir tu portafolio 
-                    mientras ayudas a la comunidad estudiantil.
+                  </Button>
+                  <p className="submit-hint">
+                    <i className="fas fa-lock me-1"></i>
+                    Tu información es confidencial y solo será utilizada para contactarte
                   </p>
-                  <ul className="text-start">
-                    <li>Proyectos internos de CODES++</li>
-                    <li>Mejoras al sitio web de CODES++</li>
-                    <li>Herramientas gratuitas para estudiantes</li>
-                    <li>Proyectos open source comunitarios</li>
-                    <li>Mejoras en herramientas educativas</li>
-                  </ul>
                 </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+              </Form>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Proyectos Voluntarios */}
+      <section className="colab-volunteer-section">
+        <Container>
+          <div className="colab-volunteer-card">
+            <div className="volunteer-icon-float">
+              <i className="fas fa-heart"></i>
+            </div>
+            <h3>Proyectos Voluntarios</h3>
+            <p className="volunteer-desc">
+              Contribuye de forma voluntaria a proyectos comunitarios y de <strong>código abierto</strong>. 
+              Ideal para ganar experiencia y construir tu portafolio mientras ayudas a la comunidad estudiantil.
+            </p>
+            <div className="volunteer-items">
+              {[
+                'Proyectos internos de CODES++',
+                'Mejoras al sitio web de CODES++',
+                'Herramientas gratuitas para estudiantes',
+                'Proyectos open source comunitarios',
+                'Mejoras en herramientas educativas'
+              ].map((item, idx) => (
+                <div className="volunteer-item" key={idx}>
+                  <i className="fas fa-check-circle"></i>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
     </div>
   );
 };
