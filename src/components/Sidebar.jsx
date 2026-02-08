@@ -12,11 +12,31 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Sincronizar activeSection con la ruta actual para páginas externas
+  useEffect(() => {
+    const routeToSection = {
+      '/calendario': 'calendario',
+      '/colaborar': 'colaborar',
+      '/encuestas': 'encuestas',
+      '/charlas': 'charlas',
+      '/cacic': 'cacic',
+      '/grupos': 'grupos',
+      '/taller': 'taller',
+      '/dashboard': 'dashboard',
+    };
+    const matched = routeToSection[location.pathname];
+    if (matched) {
+      setActiveSection(matched);
+    } else if (location.pathname === '/') {
+      // En la home, dejar que el scroll handler se encargue
+    }
+  }, [location.pathname]);
+
   useEffect(() => {
     const handleScroll = () => {
-      // Only update active section if sidebar is closed
-      if (!isOpen) {
-        const sections = ['hero', 'nosotros', 'integrantes', 'eventos', 'extra', 'faq', 'colaboradores', 'contacto'];
+      // Solo actualizar por scroll en la página principal
+      if (!isOpen && location.pathname === '/') {
+        const sections = ['hero', 'nosotros', 'integrantes', 'eventos', 'extra', 'blog', 'faq', 'colaboradores', 'contacto'];
         const scrollPosition = window.scrollY + 100;
 
         for (const section of sections) {
@@ -53,7 +73,7 @@ const Sidebar = () => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isOpen]);
+  }, [isOpen, location.pathname]);
 
   // Handle body scroll when sidebar is open
   useEffect(() => {
@@ -114,6 +134,8 @@ const Sidebar = () => {
   };
 
   const scrollToSection = (sectionId) => {
+    // Marcar como activo inmediatamente al hacer click
+    setActiveSection(sectionId);
     // Cerrar sidebar inmediatamente al hacer click en cualquier opción
     setIsOpen(false);
     
