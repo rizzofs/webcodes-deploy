@@ -58,29 +58,18 @@ const Sidebar = () => {
   // Handle body scroll when sidebar is open
   useEffect(() => {
     if (isOpen) {
-      // Store current scroll position
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
+      // Prevenir scroll simplemente escondiendo el overflow
+      document.body.style.overflow = 'hidden';
       document.body.classList.add('sidebar-open');
     } else {
-      // Restore scroll position
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
+      // Restaurar scroll
+      document.body.style.overflow = '';
       document.body.classList.remove('sidebar-open');
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
     }
 
     return () => {
       // Cleanup on unmount
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
+      document.body.style.overflow = '';
       document.body.classList.remove('sidebar-open');
     };
   }, [isOpen]);
