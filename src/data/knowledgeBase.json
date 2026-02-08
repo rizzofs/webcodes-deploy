@@ -13,25 +13,25 @@
     "president": {
       "name": "Federico Sebastián Rizzo",
       "role": "Presidente",
-      "email": "codes.unlu@gmail.com",
+      "email": "sistemas@codesunlu.tech",
       "description": "Responsable de la coordinación general y representación estudiantil"
     },
     "vicePresident": {
       "name": "Juan Cruz Rodriguez",
       "role": "Vicepresidente",
-      "email": "codes.unlu@gmail.com",
+      "email": "sistemas@codesunlu.tech",
       "description": "Apoyo en la gestión y coordinación de actividades"
     },
     "secretary": {
       "name": "Romina Ortiz",
       "role": "Secretaria",
-      "email": "codes.unlu@gmail.com",
+      "email": "sistemas@codesunlu.tech",
       "description": "Gestión documental y comunicación institucional"
     },
     "treasurer": {
       "name": "Bautista Pereyra Buch",
       "role": "Tesorero",
-      "email": "codes.unlu@gmail.com",
+      "email": "sistemas@codesunlu.tech",
       "description": "Administración de recursos y presupuesto"
     },
     "vocals": {
@@ -48,8 +48,12 @@
       "coordinator": "Federico Sebastián Rizzo (Presidente) y Juan Cruz Rodriguez (Vicepresidente)",
       "level": "Todos los años (principalmente años iniciales)",
       "description": "Tutorías personalizadas para cualquier materia de la carrera de Sistemas. Se organizan según la demanda y disponibilidad de los estudiantes.",
-      "topics": ["Todas las materias de la carrera", "Apoyo académico general", "Resolución de dudas"],
-      "contact": "codes.unlu@gmail.com",
+      "topics": [
+        "Todas las materias de la carrera",
+        "Apoyo académico general",
+        "Resolución de dudas"
+      ],
+      "contact": "sistemas@codesunlu.tech",
       "discord": "Servidor de Discord de CODES++"
     }
   ],
@@ -69,7 +73,7 @@
       ],
       "targetAudience": "Estudiantes de Sistemas",
       "registration": "Gratuita",
-      "contact": "codes.unlu@gmail.com",
+      "contact": "sistemas@codesunlu.tech",
       "status": "Realizado"
     },
     {
@@ -87,7 +91,7 @@
       ],
       "targetAudience": "Estudiantes de Sistemas",
       "registration": "Gratuita (formulario por desplegar)",
-      "contact": "codes.unlu@gmail.com",
+      "contact": "sistemas@codesunlu.tech",
       "status": "En evaluación"
     },
     {
@@ -105,7 +109,7 @@
       ],
       "targetAudience": "Estudiantes de Sistemas interesados en gaming",
       "registration": "Por definir",
-      "contact": "codes.unlu@gmail.com",
+      "contact": "sistemas@codesunlu.tech",
       "status": "En desarrollo"
     },
     {
@@ -123,7 +127,7 @@
       ],
       "targetAudience": "Estudiantes de Sistemas",
       "registration": "Por definir",
-      "contact": "codes.unlu@gmail.com",
+      "contact": "sistemas@codesunlu.tech",
       "status": "En evaluación"
     },
     {
@@ -141,7 +145,7 @@
       ],
       "targetAudience": "Estudiantes de Sistemas",
       "registration": "Gratuita",
-      "contact": "codes.unlu@gmail.com",
+      "contact": "sistemas@codesunlu.tech",
       "status": "Planificadas"
     },
     {
@@ -159,7 +163,7 @@
       ],
       "targetAudience": "Comunidad estudiantil",
       "registration": "Por definir",
-      "contact": "codes.unlu@gmail.com",
+      "contact": "sistemas@codesunlu.tech",
       "status": "En desarrollo temprano"
     }
   ],
@@ -189,7 +193,7 @@
           "Resolución de dudas específicas"
         ],
         "schedule": "Siempre que sea necesario",
-        "contact": "codes.unlu@gmail.com",
+        "contact": "sistemas@codesunlu.tech",
         "platform": "Discord"
       }
     ],
@@ -204,12 +208,12 @@
           "Oportunidades de pasantías",
           "Proyectos freelance"
         ],
-        "contact": "codes.unlu@gmail.com"
+        "contact": "sistemas@codesunlu.tech"
       }
     ]
   },
   "contact": {
-    "email": "codes.unlu@gmail.com",
+    "email": "sistemas@codesunlu.tech",
     "phone": "No disponible",
     "address": "No tenemos ubicación física, pero nos pueden contactar por nuestras redes",
     "whatsapp": "https://chat.whatsapp.com/C3i38DQvAT0JD0tBoC0YxV",
@@ -226,7 +230,7 @@
   "faq": [
     {
       "question": "¿Cómo puedo unirme a CODES++?",
-      "answer": "Para unirte a CODES++, puedes contactarnos por email (codes.unlu@gmail.com), unirte a nuestro grupo de WhatsApp o seguirnos en Instagram. La membresía es gratuita para todos los estudiantes de la carrera de Sistemas."
+      "answer": "Para unirte a CODES++, puedes contactarnos por email (sistemas@codesunlu.tech), unirte a nuestro grupo de WhatsApp o seguirnos en Instagram. La membresía es gratuita para todos los estudiantes de la carrera de Sistemas."
     },
     {
       "question": "¿Qué beneficios obtengo al ser miembro?",
@@ -234,7 +238,7 @@
     },
     {
       "question": "¿Cómo puedo acceder a las tutorías?",
-      "answer": "Las tutorías están disponibles para cualquier materia de la carrera. Simplemente contacta por email (codes.unlu@gmail.com) o únete al servidor de Discord. Se coordinan según la demanda mediante cuestionarios."
+      "answer": "Las tutorías están disponibles para cualquier materia de la carrera. Simplemente contacta por email (sistemas@codesunlu.tech) o únete al servidor de Discord. Se coordinan según la demanda mediante cuestionarios."
     },
     {
       "question": "¿Cómo accedo al repositorio de GitHub?",
@@ -246,7 +250,7 @@
     },
     {
       "question": "¿Cómo puedo proponer una nueva actividad?",
-      "answer": "Puedes proponer nuevas actividades contactando a la comisión directiva por email (codes.unlu@gmail.com) o a través del grupo de WhatsApp. Valoramos las propuestas de todos los miembros."
+      "answer": "Puedes proponer nuevas actividades contactando a la comisión directiva por email (sistemas@codesunlu.tech) o a través del grupo de WhatsApp. Valoramos las propuestas de todos los miembros."
     },
     {
       "question": "¿Ofrecen ayuda para encontrar trabajo?",
@@ -318,4 +322,3 @@
     }
   ]
 }
-

@@ -354,7 +354,7 @@ Responde en español argentino.`;
       // Información de contacto específico
       if (lowerMessage.includes('contacto') && (lowerMessage.includes('presidente') || lowerMessage.includes('federico'))) {
         return `**Contacto del Presidente:**
-📧 **Email:** codes.unlu@gmail.com
+📧 **Email:** sistemas@codesunlu.tech
 📱 **WhatsApp:** https://chat.whatsapp.com/C3i38DQvAT0JD0tBoC0YxV
 
 ¿Necesitas contactar con otro miembro de la comisión? 😊`;
@@ -394,7 +394,7 @@ Representamos la carrera de **Licenciatura en Sistemas de Información** en las 
 **Misión:** Representar y ayudar a los estudiantes y graduados de nuestra carrera, así como también impulsar mejoras.
 
 **¿Cómo unirse?**
-📧 Email: codes.unlu@gmail.com
+📧 Email: sistemas@codesunlu.tech
 📱 WhatsApp: https://chat.whatsapp.com/C3i38DQvAT0JD0tBoC0YxV
 
 ¿Te interesa unirte? 😊`;
@@ -446,7 +446,7 @@ Se realizan **virtualmente en Discord** y se coordinan según la demanda.
 • Disponibles para **todos los años** (principalmente años iniciales)
 
 **¿Cómo acceder?**
-📧 Email: codes.unlu@gmail.com
+📧 Email: sistemas@codesunlu.tech
 💬 Discord: Servidor de CODES++
 📱 WhatsApp: https://chat.whatsapp.com/C3i38DQvAT0JD0tBoC0YxV
 
@@ -482,7 +482,7 @@ Es **gratuito** para todos los estudiantes.
 • **Oportunidades laborales** y pasantías
 • **Networking** con el sector
 
-**📧 Contacto:** codes.unlu@gmail.com
+**📧 Contacto:** sistemas@codesunlu.tech
 **💬 Discord:** Servidor de CODES++
 **📱 WhatsApp:** https://chat.whatsapp.com/C3i38DQvAT0JD0tBoC0YxV
 
@@ -493,7 +493,7 @@ Es **gratuito** para todos los estudiantes.
         return `🤝 **¡Únete a CODES++!**
 
 **📧 Contacto Principal:**
-• **Email:** codes.unlu@gmail.com
+• **Email:** sistemas@codesunlu.tech
 • **WhatsApp:** https://chat.whatsapp.com/C3i38DQvAT0JD0tBoC0YxV
 
 **📱 Redes Sociales:**

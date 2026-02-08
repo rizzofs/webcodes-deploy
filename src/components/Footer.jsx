@@ -47,7 +47,7 @@ const Footer = () => {
               <h5>Contacto</h5>
               <div className="contact-item">
                 <i className="bi bi-envelope"></i>
-                <span>codes.unlu@gmail.com</span>
+                <span>sistemas@codesunlu.tech</span>
               </div>
               <div className="contact-item">
                 <i className="bi bi-geo-alt"></i>

@@ -266,7 +266,7 @@ const CharlasPage = () => {
                   Si tienes una idea para una charla o conoces a alguien que podría compartir 
                   conocimientos valiosos con la comunidad, ¡contáctanos!
                 </p>
-                <a href="mailto:codes.unlu@gmail.com" className="btn btn-outline-primary">
+                <a href="mailto:sistemas@codesunlu.tech" className="btn btn-outline-primary">
                   <i className="fas fa-envelope me-2"></i>
                   Contactar
                 </a>

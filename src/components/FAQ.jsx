@@ -22,7 +22,7 @@ const FAQ = () => {
     },
     {
       question: "¿Cómo puedo contactar al centro de estudiantes?",
-      answer: "Podés contactarnos a través de nuestro email codes.unlu@gmail.com, nuestras redes sociales (@codes_unlu), o el servidor de Discord. También podés acercarte a las actividades presenciales."
+      answer: "Podés contactarnos a través de nuestro email sistemas@codesunlu.tech, nuestras redes sociales (@codes_unlu), o el servidor de Discord. También podés acercarte a las actividades presenciales."
     }
   ];
 

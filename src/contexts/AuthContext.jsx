@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
       if (error.name === 'AbortError') {
           console.log('Auth: Fetch aborted (likely unmount or network)');
           // Emergency Override
-          if (authUser.email === 'codes.unlu@gmail.com') {
+          if (authUser.email === 'sistemas@codesunlu.tech') {
              console.warn('Auth: Forcing Admin due to AbortError');
              const fallbackUser = { ...authUser, role: 'admin' };
              setUser(fallbackUser);
@@ -127,7 +127,7 @@ export const AuthProvider = ({ children }) => {
       let fallbackUser = { ...authUser, role: 'member' };
       
       // Emergency Override for generic error too
-      if (authUser.email === 'codes.unlu@gmail.com') {
+      if (authUser.email === 'sistemas@codesunlu.tech') {
           console.warn('Auth: Forcing Admin due to Fetch Error');
           fallbackUser.role = 'admin';
       }
