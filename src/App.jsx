@@ -29,6 +29,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import TestDashboard from './components/TestDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import ReloadPrompt from './components/ReloadPrompt';
 
 
 // Pages
@@ -129,6 +130,7 @@ function App() {
     <AuthProvider>
       <Router>
         <AppContent />
+        <ReloadPrompt />
       </Router>
     </AuthProvider>
   );
