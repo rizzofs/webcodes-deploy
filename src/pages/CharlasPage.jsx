@@ -10,9 +10,15 @@ const CharlasPage = () => {
 
   useEffect(() => {
     const fetchTalks = async () => {
+      let data = [];
       try {
-        const data = await talksService.getAll();
-        
+        data = await talksService.getAll();
+      } catch (error) {
+        console.error('Error fetching talks from service, using manual talks only:', error);
+        // Continue execution with empty data array to show manual talks
+      }
+
+      try {
         const now = new Date();
         const pasadas = [];
         const proximas = [];
@@ -25,7 +31,7 @@ const CharlasPage = () => {
             speaker: 'Jorge Sagula & Jose Luis', 
             date: '2025-10-15T18:00:00Z', 
             description: 'Charla sobre la evolución de la Inteligencia Artificial y su impacto.',
-            video_url: 'https://www.youtube.com/watch?v=UrtPaE4EBPM',
+            video_url: 'https://www.youtube.com/watch?v=UrtPaE4EBPM&t=551s',
           },
           {
             id: 'manual-2',
@@ -33,11 +39,20 @@ const CharlasPage = () => {
             speaker: 'Invitado Especial',
             date: '2025-11-20T18:00:00Z',
             description: 'Charla organizada por el Centro de Estudiantes.',
-            video_url: 'https://www.youtube.com/watch?v=UC1ToqwavNA',
+            video_url: 'https://www.youtube.com/watch?v=UC1ToqwavNA&t=4s',
+          },
+          {
+            id: 'manual-3',
+            title: 'Ciberseguridad - Perito Informatico',
+            speaker: 'Walter Agüero',
+            date: '2026-02-20T18:00:00Z',
+            description: 'Docente en Univ.Nac. Villa Mercedes, Río Negro, Siglo 21, UBA (Maestría Ciberseguridad y Ciberdefensa). Perito Informático PJN. Conferencista. Inteligencia Artificial y Ciberseguridad',
+            isLive: false,
+            image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
           }
         ];
 
-        const allTalks = [...data, ...manualTalks];
+        const allTalks = [...(data || []), ...manualTalks];
         
         allTalks.forEach(charla => {
           if (new Date(charla.date) < now) {
@@ -49,8 +64,8 @@ const CharlasPage = () => {
 
         setCharlasPasadas(pasadas);
         setProximasCharlas(proximas);
-      } catch (error) {
-        console.error('Error fetching talks:', error);
+      } catch (processError) {
+        console.error('Error processing talks:', processError);
       } finally {
         setLoading(false);
       }
@@ -81,12 +96,17 @@ const CharlasPage = () => {
     }
   ];
   
-  // Helper to extract video ID from various youtube URL formats
-  const getYoutubeId = (url) => {
-    if (!url) return null;
+  // Helper to extract video ID and start time from various youtube URL formats
+  const getYoutubeParams = (url) => {
+    if (!url) return { id: null, start: null };
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
+    const id = (match && match[2].length === 11) ? match[2] : null;
+    
+    const timeMatch = url.match(/[?&]t=(\d+)s?/);
+    const start = timeMatch ? timeMatch[1] : null;
+    
+    return { id, start };
   };
 
   return (
@@ -125,16 +145,17 @@ const CharlasPage = () => {
     
             <Row className="mb-5">
               {charlasPasadas.map((charla) => {
-                const videoId = getYoutubeId(charla.video_url);
+                const { id: videoId, start } = getYoutubeParams(charla.video_url);
+                const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}${start ? `?start=${start}` : ''}` : null;
                 return (
                   <Col lg={6} md={12} key={charla.id} className="mb-4">
                     <Card className="charla-card h-100">
                       <Card.Body>
                         {/* Video Embed */}
-                         {videoId && (
+                         {embedUrl && (
                             <div className="video-container mb-3">
                               <iframe
-                                src={`https://www.youtube.com/embed/${videoId}`}
+                                src={embedUrl}
                                 title={charla.title}
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -196,7 +217,13 @@ const CharlasPage = () => {
           {proximasCharlas.length > 0 ? (
             proximasCharlas.map((charla) => (
               <Col lg={6} md={12} key={charla.id} className="mb-4">
-                <Card className="upcoming-charla-card">
+                <Card className="upcoming-charla-card h-100">
+                  {/* Image for Upcoming Talk */}
+                  {charla.image && (
+                    <div className="card-image-container">
+                      <img src={charla.image} alt={charla.title} className="card-image" />
+                    </div>
+                  )}
                   <Card.Body>
                     <div className="upcoming-badge">
                       <i className="fas fa-clock me-2"></i>
