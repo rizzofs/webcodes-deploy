@@ -17,7 +17,29 @@ const CharlasPage = () => {
         const pasadas = [];
         const proximas = [];
         
-        data.forEach(charla => {
+        // Manual talks injection
+        const manualTalks = [
+          {
+            id: 'manual-1',
+            title: 'IA: Pasado, Presente y Futuro',
+            speaker: 'Jorge Sagula & Jose Luis', 
+            date: '2025-10-15T18:00:00Z', 
+            description: 'Charla sobre la evolución de la Inteligencia Artificial y su impacto.',
+            video_url: 'https://www.youtube.com/watch?v=UrtPaE4EBPM',
+          },
+          {
+            id: 'manual-2',
+            title: 'Charla Abierta',
+            speaker: 'Invitado Especial',
+            date: '2025-11-20T18:00:00Z',
+            description: 'Charla organizada por el Centro de Estudiantes.',
+            video_url: 'https://www.youtube.com/watch?v=UC1ToqwavNA',
+          }
+        ];
+
+        const allTalks = [...data, ...manualTalks];
+        
+        allTalks.forEach(charla => {
           if (new Date(charla.date) < now) {
             pasadas.push(charla);
           } else {
