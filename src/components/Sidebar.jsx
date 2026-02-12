@@ -95,22 +95,34 @@ const Sidebar = () => {
   }, [isOpen]);
 
   const navItems = [
+    // — Inicio —
     { id: 'hero', label: 'Inicio', icon: 'fas fa-home' },
-    { id: 'nosotros', label: 'Nosotros', icon: 'fas fa-users' },
-    { id: 'integrantes', label: 'Integrantes', icon: 'fas fa-user-friends' },
-    { id: 'eventos', label: 'Actividades', icon: 'fas fa-calendar-alt' },
-    { id: 'calendario', label: 'Calendario', icon: 'fas fa-calendar-check', external: true, href: '/calendario' },
 
-    { id: 'colaborar', label: 'Colaborar en Proyectos', icon: 'fas fa-users-cog', external: true, href: '/colaborar' },
-    { id: 'encuestas', label: 'Encuestas', icon: 'fas fa-poll-h', external: true, href: '/encuestas' },
+    // — 1. Urgencia Académica: cursada, apuntes, fechas —
+    { id: 'calendario', label: 'Calendario Académico', icon: 'fas fa-calendar-check', external: true, href: '/calendario' },
+    { id: 'extra', label: 'Banco de Recursos', icon: 'fas fa-book-open' },
     { id: 'charlas', label: 'Charlas', icon: 'fas fa-video', external: true, href: '/charlas' },
-    { id: 'cacic', label: 'CACIC', icon: 'fas fa-graduation-cap', external: true, href: '/cacic' },
-    { id: 'extra', label: 'Recursos', icon: 'fas fa-folder-open' },
-    { id: 'blog', label: 'Blog', icon: 'fas fa-newspaper' },
-    { id: 'faq', label: 'FAQ', icon: 'fas fa-question-circle' },
-    { id: 'contacto', label: 'Contacto', icon: 'fas fa-envelope' },
-    { id: 'grupos', label: 'Grupos de Estudio', icon: 'fas fa-graduation-cap', external: true, href: '/grupos' },
-    { id: 'taller', label: 'Inscripción Taller', icon: 'fas fa-laptop-code', external: true, href: '/taller' },
+    { id: 'taller', label: 'Inscripción a Talleres', icon: 'fas fa-laptop-code', external: true, href: '/taller' },
+
+    // — 2. Gestión y Participación: formularios, encuestas —
+    { id: 'encuestas', label: 'Encuestas Activas', icon: 'fas fa-poll-h', external: true, href: '/encuestas' },
+    { id: 'colaborar', label: 'Proyectos Colaborativos', icon: 'fas fa-users-cog', external: true, href: '/colaborar' },
+
+    // — 3. Vida Estudiantil: eventos, novedades —
+    { id: 'eventos', label: 'Actividades y Eventos', icon: 'fas fa-calendar-alt' },
+    { id: 'cacic', label: 'CACIC', icon: 'fas fa-award', external: true, href: '/cacic' },
+    { id: 'blog', label: 'Novedades', icon: 'fas fa-newspaper' },
+
+    // — 4. Comunidad: grupos, equipo —
+    { id: 'grupos', label: 'Grupos de Estudio', icon: 'fas fa-chalkboard-teacher', external: true, href: '/grupos' },
+    { id: 'integrantes', label: 'Nuestro Equipo', icon: 'fas fa-user-friends' },
+
+    // — 5. Institucional: quiénes somos, FAQ, contacto —
+    { id: 'nosotros', label: '¿Quiénes Somos?', icon: 'fas fa-users' },
+    { id: 'faq', label: 'Preguntas Frecuentes', icon: 'fas fa-question-circle' },
+    { id: 'contacto', label: 'Contáctanos', icon: 'fas fa-envelope' },
+
+    // — Panel de administración (solo autenticados) —
     ...(isAuthenticated ? [
       { id: 'dashboard', label: 'Dashboard', icon: 'fas fa-tachometer-alt', external: true, href: '/dashboard' }
     ] : [])
