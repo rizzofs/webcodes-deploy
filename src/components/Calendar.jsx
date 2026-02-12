@@ -15,44 +15,142 @@ const Calendar = () => {
     type: 'academic'
   });
 
-
-  // Eventos de ejemplo para CODES
+  // Eventos del Calendario Académico UNLu 2026 para Sistemas de Información
   const sampleEvents = [
     {
       id: 1,
-      title: 'Asamblea General CODES',
-      description: 'Reunión mensual del centro de estudiantes',
-      date: '2024-01-15',
-      time: '18:00',
-      type: 'meeting',
-      color: '#2a8a8d'
-    },
-    {
-      id: 2,
-      title: 'Workshop de React',
-      description: 'Taller práctico de desarrollo web',
-      date: '2024-01-20',
-      time: '14:00',
-      type: 'workshop',
+      title: 'Inscripción Exámenes Finales (Feb)',
+      description: 'Inscripción a exámenes complementarios 2025 (Febrero 2026). Finaliza el 26/02/26.',
+      date: '2026-02-02',
+      time: '08:00',
+      type: 'inscription',
       color: '#61dafb'
     },
     {
-      id: 3,
-      title: 'Examen Final Sistemas',
-      description: 'Examen de la materia Sistemas Operativos',
-      date: '2024-01-25',
-      time: '09:00',
+      id: 2,
+      title: 'Turno de Exámenes (Feb)',
+      description: 'Turno de exámenes complementarios 2025. Se extiende hasta el 28/02/26.',
+      date: '2026-02-09',
+      time: '08:00',
       type: 'academic',
       color: '#ff6b6b'
     },
     {
+      id: 3,
+      title: 'Inscripción Cursadas 1º Cuatrimestre',
+      description: 'Inscripción en asignaturas para estudiantes regulares y aspirantes 2026. Finaliza el 05/03/26.',
+      date: '2026-02-26',
+      time: '08:00',
+      type: 'inscription',
+      color: '#61dafb'
+    },
+    {
       id: 4,
-      title: 'Hackathon CODES',
-      description: 'Competencia de programación estudiantil',
-      date: '2024-02-10',
-      time: '10:00',
+      title: 'Inicio 1er Cuatrimestre 2026',
+      description: 'Comienzo de clases del primer cuatrimestre. Finaliza el 27/06/26.',
+      date: '2026-03-09',
+      time: '08:00',
       type: 'event',
+      color: '#2a8a8d'
+    },
+    {
+      id: 5,
+      title: 'Inscripción Exámenes (Mayo)',
+      description: 'Inscripción al turno extraordinario de exámenes de Mayo. Finaliza el 14/05/26.',
+      date: '2026-05-04',
+      time: '08:00',
+      type: 'inscription',
+      color: '#61dafb'
+    },
+    {
+      id: 6,
+      title: 'Turno de Exámenes (Mayo)',
+      description: 'Turno extraordinario de exámenes de Mayo. Finaliza el 16/05/26.',
+      date: '2026-05-11',
+      time: '08:00',
+      type: 'academic',
+      color: '#ff6b6b'
+    },
+    {
+      id: 7,
+      title: 'Inscripción Exámenes (Jul/Ago)',
+      description: 'Inscripción a exámenes finales de Julio-Agosto. Finaliza el 06/08/26.',
+      date: '2026-06-29',
+      time: '08:00',
+      type: 'inscription',
+      color: '#61dafb'
+    },
+    {
+      id: 8,
+      title: 'Turno de Exámenes (Julio)',
+      description: 'Primer llamado del turno de exámenes Julio-Agosto. (Del 06/07 al 18/07 y del 03/08 al 08/08).',
+      date: '2026-07-06',
+      time: '08:00',
+      type: 'academic',
+      color: '#ff6b6b'
+    },
+    {
+      id: 9,
+      title: 'Receso Invernal',
+      description: 'Receso Institucional de Invierno (Académico y Administrativo). Retoma el 31/07/26.',
+      date: '2026-07-20',
+      time: '00:00',
+      type: 'holiday',
       color: '#4ecdc4'
+    },
+    {
+      id: 10,
+      title: 'Inscripción Cursadas 2º Cuatrimestre',
+      description: 'Inscripción en asignaturas para el 2° Cuatrimestre. Finaliza el 10/08/26.',
+      date: '2026-08-03',
+      time: '08:00',
+      type: 'inscription',
+      color: '#61dafb'
+    },
+    {
+      id: 11,
+      title: 'Inicio 2do Cuatrimestre 2026',
+      description: 'Comienzo de clases del segundo cuatrimestre. Finaliza el 05/12/26.',
+      date: '2026-08-17',
+      time: '08:00',
+      type: 'event',
+      color: '#2a8a8d'
+    },
+    {
+      id: 12,
+      title: 'Inscripción Exámenes (Sept)',
+      description: 'Inscripción al turno extraordinario de exámenes de Septiembre. Finaliza el 01/10/26.',
+      date: '2026-09-21',
+      time: '08:00',
+      type: 'inscription',
+      color: '#61dafb'
+    },
+    {
+      id: 13,
+      title: 'Turno de Exámenes (Sept)',
+      description: 'Turno extraordinario de exámenes de Septiembre. Finaliza el 03/10/26.',
+      date: '2026-09-28',
+      time: '08:00',
+      type: 'academic',
+      color: '#ff6b6b'
+    },
+    {
+      id: 14,
+      title: 'Inscripción Exámenes Finales (Dic)',
+      description: 'Inscripción a exámenes finales de Diciembre 2026. Finaliza el 21/12/26.',
+      date: '2026-12-07',
+      time: '08:00',
+      type: 'inscription',
+      color: '#61dafb'
+    },
+    {
+      id: 15,
+      title: 'Turno de Exámenes (Dic)',
+      description: 'Turno de exámenes finales de Diciembre 2026. Finaliza el 23/12/26.',
+      date: '2026-12-10',
+      time: '08:00',
+      type: 'academic',
+      color: '#ff6b6b'
     }
   ];
 
@@ -70,7 +168,7 @@ const Calendar = () => {
     const startingDayOfWeek = firstDay.getDay();
 
     const days = [];
-    
+
     // Días del mes anterior
     for (let i = startingDayOfWeek - 1; i >= 0; i--) {
       const prevDate = new Date(year, month, -i);
@@ -189,8 +287,8 @@ const Calendar = () => {
             <Card className="calendar-card">
               <Card.Header className="calendar-header">
                 <div className="calendar-navigation">
-                  <Button 
-                    variant="outline-primary" 
+                  <Button
+                    variant="outline-primary"
                     onClick={() => navigateMonth(-1)}
                     className="nav-btn"
                   >
@@ -199,8 +297,8 @@ const Calendar = () => {
                   <h4 className="calendar-title">
                     {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
                   </h4>
-                  <Button 
-                    variant="outline-primary" 
+                  <Button
+                    variant="outline-primary"
                     onClick={() => navigateMonth(1)}
                     className="nav-btn"
                   >
@@ -208,7 +306,7 @@ const Calendar = () => {
                   </Button>
                 </div>
               </Card.Header>
-              
+
               <Card.Body className="p-0">
                 <div className="calendar-grid">
                   {/* Días de la semana */}
@@ -217,7 +315,7 @@ const Calendar = () => {
                       <div key={day} className="weekday">{day}</div>
                     ))}
                   </div>
-                  
+
                   {/* Días del calendario */}
                   <div className="calendar-days">
                     {days.map((day, index) => {
@@ -276,7 +374,7 @@ const Calendar = () => {
                         </p>
                         <p className="event-description">{event.description}</p>
                       </div>
-                      <div 
+                      <div
                         className="event-type-indicator"
                         style={{ backgroundColor: event.color }}
                       ></div>
@@ -299,21 +397,21 @@ const Calendar = () => {
                 <Form.Control
                   type="text"
                   value={newEvent.title}
-                  onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+                  onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
                   required
                 />
               </Form.Group>
-              
+
               <Form.Group className="mb-3">
                 <Form.Label>Descripción</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
                   value={newEvent.description}
-                  onChange={(e) => setNewEvent({...newEvent, description: e.target.value})}
+                  onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
                 />
               </Form.Group>
-              
+
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3">
@@ -321,7 +419,7 @@ const Calendar = () => {
                     <Form.Control
                       type="date"
                       value={newEvent.date}
-                      onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
+                      onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
                       required
                     />
                   </Form.Group>
@@ -332,17 +430,17 @@ const Calendar = () => {
                     <Form.Control
                       type="time"
                       value={newEvent.time}
-                      onChange={(e) => setNewEvent({...newEvent, time: e.target.value})}
+                      onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })}
                     />
                   </Form.Group>
                 </Col>
               </Row>
-              
+
               <Form.Group className="mb-3">
                 <Form.Label>Tipo de Evento</Form.Label>
                 <Form.Select
                   value={newEvent.type}
-                  onChange={(e) => setNewEvent({...newEvent, type: e.target.value})}
+                  onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value })}
                 >
                   <option value="meeting">Reunión</option>
                   <option value="workshop">Taller</option>
@@ -350,7 +448,7 @@ const Calendar = () => {
                   <option value="event">Evento</option>
                 </Form.Select>
               </Form.Group>
-              
+
               <div className="d-flex justify-content-end gap-2">
                 <Button variant="secondary" onClick={() => setShowModal(false)}>
                   Cancelar
