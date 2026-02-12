@@ -362,9 +362,9 @@ const Calendar = () => {
                   .map(event => (
                     <div key={event.id} className="event-item">
                       <div className="event-date">
-                        <div className="event-day">{new Date(event.date).getDate()}</div>
+                        <div className="event-day">{new Date(event.date + 'T00:00:00').getDate()}</div>
                         <div className="event-month">
-                          {monthNames[new Date(event.date).getMonth()].substring(0, 3)}
+                          {monthNames[new Date(event.date + 'T00:00:00').getMonth()].substring(0, 3)}
                         </div>
                       </div>
                       <div className="event-details">
