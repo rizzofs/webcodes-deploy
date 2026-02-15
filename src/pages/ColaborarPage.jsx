@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import collaboratorsService from '../services/collaboratorsService';
 import './ColaborarPage.css';
 
 const ColaborarPage = () => {
@@ -154,58 +155,16 @@ const ColaborarPage = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
     try {
-      const tecnologiasConNiveles = formData.tecnologias.map(tech => {
-        const techLabel = tecnologiasDisponibles.find(t => t.value === tech)?.label || tech;
-        const nivel = formData.nivelesExperiencia[tech] || 'No especificado';
-        return `${techLabel} (${nivel})`;
-      }).join(', ');
-      const disponibilidadesTexto = formData.disponibilidad
-        .map(disp => disponibilidades.find(d => d.value === disp)?.label || disp)
-        .join(', ');
-      const mensajeCompleto = `
-INFORMACIÓN PERSONAL:
-- Nombre: ${formData.nombre}
-- Email: ${formData.email}
-- Teléfono: ${formData.telefono}
-- Año de ingreso: ${formData.anoIngreso}
+      await collaboratorsService.submitApplication(formData);
 
-DISPONIBILIDAD HORARIA:
-${disponibilidadesTexto}
-
-TECNOLOGÍAS E INTERESES:
-${tecnologiasConNiveles}
-
-MOTIVACIÓN E INTERESES:
-${formData.motivacion}
-      `.trim();
-
-      const response = await fetch('https://formspree.io/f/xkgpnnzr', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.nombre,
-          email: formData.email,
-          phone: formData.telefono,
-          subject: `[CODES++] Solicitud de Colaboración - ${formData.nombre}`,
-          message: mensajeCompleto,
-          category: 'colaboracion',
-          _replyto: formData.email,
-          _subject: `[CODES++] Solicitud de Colaboración - ${formData.nombre}`
-        })
+      setSubmitStatus({
+        type: 'success',
+        message: '¡Gracias por tu interés! Tu solicitud se ha registrado correctamente. Te contactaremos pronto.'
       });
-
-      if (response.ok) {
-        setSubmitStatus({
-          type: 'success',
-          message: '¡Gracias por tu interés! Tu solicitud se ha registrado correctamente. Te contactaremos pronto.'
-        });
-        setFormData({
-          nombre: '', email: '', telefono: '', anoIngreso: '',
-          disponibilidad: [], tecnologias: [], nivelesExperiencia: {}, motivacion: ''
-        });
-      } else {
-        throw new Error('Error al enviar el formulario');
-      }
+      setFormData({
+        nombre: '', email: '', telefono: '', anoIngreso: '',
+        disponibilidad: [], tecnologias: [], nivelesExperiencia: {}, motivacion: ''
+      });
     } catch (error) {
       console.error('Error al enviar formulario:', error);
       setSubmitStatus({
