@@ -1,0 +1,1134 @@
+/* ========================================
+   CATEC PAGE - Inscripción Proyectos CATEC
+   Estética alineada con ColaborarPage
+   ======================================== */
+
+/* ---- BASE ---- */
+.catec-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(57, 192, 195, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(57, 192, 195, 0.12) 0%, transparent 50%),
+    linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 30%, #2d2d2d 70%, #1a5f61 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+/* ---- PARTÍCULAS ---- */
+.catec-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.catec-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(57, 192, 195, 0.5);
+  border-radius: 50%;
+  animation: catecParticleFloat 15s infinite linear;
+}
+
+.catec-particle:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.catec-particle:nth-child(3n) {
+  background: rgba(57, 192, 195, 0.7);
+}
+
+@keyframes catecParticleFloat {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ---- FORMAS GEOMÉTRICAS ---- */
+.catec-geometric-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.catec-shape {
+  position: absolute;
+  border: 2px solid rgba(57, 192, 195, 0.08);
+  border-radius: 50%;
+  animation: catecShapeFloat 8s ease-in-out infinite;
+}
+
+.catec-shape-1 {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.catec-shape-2 {
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  right: 8%;
+  animation-delay: 2s;
+  border-radius: 30%;
+}
+
+.catec-shape-3 {
+  width: 100px;
+  height: 100px;
+  bottom: 15%;
+  left: 15%;
+  animation-delay: 4s;
+}
+
+@keyframes catecShapeFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+  50% { transform: translateY(-25px) rotate(180deg); opacity: 0.8; }
+}
+
+/* ---- OVERLAY DE GRADIENTE ---- */
+.catec-gradient-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at top, rgba(57,192,195,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(57,192,195,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+.catec-hero-section {
+  position: relative;
+  z-index: 1;
+  padding: 140px 0 60px;
+  text-align: center;
+}
+
+.catec-hero-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.catec-hero-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.catec-badge {
+  display: inline-block;
+  background: rgba(57, 192, 195, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(57, 192, 195, 0.3);
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #39c0c3;
+}
+
+.catec-hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #39c0c3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.catec-hero-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   BENEFICIOS SECTION
+   ======================================== */
+.catec-benefits-section {
+  position: relative;
+  z-index: 1;
+  padding: 40px 0 60px;
+}
+
+.catec-benefit-card {
+  background: rgba(57, 192, 195, 0.06);
+  border: 1px solid rgba(57, 192, 195, 0.15);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  height: 100%;
+  animation: catecFadeInUp 0.6s ease-out both;
+}
+
+.catec-benefit-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(57, 192, 195, 0.4);
+  box-shadow: 0 20px 40px rgba(57, 192, 195, 0.15);
+  background: rgba(57, 192, 195, 0.1);
+}
+
+.catec-benefit-card .benefit-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(57, 192, 195, 0.2) 0%, rgba(42, 138, 141, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  font-size: 1.8rem;
+  color: #39c0c3;
+  transition: all 0.3s ease;
+}
+
+.catec-benefit-card:hover .benefit-icon-wrapper {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3);
+}
+
+.catec-benefit-card h4 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+}
+
+.catec-benefit-card p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.92rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* ========================================
+   FORMULARIO SECTION
+   ======================================== */
+.catec-form-section {
+  position: relative;
+  z-index: 1;
+  padding: 40px 0 60px;
+}
+
+.catec-form-wrapper {
+  max-width: 850px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 80px rgba(57, 192, 195, 0.05);
+  backdrop-filter: blur(20px);
+}
+
+.catec-form-header {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 50%, #1e6b6e 100%);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.catec-form-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  animation: catecHeaderShine 6s ease-in-out infinite;
+}
+
+@keyframes catecHeaderShine {
+  0%, 100% { transform: translate(-30%, -30%); }
+  50% { transform: translate(30%, 30%); }
+}
+
+.catec-form-header .form-header-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.catec-form-header h2 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.catec-form-header p {
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 1;
+}
+
+.catec-form-body {
+  background: rgba(20, 20, 20, 0.85);
+  padding: 2.5rem;
+}
+
+/* ---- ALERTAS ---- */
+.catec-alert {
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+}
+
+.catec-alert.alert-success {
+  background: rgba(40, 167, 69, 0.15);
+  color: #5dd47d;
+  border-left: 4px solid #28a745;
+}
+
+.catec-alert.alert-danger {
+  background: rgba(220, 53, 69, 0.15);
+  color: #f78d97;
+  border-left: 4px solid #dc3545;
+}
+
+/* ---- BLOQUES DEL FORM ---- */
+.catec-form-block {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(57, 192, 195, 0.1);
+}
+
+.catec-form-block:last-of-type {
+  border-bottom: none;
+}
+
+.catec-form-block .form-block-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.catec-form-block .form-block-number {
+  min-width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.catec-form-block .form-block-title h5 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 0.15rem;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+  text-align: left;
+  position: static;
+  display: inline;
+  width: auto;
+}
+
+.catec-form-block .form-block-title h5::after {
+  display: none;
+}
+
+.catec-form-block .form-block-title p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+/* ---- INPUTS ---- */
+.catec-input-group {
+  margin-bottom: 0;
+}
+
+.catec-input-group label {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.catec-input-group label i {
+  color: #39c0c3;
+}
+
+.catec-input-group input,
+.catec-input-group select,
+.catec-input-group textarea {
+  width: 100%;
+  background: rgba(15, 15, 15, 0.6);
+  border: 1.5px solid rgba(57, 192, 195, 0.2);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.catec-input-group input::placeholder,
+.catec-input-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.catec-input-group input:focus,
+.catec-input-group select:focus,
+.catec-input-group textarea:focus {
+  outline: none;
+  background: rgba(15, 15, 15, 0.8);
+  border-color: #39c0c3;
+  box-shadow: 0 0 0 3px rgba(57, 192, 195, 0.15);
+}
+
+.catec-input-group select option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.catec-input-group.has-error input,
+.catec-input-group.has-error select,
+.catec-input-group input.is-invalid,
+.catec-input-group select.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.catec-error {
+  display: block;
+  color: #f78d97;
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+.catec-inline-error {
+  background: rgba(220, 53, 69, 0.1);
+  color: #f78d97;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-left: 3px solid #dc3545;
+}
+
+/* ---- AREA CARDS ---- */
+.catec-area-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+
+.catec-area-card {
+  background: rgba(15, 15, 15, 0.5);
+  border: 1.5px solid rgba(57, 192, 195, 0.15);
+  border-radius: 14px;
+  padding: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  user-select: none;
+}
+
+.catec-area-card i.area-icon {
+  display: block;
+  font-size: 1.8rem;
+  color: rgba(57, 192, 195, 0.5);
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.catec-area-card strong {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.catec-area-card small {
+  display: block;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.catec-area-card:hover {
+  border-color: rgba(57, 192, 195, 0.4);
+  background: rgba(57, 192, 195, 0.05);
+}
+
+.catec-area-card.selected {
+  border-color: #39c0c3;
+  background: rgba(57, 192, 195, 0.1);
+  box-shadow: 0 0 20px rgba(57, 192, 195, 0.1);
+}
+
+.catec-area-card.selected i.area-icon {
+  color: #39c0c3;
+}
+
+.catec-area-card .area-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #39c0c3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: catecPopIn 0.3s ease;
+}
+
+.catec-area-card .area-check i {
+  font-size: 0.7rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+@keyframes catecPopIn {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ---- GRID DE TECNOLOGÍAS ---- */
+.catec-tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.catec-tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(15, 15, 15, 0.5);
+  border: 1.5px solid rgba(57, 192, 195, 0.15);
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.catec-tech-chip i {
+  font-size: 1rem;
+  color: rgba(57, 192, 195, 0.5);
+  transition: color 0.3s ease;
+}
+
+.catec-tech-chip:hover:not(.disabled) {
+  border-color: rgba(57, 192, 195, 0.5);
+  background: rgba(57, 192, 195, 0.05);
+  color: #ffffff;
+}
+
+.catec-tech-chip.selected {
+  border-color: #39c0c3;
+  background: rgba(57, 192, 195, 0.15);
+  color: #ffffff;
+}
+
+.catec-tech-chip.selected i {
+  color: #39c0c3;
+}
+
+.catec-chip-check {
+  font-size: 0.7rem;
+  color: #39c0c3;
+  animation: catecPopIn 0.3s ease;
+}
+
+.catec-counter {
+  color: #39c0c3;
+  font-weight: 600;
+}
+
+/* ---- SUBMIT ---- */
+.catec-submit-area {
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+.catec-submit-btn {
+  background: linear-gradient(135deg, #39c0c3 0%, #2a8a8d 100%) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 0.85rem 3rem !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(57, 192, 195, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.catec-submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.catec-submit-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.catec-submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 30px rgba(57, 192, 195, 0.4) !important;
+}
+
+.catec-submit-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+.catec-submit-area .submit-hint {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* ========================================
+   INFO SECTION (CATEC)
+   ======================================== */
+.catec-info-section {
+  position: relative;
+  z-index: 1;
+  padding: 20px 0 80px;
+}
+
+.catec-info-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(57, 192, 195, 0.04);
+  border: 1px solid rgba(57, 192, 195, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.catec-info-card:hover {
+  border-color: rgba(57, 192, 195, 0.35);
+  box-shadow: 0 15px 40px rgba(57, 192, 195, 0.1);
+}
+
+.catec-info-card .info-icon-float {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(57, 192, 195, 0.2) 0%, rgba(42, 138, 141, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  font-size: 1.8rem;
+  color: #39c0c3;
+  animation: catecPulse 3s ease-in-out infinite;
+}
+
+@keyframes catecPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(57, 192, 195, 0.2); }
+  50% { box-shadow: 0 0 0 15px rgba(57, 192, 195, 0); }
+}
+
+.catec-info-card h3 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.catec-info-card .info-desc {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  max-width: 550px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.catec-info-card .info-desc strong {
+  color: #39c0c3;
+}
+
+.catec-info-card .info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.catec-info-card .info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+}
+
+.catec-info-card .info-item i {
+  color: #39c0c3;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+@keyframes catecFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   LIGHT MODE
+   ======================================== */
+[data-theme="light"] .catec-page {
+  background:
+    radial-gradient(circle at 20% 80%, rgba(57, 192, 195, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(57, 192, 195, 0.04) 0%, transparent 50%),
+    linear-gradient(135deg, #f8f9fa 0%, #e9ecef 30%, #dee2e6 70%, #e0f4f5 100%);
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-particle {
+  background: rgba(57, 192, 195, 0.3);
+}
+
+[data-theme="light"] .catec-particle:nth-child(odd) {
+  background: rgba(57, 192, 195, 0.15);
+}
+
+[data-theme="light"] .catec-shape {
+  border-color: rgba(57, 192, 195, 0.1);
+}
+
+[data-theme="light"] .catec-badge {
+  background: rgba(57, 192, 195, 0.1);
+  border-color: rgba(57, 192, 195, 0.25);
+}
+
+[data-theme="light"] .catec-hero-title {
+  background: linear-gradient(135deg, #2c3e50 0%, #39c0c3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .catec-hero-subtitle {
+  color: #6c757d;
+}
+
+[data-theme="light"] .catec-benefit-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(57, 192, 195, 0.15);
+}
+
+[data-theme="light"] .catec-benefit-card:hover {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .catec-benefit-card h4 {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-benefit-card p {
+  color: #6c757d;
+}
+
+[data-theme="light"] .catec-form-wrapper {
+  border-color: rgba(57, 192, 195, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .catec-form-body {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="light"] .catec-form-block .form-block-title h5 {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-form-block .form-block-title p {
+  color: #6c757d;
+}
+
+[data-theme="light"] .catec-input-group label {
+  color: #495057;
+}
+
+[data-theme="light"] .catec-input-group input,
+[data-theme="light"] .catec-input-group select {
+  background: #ffffff;
+  border-color: #dee2e6;
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-input-group input::placeholder {
+  color: #adb5bd;
+}
+
+[data-theme="light"] .catec-input-group input:focus,
+[data-theme="light"] .catec-input-group select:focus {
+  background: #ffffff;
+  border-color: #39c0c3;
+}
+
+[data-theme="light"] .catec-input-group select option {
+  background: #ffffff;
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-area-card {
+  background: #ffffff;
+  border-color: #dee2e6;
+}
+
+[data-theme="light"] .catec-area-card strong {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-area-card small {
+  color: #6c757d;
+}
+
+[data-theme="light"] .catec-area-card:hover {
+  border-color: rgba(57, 192, 195, 0.4);
+}
+
+[data-theme="light"] .catec-area-card.selected {
+  background: rgba(57, 192, 195, 0.05);
+}
+
+[data-theme="light"] .catec-tech-chip {
+  background: #ffffff;
+  border-color: #dee2e6;
+  color: #495057;
+}
+
+[data-theme="light"] .catec-tech-chip.selected {
+  background: rgba(57, 192, 195, 0.1);
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-form-block {
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .catec-submit-area .submit-hint {
+  color: #adb5bd;
+}
+
+[data-theme="light"] .catec-info-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="light"] .catec-info-card h3 {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-info-card .info-desc {
+  color: #6c757d;
+}
+
+[data-theme="light"] .catec-info-card .info-item {
+  color: #495057;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+/* Tablet */
+@media (max-width: 991px) {
+  .catec-hero-section {
+    padding: 120px 0 40px;
+  }
+
+  .catec-hero-title {
+    font-size: 2.8rem;
+  }
+
+  .catec-hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .catec-form-body {
+    padding: 2rem;
+  }
+
+  .catec-info-card {
+    padding: 2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .catec-hero-section {
+    padding: 110px 0 30px;
+  }
+
+  .catec-hero-title {
+    font-size: 2.2rem;
+  }
+
+  .catec-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .catec-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 1.2rem;
+  }
+
+  .catec-benefits-section {
+    padding: 20px 0 40px;
+  }
+
+  .catec-benefit-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .catec-benefit-card .benefit-icon-wrapper {
+    width: 55px;
+    height: 55px;
+    font-size: 1.4rem;
+  }
+
+  .catec-form-section {
+    padding: 20px 0 40px;
+  }
+
+  .catec-form-wrapper {
+    border-radius: 18px;
+    margin: 0 -0.5rem;
+  }
+
+  .catec-form-header {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .catec-form-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .catec-form-body {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .catec-form-block .form-block-title {
+    gap: 0.75rem;
+  }
+
+  .catec-form-block .form-block-number {
+    min-width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+
+  .catec-form-block .form-block-title h5 {
+    font-size: 1.05rem;
+  }
+
+  .catec-area-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .catec-tech-grid {
+    gap: 0.5rem;
+  }
+
+  .catec-tech-chip {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .catec-area-card {
+    padding: 1rem;
+  }
+
+  .catec-area-card i.area-icon {
+    font-size: 1.4rem;
+  }
+
+  .catec-submit-btn {
+    width: 100% !important;
+    padding: 0.85rem 2rem !important;
+  }
+
+  .catec-info-section {
+    padding: 10px 0 60px;
+  }
+
+  .catec-info-card {
+    padding: 1.8rem 1.2rem;
+    border-radius: 16px;
+  }
+
+  .catec-info-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .catec-info-card .info-desc {
+    font-size: 0.92rem;
+  }
+
+  .catec-info-card .info-items {
+    gap: 0.5rem;
+  }
+
+  .catec-info-card .info-item {
+    font-size: 0.88rem;
+  }
+
+  /* Ocultar formas geométricas en mobile */
+  .catec-shape-1,
+  .catec-shape-2,
+  .catec-shape-3 {
+    display: none;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .catec-hero-section {
+    padding: 100px 0 25px;
+  }
+
+  .catec-hero-title {
+    font-size: 1.8rem;
+  }
+
+  .catec-hero-subtitle {
+    font-size: 0.92rem;
+  }
+
+  .catec-form-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .catec-form-header .form-header-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .catec-form-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .catec-form-body {
+    padding: 1.2rem 1rem;
+  }
+
+  .catec-form-block {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .catec-benefit-card h4 {
+    font-size: 1rem;
+  }
+
+  .catec-benefit-card p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Landscape mobile fix */
+@media (max-height: 500px) and (orientation: landscape) {
+  .catec-hero-section {
+    padding: 90px 0 20px;
+  }
+
+  .catec-hero-title {
+    font-size: 2rem;
+  }
+}
