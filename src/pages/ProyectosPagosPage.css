@@ -611,6 +611,62 @@
   font-weight: 600;
 }
 
+.catec-levels-section {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(57, 192, 195, 0.2);
+}
+
+.catec-levels-section h6 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0.9rem;
+}
+
+.catec-level-row {
+  background: rgba(15, 15, 15, 0.35);
+  border: 1px solid rgba(57, 192, 195, 0.14);
+  border-radius: 12px;
+  padding: 0.85rem;
+  margin-bottom: 0.65rem;
+}
+
+.catec-level-row .level-tech-name {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.6rem;
+}
+
+.catec-level-row .level-tech-name i {
+  color: #39c0c3;
+}
+
+.catec-level-row .level-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.catec-level-row .level-btn {
+  border: 1px solid rgba(57, 192, 195, 0.3);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.82rem;
+  transition: all 0.2s ease;
+}
+
+.catec-level-row .level-btn:hover {
+  border-color: #39c0c3;
+  color: #ffffff;
+}
+
+.catec-level-row .level-btn.active {
+  border-color: #39c0c3;
+  background: rgba(57, 192, 195, 0.16);
+  color: #ffffff;
+}
+
 /* ---- SUBMIT ---- */
 .catec-submit-area {
   text-align: center;
@@ -897,6 +953,28 @@
   color: #2c3e50;
 }
 
+[data-theme="light"] .catec-levels-section h6 {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-level-row {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="light"] .catec-level-row .level-tech-name {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .catec-level-row .level-btn {
+  color: #495057;
+  border-color: rgba(57, 192, 195, 0.25);
+}
+
+[data-theme="light"] .catec-level-row .level-btn.active {
+  color: #2c3e50;
+}
+
 [data-theme="light"] .catec-form-block {
   border-bottom-color: rgba(0, 0, 0, 0.06);
 }
@@ -1028,6 +1106,15 @@
   .catec-tech-chip {
     font-size: 0.82rem;
     padding: 0.4rem 0.8rem;
+  }
+
+  .catec-level-row .level-options {
+    gap: 0.4rem;
+  }
+
+  .catec-level-row .level-btn {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.65rem;
   }
 
   .catec-area-card {

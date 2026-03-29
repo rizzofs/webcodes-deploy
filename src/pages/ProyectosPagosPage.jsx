@@ -8,9 +8,13 @@ const ProyectosPagosPage = () => {
     nombre: '',
     email: '',
     legajo: '',
+    celular: '',
+    githubUrl: '',
+    linkedinUrl: '',
     area: '',
     tecnologias: [],
-    portfolioUrl: ''
+    nivelesExperiencia: {},
+    otraTecnologia: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -93,6 +97,12 @@ const ProyectosPagosPage = () => {
     ]
   };
 
+  const nivelesExperiencia = [
+    { value: 'principiante', label: 'Principiante', icon: 'fas fa-seedling' },
+    { value: 'intermedio', label: 'Intermedio', icon: 'fas fa-chart-line' },
+    { value: 'avanzado', label: 'Avanzado', icon: 'fas fa-rocket' }
+  ];
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -105,7 +115,9 @@ const ProyectosPagosPage = () => {
     setFormData(prev => ({
       ...prev,
       area: areaValue,
-      tecnologias: [] // Reset tecnologías al cambiar de área
+      tecnologias: [],
+      nivelesExperiencia: {},
+      otraTecnologia: ''
     }));
     if (errors.area) {
       setErrors(prev => ({ ...prev, area: '' }));
@@ -115,13 +127,37 @@ const ProyectosPagosPage = () => {
   const handleTecnologiaChange = (techValue) => {
     setFormData(prev => {
       if (prev.tecnologias.includes(techValue)) {
-        return { ...prev, tecnologias: prev.tecnologias.filter(t => t !== techValue) };
+        const nuevasTecnologias = prev.tecnologias.filter(t => t !== techValue);
+        const nuevosNiveles = { ...prev.nivelesExperiencia };
+        delete nuevosNiveles[techValue];
+        return {
+          ...prev,
+          tecnologias: nuevasTecnologias,
+          nivelesExperiencia: nuevosNiveles,
+          ...(techValue === 'otros' ? { otraTecnologia: '' } : {})
+        };
       } else {
         return { ...prev, tecnologias: [...prev.tecnologias, techValue] };
       }
     });
     if (errors.tecnologias) {
       setErrors(prev => ({ ...prev, tecnologias: '' }));
+    }
+    if (errors[`nivel_${techValue}`]) {
+      setErrors(prev => ({ ...prev, [`nivel_${techValue}`]: '' }));
+    }
+    if (techValue === 'otros' && errors.otraTecnologia) {
+      setErrors(prev => ({ ...prev, otraTecnologia: '' }));
+    }
+  };
+
+  const handleNivelExperienciaChange = (techValue, nivel) => {
+    setFormData(prev => ({
+      ...prev,
+      nivelesExperiencia: { ...prev.nivelesExperiencia, [techValue]: nivel }
+    }));
+    if (errors[`nivel_${techValue}`]) {
+      setErrors(prev => ({ ...prev, [`nivel_${techValue}`]: '' }));
     }
   };
 
@@ -134,8 +170,32 @@ const ProyectosPagosPage = () => {
       newErrors.email = 'El email no es válido';
     }
     if (!formData.legajo.trim()) newErrors.legajo = 'El legajo es requerido';
+    if (!formData.celular.trim()) newErrors.celular = 'El número de celular es requerido';
+    if (!formData.githubUrl.trim()) {
+      newErrors.githubUrl = 'El enlace de GitHub es requerido';
+    } else if (!/^https?:\/\/.+/i.test(formData.githubUrl.trim())) {
+      newErrors.githubUrl = 'El enlace de GitHub debe comenzar con http:// o https://';
+    }
+    if (!formData.linkedinUrl.trim()) {
+      newErrors.linkedinUrl = 'El enlace de LinkedIn es requerido';
+    } else if (!/^https?:\/\/.+/i.test(formData.linkedinUrl.trim())) {
+      newErrors.linkedinUrl = 'El enlace de LinkedIn debe comenzar con http:// o https://';
+    }
     if (!formData.area) newErrors.area = 'Selecciona un área de interés';
-    if (formData.tecnologias.length === 0) newErrors.tecnologias = 'Selecciona al menos una tecnología';
+    if (formData.tecnologias.length === 0) {
+      newErrors.tecnologias = 'Selecciona al menos una tecnología';
+    } else {
+      formData.tecnologias.forEach(tech => {
+        if (!formData.nivelesExperiencia[tech]) {
+          const nombreTech = tech === 'otros' ? 'Otra tecnología' : tech;
+          newErrors[`nivel_${tech}`] = `Selecciona el nivel para ${nombreTech}`;
+        }
+      });
+    }
+
+    if (formData.tecnologias.includes('otros') && !formData.otraTecnologia.trim()) {
+      newErrors.otraTecnologia = 'Especifica cuál es la otra tecnología';
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -156,8 +216,16 @@ const ProyectosPagosPage = () => {
         message: '¡Postulación enviada! Te hemos enviado un email de confirmación. Te contactaremos cuando surjan proyectos acordes a tu perfil.'
       });
       setFormData({
-        nombre: '', email: '', legajo: '', area: '',
-        tecnologias: [], portfolioUrl: ''
+        nombre: '',
+        email: '',
+        legajo: '',
+        celular: '',
+        githubUrl: '',
+        linkedinUrl: '',
+        area: '',
+        tecnologias: [],
+        nivelesExperiencia: {},
+        otraTecnologia: ''
       });
     } catch (error) {
       console.error('Error al enviar formulario:', error);
@@ -171,6 +239,10 @@ const ProyectosPagosPage = () => {
   };
 
   const techsDisponibles = formData.area ? tecnologiasPorArea[formData.area] : [];
+  const techsConOpcionOtros = [
+    ...techsDisponibles,
+    { value: 'otros', icon: 'fas fa-plus-circle' }
+  ];
 
   return (
     <div className="catec-page">
@@ -208,7 +280,7 @@ const ProyectosPagosPage = () => {
             {[
               { icon: 'fas fa-dollar-sign', title: 'Remunerado', desc: 'Proyectos pagos para empresas reales', delay: '0.1s' },
               { icon: 'fas fa-building', title: 'Clientes Reales', desc: 'Trabajá con empresas que necesitan soluciones tecnológicas', delay: '0.2s' },
-              { icon: 'fas fa-certificate', title: 'Certificación', desc: 'Obtené certificaciones y referencias profesionales', delay: '0.3s' },
+              { icon: 'fas fa-briefcase', title: 'Experiencia', desc: 'Obtené experiencia y referencias profesionales', delay: '0.3s' },
               { icon: 'fas fa-users-cog', title: 'Equipo', desc: 'Formá parte de equipos multidisciplinarios de trabajo', delay: '0.4s' }
             ].map((benefit, idx) => (
               <Col lg={3} md={6} sm={6} xs={12} key={idx}>
@@ -279,13 +351,13 @@ const ProyectosPagosPage = () => {
                     </Col>
                     <Col md={6}>
                       <div className={`catec-input-group ${errors.email ? 'has-error' : ''}`}>
-                        <label><i className="fas fa-envelope me-2"></i>Email (institucional preferentemente)</label>
+                        <label><i className="fas fa-envelope me-2"></i>Email</label>
                         <input
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          placeholder="tu@unlu.edu.ar"
+                          placeholder="tu@email.com"
                           className={errors.email ? 'is-invalid' : ''}
                         />
                         {errors.email && <span className="catec-error">{errors.email}</span>}
@@ -306,15 +378,45 @@ const ProyectosPagosPage = () => {
                       </div>
                     </Col>
                     <Col md={6}>
-                      <div className="catec-input-group">
-                        <label><i className="fas fa-link me-2"></i>Portfolio o GitHub (opcional)</label>
+                      <div className={`catec-input-group ${errors.celular ? 'has-error' : ''}`}>
+                        <label><i className="fas fa-phone me-2"></i>Número de celular</label>
+                        <input
+                          type="tel"
+                          name="celular"
+                          value={formData.celular}
+                          onChange={handleInputChange}
+                          placeholder="Ej: +54 9 11 1234-5678"
+                          className={errors.celular ? 'is-invalid' : ''}
+                        />
+                        {errors.celular && <span className="catec-error">{errors.celular}</span>}
+                      </div>
+                    </Col>
+                    <Col md={6}>
+                      <div className={`catec-input-group ${errors.githubUrl ? 'has-error' : ''}`}>
+                        <label><i className="fab fa-github me-2"></i>GitHub</label>
                         <input
                           type="url"
-                          name="portfolioUrl"
-                          value={formData.portfolioUrl}
+                          name="githubUrl"
+                          value={formData.githubUrl}
                           onChange={handleInputChange}
                           placeholder="https://github.com/tu-usuario"
+                          className={errors.githubUrl ? 'is-invalid' : ''}
                         />
+                        {errors.githubUrl && <span className="catec-error">{errors.githubUrl}</span>}
+                      </div>
+                    </Col>
+                    <Col md={6}>
+                      <div className={`catec-input-group ${errors.linkedinUrl ? 'has-error' : ''}`}>
+                        <label><i className="fab fa-linkedin me-2"></i>LinkedIn</label>
+                        <input
+                          type="url"
+                          name="linkedinUrl"
+                          value={formData.linkedinUrl}
+                          onChange={handleInputChange}
+                          placeholder="https://www.linkedin.com/in/tu-perfil"
+                          className={errors.linkedinUrl ? 'is-invalid' : ''}
+                        />
+                        {errors.linkedinUrl && <span className="catec-error">{errors.linkedinUrl}</span>}
                       </div>
                     </Col>
                   </Row>
@@ -382,25 +484,80 @@ const ProyectosPagosPage = () => {
                   )}
 
                   {techsDisponibles.length > 0 ? (
-                    <div className="catec-tech-grid">
-                      {techsDisponibles.map(tech => {
-                        const isSelected = formData.tecnologias.includes(tech.value);
-                        return (
-                          <div
-                            key={tech.value}
-                            className={`catec-tech-chip ${isSelected ? 'selected' : ''}`}
-                            onClick={() => handleTecnologiaChange(tech.value)}
-                            role="button"
-                            tabIndex={0}
-                            onKeyDown={(e) => e.key === 'Enter' && handleTecnologiaChange(tech.value)}
-                          >
-                            <i className={tech.icon}></i>
-                            <span>{tech.value}</span>
-                            {isSelected && <i className="fas fa-check catec-chip-check"></i>}
-                          </div>
-                        );
-                      })}
-                    </div>
+                    <>
+                      <div className="catec-tech-grid">
+                        {techsConOpcionOtros.map(tech => {
+                          const isSelected = formData.tecnologias.includes(tech.value);
+                          return (
+                            <div
+                              key={tech.value}
+                              className={`catec-tech-chip ${isSelected ? 'selected' : ''}`}
+                              onClick={() => handleTecnologiaChange(tech.value)}
+                              role="button"
+                              tabIndex={0}
+                              onKeyDown={(e) => e.key === 'Enter' && handleTecnologiaChange(tech.value)}
+                            >
+                              <i className={tech.icon}></i>
+                              <span>{tech.value === 'otros' ? 'Otros' : tech.value}</span>
+                              {isSelected && <i className="fas fa-check catec-chip-check"></i>}
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {formData.tecnologias.length > 0 && (
+                        <div className="catec-levels-section">
+                          <h6><i className="fas fa-signal me-2"></i>Nivel por tecnología</h6>
+                          {formData.tecnologias.map(techValue => {
+                            const tech = techValue === 'otros'
+                              ? { value: 'otros', icon: 'fas fa-plus-circle' }
+                              : techsDisponibles.find(t => t.value === techValue);
+
+                            return (
+                              <div key={techValue} className="catec-level-row">
+                                <div className="level-tech-name">
+                                  <i className={tech?.icon + ' me-2'}></i>
+                                  <strong>{techValue === 'otros' ? 'Otra tecnología' : tech?.value}</strong>
+                                </div>
+
+                                <div className="level-options">
+                                  {nivelesExperiencia.map(nivel => (
+                                    <button
+                                      key={nivel.value}
+                                      type="button"
+                                      className={`level-btn ${formData.nivelesExperiencia[techValue] === nivel.value ? 'active' : ''}`}
+                                      onClick={() => handleNivelExperienciaChange(techValue, nivel.value)}
+                                    >
+                                      <i className={nivel.icon + ' me-1'}></i>
+                                      {nivel.label}
+                                    </button>
+                                  ))}
+                                </div>
+
+                                {errors[`nivel_${techValue}`] && (
+                                  <span className="catec-error d-block mt-1">{errors[`nivel_${techValue}`]}</span>
+                                )}
+
+                                {techValue === 'otros' && (
+                                  <div className={`catec-input-group mt-2 ${errors.otraTecnologia ? 'has-error' : ''}`}>
+                                    <label><i className="fas fa-pen me-2"></i>¿Cuál tecnología?</label>
+                                    <input
+                                      type="text"
+                                      name="otraTecnologia"
+                                      value={formData.otraTecnologia}
+                                      onChange={handleInputChange}
+                                      placeholder="Especifica la tecnología"
+                                      className={errors.otraTecnologia ? 'is-invalid' : ''}
+                                    />
+                                    {errors.otraTecnologia && <span className="catec-error">{errors.otraTecnologia}</span>}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', padding: '1.5rem 0' }}>
                       <i className="fas fa-arrow-up me-2"></i>

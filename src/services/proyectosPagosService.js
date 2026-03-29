@@ -6,21 +6,50 @@ const proyectosPagosService = {
    * Guarda en Supabase y envía email de confirmación vía Vercel Serverless Function (Resend).
    */
   submitApplication: async (formData) => {
+    const tecnologiasConNivel = formData.tecnologias.map((tech) => ({
+      tecnologia: tech === 'otros' ? formData.otraTecnologia : tech,
+      nivel: formData.nivelesExperiencia[tech] || null,
+      esOtra: tech === 'otros'
+    }));
+
     // 1. Enviar email de confirmación vía Vercel Serverless Function (obligatorio)
-    const emailResult = await proyectosPagosService.sendConfirmationEmail(formData);
+    const emailResult = await proyectosPagosService.sendConfirmationEmail({
+      ...formData,
+      tecnologiasConNivel
+    });
 
     // 2. Intentar guardar en BD (opcional, no bloquea si la tabla no existe)
     try {
-      await supabase
+      const payloadNuevo = {
+        nombre: formData.nombre,
+        email: formData.email,
+        legajo: formData.legajo,
+        celular: formData.celular,
+        github_url: formData.githubUrl,
+        linkedin_url: formData.linkedinUrl,
+        area: formData.area,
+        tecnologias: tecnologiasConNivel,
+        niveles_experiencia: formData.nivelesExperiencia,
+        otra_tecnologia: formData.otraTecnologia || null
+      };
+
+      const { error } = await supabase
         .from('proyectos_pagos_applications')
-        .insert([{
+        .insert([payloadNuevo]);
+
+      if (error) {
+        const payloadLegacy = {
           nombre: formData.nombre,
           email: formData.email,
           legajo: formData.legajo,
           area: formData.area,
-          tecnologias: formData.tecnologias,
-          portfolio_url: formData.portfolioUrl || null
-        }]);
+          tecnologias: tecnologiasConNivel.map(item => `${item.tecnologia} (${item.nivel || 'sin nivel'})`)
+        };
+
+        await supabase
+          .from('proyectos_pagos_applications')
+          .insert([payloadLegacy]);
+      }
     } catch (dbError) {
       console.warn('No se pudo guardar en BD (la tabla puede no existir aún):', dbError.message);
     }
@@ -40,9 +69,11 @@ const proyectosPagosService = {
         nombre: formData.nombre,
         email: formData.email,
         legajo: formData.legajo,
+        celular: formData.celular,
+        githubUrl: formData.githubUrl,
+        linkedinUrl: formData.linkedinUrl,
         area: formData.area,
-        tecnologias: formData.tecnologias,
-        portfolioUrl: formData.portfolioUrl
+        tecnologiasConNivel: formData.tecnologiasConNivel
       })
     });
 

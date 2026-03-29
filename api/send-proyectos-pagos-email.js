@@ -21,10 +21,43 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { nombre, email, area, tecnologias } = req.body;
+    const {
+      nombre,
+      email,
+      legajo,
+      celular,
+      githubUrl,
+      linkedinUrl,
+      area,
+      tecnologiasConNivel
+    } = req.body;
+
+    if (!nombre?.trim() || !email?.trim() || !legajo?.trim() || !celular?.trim() || !githubUrl?.trim() || !linkedinUrl?.trim()) {
+      return res.status(400).json({ error: 'Faltan campos obligatorios' });
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      return res.status(400).json({ error: 'El email no es valido' });
+    }
+
+    if (!Array.isArray(tecnologiasConNivel) || tecnologiasConNivel.length === 0) {
+      return res.status(400).json({ error: 'Debes indicar al menos una tecnologia con su nivel' });
+    }
+
+    const escapeHtml = (value) => String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
 
     const areaLabel = AREA_LABELS[area] || area;
-    const tecnologiasTexto = Array.isArray(tecnologias) ? tecnologias.join(', ') : '';
+    const tecnologiasTexto = tecnologiasConNivel
+      .map((item) => `${item.tecnologia} (${item.nivel || 'sin nivel'})`)
+      .join(', ');
+    const tecnologiasHtml = tecnologiasConNivel
+      .map((item) => `<li style="margin-bottom: 6px;"><strong>${escapeHtml(item.tecnologia)}</strong>: ${escapeHtml(item.nivel || 'sin nivel')}</li>`)
+      .join('');
 
     const htmlConfirmacion = `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #1a1a2e; color: #e0e0e0; border-radius: 12px; overflow: hidden;">
@@ -34,7 +67,7 @@ export default async function handler(req, res) {
         </div>
 
         <div style="padding: 30px;">
-          <p style="font-size: 16px; line-height: 1.6;">Hola <strong>${nombre}</strong>,</p>
+          <p style="font-size: 16px; line-height: 1.6;">Hola <strong>${escapeHtml(nombre)}</strong>,</p>
           <p style="line-height: 1.6;">
             ¡Gracias por postularte a nuestros <strong>proyectos pagos</strong> a través de CODES++!
             Tu solicitud fue registrada correctamente.
@@ -42,9 +75,18 @@ export default async function handler(req, res) {
 
           <div style="background: rgba(57, 192, 195, 0.1); border-left: 4px solid #39c0c3; border-radius: 8px; padding: 16px; margin: 20px 0;">
             <p style="margin: 0; font-size: 14px;">
-              <strong>Área seleccionada:</strong> ${areaLabel}<br/>
-              <strong>Tecnologías:</strong> ${tecnologiasTexto}
+              <strong>Nombre completo:</strong> ${escapeHtml(nombre)}<br/>
+              <strong>Email:</strong> ${escapeHtml(email)}<br/>
+              <strong>Legajo:</strong> ${escapeHtml(legajo)}<br/>
+              <strong>Celular:</strong> ${escapeHtml(celular)}<br/>
+              <strong>GitHub:</strong> ${escapeHtml(githubUrl)}<br/>
+              <strong>LinkedIn:</strong> ${escapeHtml(linkedinUrl)}<br/>
+              <strong>Área seleccionada:</strong> ${escapeHtml(areaLabel)}
             </p>
+            <div style="margin-top: 12px; font-size: 14px;">
+              <strong>Tecnologías y nivel:</strong>
+              <ul style="margin: 8px 0 0 18px; padding: 0;">${tecnologiasHtml}</ul>
+            </div>
           </div>
 
           <p style="line-height: 1.6;">
@@ -66,6 +108,12 @@ Hola ${nombre},
 ¡Gracias por postularte a nuestros proyectos pagos a través de CODES++!
 Tu solicitud fue registrada correctamente.
 
+Nombre completo: ${nombre}
+Email: ${email}
+Legajo: ${legajo}
+Celular: ${celular}
+GitHub: ${githubUrl}
+LinkedIn: ${linkedinUrl}
 Área seleccionada: ${areaLabel}
 Tecnologías: ${tecnologiasTexto}
 
