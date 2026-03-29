@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Spinner } from 'react-bootstrap';
-import catecService from '../services/catecService';
-import './CatecPage.css';
+import proyectosPagosService from '../services/proyectosPagosService';
+import './ProyectosPagosPage.css';
 
-const CatecPage = () => {
+const ProyectosPagosPage = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -149,7 +149,7 @@ const CatecPage = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
     try {
-      await catecService.submitApplication(formData);
+      await proyectosPagosService.submitApplication(formData);
 
       setSubmitStatus({
         type: 'success',
@@ -191,11 +191,11 @@ const CatecPage = () => {
               <span><i className="fas fa-building me-2"></i>Vinculación Tecnológica</span>
             </div>
             <h1 className="catec-hero-title">
-              Proyectos CATEC
+              Proyectos Pagos
             </h1>
             <p className="catec-hero-subtitle">
-              Accedé a proyectos reales para empresas a través del Centro de Asistencia 
-              Tecnológica y Empresarial. Trabajos remunerados que fortalecen tu experiencia profesional.
+              Accedé a proyectos reales para empresas. 
+              Trabajos remunerados que fortalecen tu experiencia profesional.
             </p>
           </div>
         </Container>
@@ -206,7 +206,7 @@ const CatecPage = () => {
         <Container>
           <Row className="g-4">
             {[
-              { icon: 'fas fa-dollar-sign', title: 'Remunerado', desc: 'Proyectos pagos para empresas reales a través del CATEC', delay: '0.1s' },
+              { icon: 'fas fa-dollar-sign', title: 'Remunerado', desc: 'Proyectos pagos para empresas reales', delay: '0.1s' },
               { icon: 'fas fa-building', title: 'Clientes Reales', desc: 'Trabajá con empresas que necesitan soluciones tecnológicas', delay: '0.2s' },
               { icon: 'fas fa-certificate', title: 'Certificación', desc: 'Obtené certificaciones y referencias profesionales', delay: '0.3s' },
               { icon: 'fas fa-users-cog', title: 'Equipo', desc: 'Formá parte de equipos multidisciplinarios de trabajo', delay: '0.4s' }
@@ -234,8 +234,8 @@ const CatecPage = () => {
               <div className="form-header-icon">
                 <i className="fas fa-file-signature"></i>
               </div>
-              <h2>Postulación CATEC</h2>
-              <p>Completá el formulario para sumarte a la base de vinculación tecnológica</p>
+              <h2>Postulación a Proyectos Pagos</h2>
+              <p>Completá el formulario para sumarte a la base de postulantes</p>
             </div>
 
             <div className="catec-form-body">
@@ -449,17 +449,17 @@ const CatecPage = () => {
         </Container>
       </section>
 
-      {/* Info CATEC */}
+      {/* Info Proyectos Pagos */}
       <section className="catec-info-section">
         <Container>
           <div className="catec-info-card">
             <div className="info-icon-float">
               <i className="fas fa-building"></i>
             </div>
-            <h3>¿Qué es el CATEC?</h3>
+            <h3>¿Qué son los proyectos pagos?</h3>
             <p className="info-desc">
-              El <strong>Centro de Asistencia Tecnológica y Empresarial</strong> vincula a estudiantes 
-              con empresas que necesitan soluciones tecnológicas. Los proyectos son <strong>remunerados</strong> y 
+              Esta iniciativa vincula a estudiantes con empresas que necesitan soluciones tecnológicas. 
+              Los proyectos son <strong>remunerados</strong> y 
               supervisados por docentes de la universidad.
             </p>
             <div className="info-items">
@@ -483,4 +483,4 @@ const CatecPage = () => {
   );
 };
 
-export default CatecPage;
+export default ProyectosPagosPage;

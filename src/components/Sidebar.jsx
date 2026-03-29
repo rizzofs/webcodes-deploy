@@ -19,7 +19,7 @@ const Sidebar = () => {
       '/colaborar': 'colaborar',
       '/encuestas': 'encuestas',
       '/charlas': 'charlas',
-      '/catec': 'catec',
+      '/proyectos-pagos': 'proyectos-pagos',
       '/cacic': 'cacic',
       '/grupos': 'grupos',
       '/taller': 'taller',
@@ -108,7 +108,7 @@ const Sidebar = () => {
     // — 2. Gestión y Participación: formularios, encuestas —
     { id: 'encuestas', label: 'Encuestas Activas', icon: 'fas fa-poll-h', external: true, href: '/encuestas' },
     { id: 'colaborar', label: 'Proyectos Colaborativos', icon: 'fas fa-users-cog', external: true, href: '/colaborar' },
-    { id: 'catec', label: 'Colaborar con CATEC', icon: 'fas fa-handshake', external: true, href: '/catec' },
+    { id: 'proyectos-pagos', label: 'Proyectos Pagos', icon: 'fas fa-handshake', external: true, href: '/proyectos-pagos' },
 
     // — 3. Vida Estudiantil: eventos, novedades —
     { id: 'eventos', label: 'Actividades y Eventos', icon: 'fas fa-calendar-alt' },

@@ -1,18 +1,18 @@
 import { supabase } from '../supabaseClient';
 
-const catecService = {
+const proyectosPagosService = {
   /**
-   * Enviar una postulación al CATEC.
-   * Guarda en Supabase y envía emails de notificación vía Vercel Serverless Function (Resend).
+   * Enviar una postulación a proyectos pagos.
+   * Guarda en Supabase y envía email de confirmación vía Vercel Serverless Function (Resend).
    */
   submitApplication: async (formData) => {
-    // 1. Enviar emails de notificación vía Vercel Serverless Function (obligatorio)
-    const emailResult = await catecService.sendNotificationEmail(formData);
+    // 1. Enviar email de confirmación vía Vercel Serverless Function (obligatorio)
+    const emailResult = await proyectosPagosService.sendConfirmationEmail(formData);
 
     // 2. Intentar guardar en BD (opcional, no bloquea si la tabla no existe)
     try {
       await supabase
-        .from('catec_applications')
+        .from('proyectos_pagos_applications')
         .insert([{
           nombre: formData.nombre,
           email: formData.email,
@@ -29,11 +29,11 @@ const catecService = {
   },
 
   /**
-   * Llama a la Vercel Serverless Function (/api/send-catec-email)
-   * para enviar los emails de notificación y confirmación vía Resend.
+   * Llama a la Vercel Serverless Function (/api/send-proyectos-pagos-email)
+    * para enviar el email de confirmación vía Resend.
    */
-  sendNotificationEmail: async (formData) => {
-    const response = await fetch('/api/send-catec-email', {
+  sendConfirmationEmail: async (formData) => {
+    const response = await fetch('/api/send-proyectos-pagos-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -59,7 +59,7 @@ const catecService = {
    */
   getAll: async () => {
     const { data, error } = await supabase
-      .from('catec_applications')
+      .from('proyectos_pagos_applications')
       .select('*')
       .order('created_at', { ascending: false });
 
@@ -77,7 +77,7 @@ const catecService = {
     }
 
     const { data, error } = await supabase
-      .from('catec_applications')
+      .from('proyectos_pagos_applications')
       .update(updateData)
       .eq('id', id)
       .select();
@@ -91,7 +91,7 @@ const catecService = {
    */
   delete: async (id) => {
     const { error } = await supabase
-      .from('catec_applications')
+      .from('proyectos_pagos_applications')
       .delete()
       .eq('id', id);
 
@@ -100,4 +100,4 @@ const catecService = {
   }
 };
 
-export default catecService;
+export default proyectosPagosService;

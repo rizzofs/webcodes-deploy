@@ -41,7 +41,7 @@ import CalendarPage from './pages/CalendarPage';
 
 import AdminPage from './pages/AdminPage';
 import ColaborarPage from './pages/ColaborarPage';
-import CatecPage from './pages/CatecPage';
+import ProyectosPagosPage from './pages/ProyectosPagosPage';
 import EncuestasPage from './pages/EncuestasPage';
 import CharlasPage from './pages/CharlasPage';
 
@@ -90,7 +90,7 @@ function AppContent() {
         <Route path="/calendario" element={<CalendarPage />} />
 
         <Route path="/colaborar" element={<ColaborarPage />} />
-        <Route path="/catec" element={<CatecPage />} />
+        <Route path="/proyectos-pagos" element={<ProyectosPagosPage />} />
         <Route path="/encuestas" element={<EncuestasPage />} />
         <Route path="/charlas" element={<CharlasPage />} />
         <Route path="/admin" element={<AdminPage />} />
