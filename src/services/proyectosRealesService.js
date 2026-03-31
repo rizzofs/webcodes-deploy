@@ -1,8 +1,8 @@
 import { supabase } from '../supabaseClient';
 
-const proyectosPagosService = {
+const proyectosRealesService = {
   /**
-   * Enviar una postulación a proyectos pagos.
+   * Enviar una postulación a proyectos reales.
    * Guarda en Supabase y envía email de confirmación vía Vercel Serverless Function (Resend).
    */
   submitApplication: async (formData) => {
@@ -13,7 +13,7 @@ const proyectosPagosService = {
     }));
 
     // 1. Enviar email de confirmación vía Vercel Serverless Function (obligatorio)
-    const emailResult = await proyectosPagosService.sendConfirmationEmail({
+    const emailResult = await proyectosRealesService.sendConfirmationEmail({
       ...formData,
       tecnologiasConNivel
     });
@@ -58,11 +58,11 @@ const proyectosPagosService = {
   },
 
   /**
-   * Llama a la Vercel Serverless Function (/api/send-proyectos-pagos-email)
+   * Llama a la Vercel Serverless Function (/api/send-proyectos-reales-email)
     * para enviar el email de confirmación vía Resend.
    */
   sendConfirmationEmail: async (formData) => {
-    const response = await fetch('/api/send-proyectos-pagos-email', {
+    const response = await fetch('/api/send-proyectos-reales-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -131,4 +131,4 @@ const proyectosPagosService = {
   }
 };
 
-export default proyectosPagosService;
+export default proyectosRealesService;

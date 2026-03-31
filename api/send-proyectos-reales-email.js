@@ -1,6 +1,6 @@
 // Vercel Serverless Function: Envía email de confirmación de postulación
-// a proyectos pagos vía Resend.
-// Se invoca desde el frontend a través de /api/send-proyectos-pagos-email
+// a proyectos reales vía Resend.
+// Se invoca desde el frontend a través de /api/send-proyectos-reales-email
 
 const AREA_LABELS = {
   frontend: 'Frontend',
@@ -63,13 +63,13 @@ export default async function handler(req, res) {
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #1a1a2e; color: #e0e0e0; border-radius: 12px; overflow: hidden;">
         <div style="background: linear-gradient(135deg, #39c0c3 0%, #1e6b6e 100%); padding: 30px; text-align: center;">
           <h1 style="margin: 0; color: white; font-size: 24px;">✅ ¡Postulación Recibida!</h1>
-          <p style="margin: 8px 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">CODES++ - Proyectos Pagos</p>
+          <p style="margin: 8px 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">CODES++ - Proyectos Reales</p>
         </div>
 
         <div style="padding: 30px;">
           <p style="font-size: 16px; line-height: 1.6;">Hola <strong>${escapeHtml(nombre)}</strong>,</p>
           <p style="line-height: 1.6;">
-            ¡Gracias por postularte a nuestros <strong>proyectos pagos</strong> a través de CODES++!
+            ¡Gracias por postularte a nuestros <strong>proyectos reales</strong> a través de CODES++!
             Tu solicitud fue registrada correctamente.
           </p>
 
@@ -105,7 +105,7 @@ export default async function handler(req, res) {
     const textConfirmacion = `
 Hola ${nombre},
 
-¡Gracias por postularte a nuestros proyectos pagos a través de CODES++!
+¡Gracias por postularte a nuestros proyectos reales a través de CODES++!
 Tu solicitud fue registrada correctamente.
 
 Nombre completo: ${nombre}
@@ -120,7 +120,7 @@ Tecnologías: ${tecnologiasTexto}
 Revisaremos tu perfil y te contactaremos cuando surjan proyectos que se ajusten a tus habilidades.
 
 ---
-CODES++ - Proyectos Pagos
+CODES++ - Proyectos Reales
     `.trim();
 
     const fromAddress = process.env.RESEND_FROM || 'CODES++ <onboarding@resend.dev>';
@@ -134,7 +134,7 @@ CODES++ - Proyectos Pagos
       body: JSON.stringify({
         from: fromAddress,
         to: [email],
-        subject: '¡Tu postulación a proyectos pagos fue recibida! - CODES++',
+        subject: '¡Tu postulación a proyectos reales fue recibida! - CODES++',
         html: htmlConfirmacion,
         text: textConfirmacion
       })
@@ -157,7 +157,7 @@ CODES++ - Proyectos Pagos
       emailId: confirmData.id
     });
   } catch (error) {
-    console.error('Error al enviar email de proyectos pagos:', error);
+    console.error('Error al enviar email de proyectos reales:', error);
     return res.status(500).json({
       success: false,
       error: 'Error interno al procesar la solicitud'

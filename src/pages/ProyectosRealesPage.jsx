@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Spinner } from 'react-bootstrap';
-import proyectosPagosService from '../services/proyectosPagosService';
-import './ProyectosPagosPage.css';
+import proyectosRealesService from '../services/proyectosRealesService';
+import './ProyectosRealesPage.css';
 
-const ProyectosPagosPage = () => {
+const ProyectosRealesPage = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -209,7 +209,7 @@ const ProyectosPagosPage = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
     try {
-      await proyectosPagosService.submitApplication(formData);
+      await proyectosRealesService.submitApplication(formData);
 
       setSubmitStatus({
         type: 'success',
@@ -606,7 +606,7 @@ const ProyectosPagosPage = () => {
         </Container>
       </section>
 
-      {/* Info Proyectos Pagos */}
+      {/* Info Proyectos Reales */}
       <section className="catec-info-section">
         <Container>
           <div className="catec-info-card">
@@ -640,4 +640,4 @@ const ProyectosPagosPage = () => {
   );
 };
 
-export default ProyectosPagosPage;
+export default ProyectosRealesPage;
