@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import talksService from '../services/talksService';
+import patriciaImg from '../assets/Patricia.png';
 import './CharlasPage.css';
 
 const CharlasPage = () => {
@@ -48,7 +49,24 @@ const CharlasPage = () => {
             date: '2026-02-20T18:00:00Z',
             description: 'Docente en Univ.Nac. Villa Mercedes, Río Negro, Siglo 21, UBA (Maestría Ciberseguridad y Ciberdefensa). Perito Informático PJN. Conferencista. Inteligencia Artificial y Ciberseguridad',
             isLive: false,
+            video_url: 'https://www.youtube.com/watch?v=7NQ9KT6WgHA&list=PLPVJg3gxGyJR3k1hCnkjfJLGTPWM9sDSf',
             image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+          },
+          {
+            id: 'manual-4',
+            title: 'Hacking Ético',
+            speaker: 'Angel Maldonado',
+            date: '2026-04-20T18:00:00Z',
+            description: 'Red Team Member & Pentester. Especialista en seguridad ofensiva, evaluación de vulnerabilidades y respuesta ante incidentes. Estudiante de Ciberdefensa con certificaciones PJPT y eJPT.',
+            image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+          },
+          {
+            id: 'manual-5',
+            title: 'Gestión Profesional',
+            speaker: 'Patricia Jebsen',
+            date: '2026-05-22T19:00:00Z',
+            description: 'Estrategias de carrera, liderazgo y desarrollo profesional en el sector tecnológico y retail. Una mirada experta sobre cómo gestionar tu crecimiento en la industria actual.',
+            image: patriciaImg
           }
         ];
 
@@ -75,26 +93,7 @@ const CharlasPage = () => {
   }, []);
 
   // Hardcoded for now until we move this to DB too
-  const speakers2026 = [
-    {
-      id: 1,
-      name: 'Nehuen Prados',
-      description: 'Trabajo en transformación digital desde hace más de una década, liderando proyectos donde la teoría y la práctica se encuentran en el terreno real. Exigente con los resultados y la calidad. Docente universitario con enfoque pragmático: la innovación debe estar al servicio de la solución.',
-      avatar: '👨‍💻'
-    },
-    {
-      id: 2,
-      name: 'Patricia Jebsen',
-      description: 'Miembro de junta directiva y asesora de negocios en empresas de tecnología, e-commerce y retail. Consultora especializada en estrategias de e-commerce y omnicanal. Creadora de contenido y conferencista sobre desarrollo profesional y liderazgo.',
-      avatar: '👩‍💻'
-    },
-    {
-      id: 3,
-      name: 'Gladys Kaplan',
-      description: 'Profesora e Investigadora en Ingeniería en Informática y Licenciatura en Sistemas de Información. Investiga en Ingeniería de Software, particularmente en Ingeniería de Requisitos. Master en Informática y Doctorado de UNLP. Integra el Registro de expertos de Coneau desde 2010.',
-      avatar: '👩‍🏫'
-    }
-  ];
+  const speakers2026 = [];
   
   // Helper to extract video ID and start time from various youtube URL formats
   const getYoutubeParams = (url) => {
