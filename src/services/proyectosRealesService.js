@@ -12,46 +12,54 @@ const proyectosRealesService = {
       esOtra: tech === 'otros'
     }));
 
-    // 1. Enviar email de confirmación vía Vercel Serverless Function (obligatorio)
-    const emailResult = await proyectosRealesService.sendConfirmationEmail({
-      ...formData,
-      tecnologiasConNivel
-    });
+    // 1. Guardar en BD (Obligatorio para no perder el dato si falla el email)
+    const payloadNuevo = {
+      nombre: formData.nombre,
+      email: formData.email,
+      legajo: formData.legajo,
+      celular: formData.celular,
+      github_url: formData.githubUrl,
+      linkedin_url: formData.linkedinUrl,
+      area: formData.area,
+      tecnologias: tecnologiasConNivel,
+      niveles_experiencia: formData.nivelesExperiencia,
+      otra_tecnologia: formData.otraTecnologia || null
+    };
 
-    // 2. Intentar guardar en BD (opcional, no bloquea si la tabla no existe)
-    try {
-      const payloadNuevo = {
+    const { error } = await supabase
+      .from('proyectos_reales_applications')
+      .insert([payloadNuevo]);
+
+    if (error) {
+      console.warn('Fallo payload nuevo, intentando legacy:', error);
+      const payloadLegacy = {
         nombre: formData.nombre,
         email: formData.email,
         legajo: formData.legajo,
-        celular: formData.celular,
-        github_url: formData.githubUrl,
-        linkedin_url: formData.linkedinUrl,
         area: formData.area,
-        tecnologias: tecnologiasConNivel,
-        niveles_experiencia: formData.nivelesExperiencia,
-        otra_tecnologia: formData.otraTecnologia || null
+        tecnologias: tecnologiasConNivel.map(item => `${item.tecnologia} (${item.nivel || 'sin nivel'})`)
       };
 
-      const { error } = await supabase
+      const { error: errorLegacy } = await supabase
         .from('proyectos_reales_applications')
-        .insert([payloadNuevo]);
-
-      if (error) {
-        const payloadLegacy = {
-          nombre: formData.nombre,
-          email: formData.email,
-          legajo: formData.legajo,
-          area: formData.area,
-          tecnologias: tecnologiasConNivel.map(item => `${item.tecnologia} (${item.nivel || 'sin nivel'})`)
-        };
-
-        await supabase
-          .from('proyectos_reales_applications')
-          .insert([payloadLegacy]);
+        .insert([payloadLegacy]);
+        
+      if (errorLegacy) {
+          throw new Error('No se pudo guardar la postulación en la base de datos: ' + errorLegacy.message);
       }
-    } catch (dbError) {
-      console.warn('No se pudo guardar en BD (la tabla puede no existir aún):', dbError.message);
+    }
+
+    // 2. Enviar email de confirmación vía Vercel Serverless Function
+    let emailResult = { success: false, message: 'No se intentó enviar email' };
+    try {
+      emailResult = await proyectosRealesService.sendConfirmationEmail({
+        ...formData,
+        tecnologiasConNivel
+      });
+    } catch (emailError) {
+      console.error('La postulación se guardó en BD pero falló el email:', emailError);
+      // Podemos decidir no romper el flujo principal si solo falló el email
+      // throw emailError; 
     }
 
     return emailResult;
