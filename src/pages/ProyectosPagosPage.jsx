@@ -263,11 +263,11 @@ const ProyectosPagosPage = () => {
               <span><i className="fas fa-building me-2"></i>Vinculación Tecnológica</span>
             </div>
             <h1 className="catec-hero-title">
-              Proyectos Pagos
+              Proyectos Reales
             </h1>
             <p className="catec-hero-subtitle">
               Accedé a proyectos reales para empresas. 
-              Trabajos remunerados que fortalecen tu experiencia profesional.
+              Trabaja en entornos profesionales que fortalecen tu experiencia.
             </p>
           </div>
         </Container>
@@ -278,7 +278,7 @@ const ProyectosPagosPage = () => {
         <Container>
           <Row className="g-4">
             {[
-              { icon: 'fas fa-dollar-sign', title: 'Remunerado', desc: 'Proyectos pagos para empresas reales', delay: '0.1s' },
+              { icon: 'fas fa-rocket', title: 'Proyectos Reales', desc: 'Suma experiencia en proyectos para empresas reales', delay: '0.1s' },
               { icon: 'fas fa-building', title: 'Clientes Reales', desc: 'Trabajá con empresas que necesitan soluciones tecnológicas', delay: '0.2s' },
               { icon: 'fas fa-briefcase', title: 'Experiencia', desc: 'Obtené experiencia y referencias profesionales', delay: '0.3s' },
               { icon: 'fas fa-users-cog', title: 'Equipo', desc: 'Formá parte de equipos multidisciplinarios de trabajo', delay: '0.4s' }
@@ -306,7 +306,7 @@ const ProyectosPagosPage = () => {
               <div className="form-header-icon">
                 <i className="fas fa-file-signature"></i>
               </div>
-              <h2>Postulación a Proyectos Pagos</h2>
+              <h2>Postulación a Proyectos Reales</h2>
               <p>Completá el formulario para sumarte a la base de postulantes</p>
             </div>
 
@@ -613,16 +613,16 @@ const ProyectosPagosPage = () => {
             <div className="info-icon-float">
               <i className="fas fa-building"></i>
             </div>
-            <h3>¿Qué son los proyectos pagos?</h3>
+            <h3>¿Qué son los proyectos reales?</h3>
             <p className="info-desc">
               Esta iniciativa vincula a estudiantes con empresas que necesitan soluciones tecnológicas. 
-              Los proyectos son <strong>remunerados</strong> y 
+              Los proyectos te permitirán <strong>adentrarte en el mercado laboral</strong> y serán 
               supervisados por docentes de la universidad.
             </p>
             <div className="info-items">
               {[
                 'Desarrollo de software para empresas reales',
-                'Proyectos remunerados y con seguimiento académico',
+                'Proyectos de impacto con seguimiento académico',
                 'Formación de equipos según habilidades',
                 'Certificación de experiencia profesional',
                 'Vinculación directa con el sector productivo'

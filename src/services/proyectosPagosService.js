@@ -34,7 +34,7 @@ const proyectosPagosService = {
       };
 
       const { error } = await supabase
-        .from('proyectos_pagos_applications')
+        .from('proyectos_reales_applications')
         .insert([payloadNuevo]);
 
       if (error) {
@@ -47,7 +47,7 @@ const proyectosPagosService = {
         };
 
         await supabase
-          .from('proyectos_pagos_applications')
+          .from('proyectos_reales_applications')
           .insert([payloadLegacy]);
       }
     } catch (dbError) {
@@ -90,7 +90,7 @@ const proyectosPagosService = {
    */
   getAll: async () => {
     const { data, error } = await supabase
-      .from('proyectos_pagos_applications')
+      .from('proyectos_reales_applications')
       .select('*')
       .order('created_at', { ascending: false });
 
@@ -108,7 +108,7 @@ const proyectosPagosService = {
     }
 
     const { data, error } = await supabase
-      .from('proyectos_pagos_applications')
+      .from('proyectos_reales_applications')
       .update(updateData)
       .eq('id', id)
       .select();
@@ -122,7 +122,7 @@ const proyectosPagosService = {
    */
   delete: async (id) => {
     const { error } = await supabase
-      .from('proyectos_pagos_applications')
+      .from('proyectos_reales_applications')
       .delete()
       .eq('id', id);
 
