@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Button, Table, Badge, Modal, Form, Alert } from 'react-bootstrap';
+import { Row, Col, Card, Button, Table, Badge, Modal, Form, Alert, Spinner } from 'react-bootstrap';
+import { supabase } from '../supabaseClient';
 import './UserManagement.css';
 
 const UserManagement = () => {
@@ -10,8 +11,7 @@ const UserManagement = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    role: 'member',
-    status: 'active'
+    role: 'member'
   });
   const [errors, setErrors] = useState({});
 
@@ -20,55 +20,30 @@ const UserManagement = () => {
   }, []);
 
   const loadUsers = async () => {
-    setLoading(true);
-    // Simular carga de usuarios
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const mockUsers = [
-      {
-        id: 1,
-        name: 'Administrador CODES++',
-        email: 'admin@codes.unlu.edu.ar',
-        role: 'admin',
-        status: 'active',
-        lastLogin: '2025-01-15',
-        createdAt: '2022-01-01',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
-      },
-      {
-        id: 2,
-        name: 'Editor de Contenido',
-        email: 'editor@codes.unlu.edu.ar',
-        role: 'editor',
-        status: 'active',
-        lastLogin: '2025-01-14',
-        createdAt: '2022-06-15',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
-      },
-      {
-        id: 3,
-        name: 'Miembro CODES++',
-        email: 'miembro@codes.unlu.edu.ar',
-        role: 'member',
-        status: 'active',
-        lastLogin: '2025-01-13',
-        createdAt: '2023-03-10',
-        avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
-      },
-      {
-        id: 4,
-        name: 'Juan Pérez',
-        email: 'juan.perez@unlu.edu.ar',
-        role: 'member',
-        status: 'inactive',
-        lastLogin: '2024-12-20',
-        createdAt: '2023-09-01',
-        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face'
-      }
-    ];
-    
-    setUsers(mockUsers);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .order('full_name', { ascending: true });
+
+      if (error) throw error;
+      
+      const mappedUsers = data.map(u => ({
+        id: u.id,
+        name: u.full_name || u.email?.split('@')[0] || 'Usuario',
+        email: u.email || 'Sin email',
+        role: u.role || 'member',
+        createdAt: u.created_at ? new Date(u.created_at).toISOString().split('T')[0] : 'Desconocido',
+        avatar: u.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(u.full_name || u.email || 'U')}&background=random`
+      }));
+
+      setUsers(mappedUsers);
+    } catch (err) {
+      console.error('Error loading users:', err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCreateUser = () => {
@@ -76,8 +51,7 @@ const UserManagement = () => {
     setFormData({
       name: '',
       email: '',
-      role: 'member',
-      status: 'active'
+      role: 'member'
     });
     setErrors({});
     setShowModal(true);
@@ -88,8 +62,7 @@ const UserManagement = () => {
     setFormData({
       name: user.name,
       email: user.email,
-      role: user.role,
-      status: user.status
+      role: user.role
     });
     setErrors({});
     setShowModal(true);
@@ -134,40 +107,59 @@ const UserManagement = () => {
       return;
     }
 
-    const userData = {
-      ...formData,
-      lastLogin: editingUser ? editingUser.lastLogin : 'Nunca',
-      createdAt: editingUser ? editingUser.createdAt : new Date().toISOString().split('T')[0],
-      avatar: editingUser ? editingUser.avatar : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
-    };
-
-    if (editingUser) {
-      // Actualizar usuario existente
-      setUsers(prev => prev.map(user => 
-        user.id === editingUser.id ? { ...user, ...userData } : user
-      ));
-    } else {
-      // Crear nuevo usuario
-      const newUser = {
-        id: Date.now(),
-        ...userData
+    try {
+      setLoading(true);
+      const profileData = {
+        full_name: formData.name,
+        email: formData.email,
+        role: formData.role,
+        avatar_url: editingUser ? editingUser.avatar : `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.name)}&background=random`
       };
-      setUsers(prev => [newUser, ...prev]);
-    }
 
-    setShowModal(false);
+      if (editingUser) {
+        // Actualizar usuario existente
+        const { error } = await supabase
+          .from('profiles')
+          .update(profileData)
+          .eq('id', editingUser.id);
+
+        if (error) throw error;
+      } else {
+        // Para crear un usuario nuevo, técnicamente se requiere Auth. 
+        // Pero si solo estamos creando el perfil (asumiendo que el ID se genera o se vincula):
+        alert('La creación de usuarios debe realizarse a través del sistema de registro/auth para vincular el ID.');
+        setLoading(false);
+        return;
+      }
+
+      await loadUsers();
+      setShowModal(false);
+    } catch (err) {
+      alert('Error: ' + err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDeleteUser = (userId) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
-      setUsers(prev => prev.filter(user => user.id !== userId));
+  const handleDeleteUser = async (userId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este usuario? (Esto no eliminará su cuenta de Auth, solo su perfil)')) {
+      try {
+        const { error } = await supabase
+          .from('profiles')
+          .delete()
+          .eq('id', userId);
+        
+        if (error) throw error;
+        await loadUsers();
+      } catch (err) {
+        alert('Error al eliminar: ' + err.message);
+      }
     }
   };
 
-  const handleStatusChange = (userId, newStatus) => {
-    setUsers(prev => prev.map(user => 
-      user.id === userId ? { ...user, status: newStatus } : user
-    ));
+  // No se implementa cambio de estado directo ya que no hay columna 'status' en la DB
+  const handleStatusChange = () => {
+    alert('Esta funcionalidad requiere una columna de estado en la base de datos.');
   };
 
   const getRoleBadge = (role) => {
@@ -192,12 +184,12 @@ const UserManagement = () => {
     return <Badge bg={config.variant}>{config.text}</Badge>;
   };
 
-  if (loading) {
+  if (loading && users.length === 0) {
     return (
       <div className="user-loading">
         <div className="loading-spinner">
-          <i className="fas fa-spinner fa-spin"></i>
-          <p>Cargando usuarios...</p>
+          <Spinner animation="border" variant="primary" />
+          <p className="mt-3">Cargando usuarios reales...</p>
         </div>
       </div>
     );
@@ -236,8 +228,7 @@ const UserManagement = () => {
                     <tr>
                       <th>Usuario</th>
                       <th>Rol</th>
-                      <th>Estado</th>
-                      <th>Último Login</th>
+                      <th>Fecha Registro</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
@@ -258,8 +249,7 @@ const UserManagement = () => {
                           </div>
                         </td>
                         <td>{getRoleBadge(user.role)}</td>
-                        <td>{getStatusBadge(user.status)}</td>
-                        <td>{user.lastLogin}</td>
+                        <td>{user.createdAt}</td>
                         <td>
                           <div className="action-buttons">
                             <Button
@@ -269,24 +259,6 @@ const UserManagement = () => {
                               className="action-btn"
                             >
                               <i className="fas fa-edit"></i>
-                            </Button>
-                            <Button
-                              variant="outline-success"
-                              size="sm"
-                              onClick={() => handleStatusChange(user.id, 'active')}
-                              className="action-btn"
-                              disabled={user.status === 'active'}
-                            >
-                              <i className="fas fa-check"></i>
-                            </Button>
-                            <Button
-                              variant="outline-warning"
-                              size="sm"
-                              onClick={() => handleStatusChange(user.id, 'inactive')}
-                              className="action-btn"
-                              disabled={user.status === 'inactive'}
-                            >
-                              <i className="fas fa-pause"></i>
                             </Button>
                             <Button
                               variant="outline-danger"
@@ -322,10 +294,6 @@ const UserManagement = () => {
                   <div className="stat-label">Total Usuarios</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">{users.filter(u => u.status === 'active').length}</div>
-                  <div className="stat-label">Activos</div>
-                </div>
-                <div className="stat-item">
                   <div className="stat-number">{users.filter(u => u.role === 'admin').length}</div>
                   <div className="stat-label">Administradores</div>
                 </div>
@@ -336,10 +304,6 @@ const UserManagement = () => {
                 <div className="stat-item">
                   <div className="stat-number">{users.filter(u => u.role === 'member').length}</div>
                   <div className="stat-label">Miembros</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-number">{users.filter(u => u.status === 'inactive').length}</div>
-                  <div className="stat-label">Inactivos</div>
                 </div>
               </div>
             </Card.Body>
@@ -387,7 +351,7 @@ const UserManagement = () => {
             </Form.Group>
 
             <Row>
-              <Col md={6}>
+              <Col md={12}>
                 <Form.Group className="mb-3">
                   <Form.Label>Rol</Form.Label>
                   <Form.Select
@@ -398,20 +362,6 @@ const UserManagement = () => {
                     <option value="member">Miembro</option>
                     <option value="editor">Editor</option>
                     <option value="admin">Administrador</option>
-                  </Form.Select>
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Estado</Form.Label>
-                  <Form.Select
-                    name="status"
-                    value={formData.status}
-                    onChange={handleInputChange}
-                  >
-                    <option value="active">Activo</option>
-                    <option value="inactive">Inactivo</option>
-                    <option value="suspended">Suspendido</option>
                   </Form.Select>
                 </Form.Group>
               </Col>

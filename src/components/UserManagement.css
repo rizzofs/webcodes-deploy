@@ -118,6 +118,7 @@
   border: none;
   border-bottom: 1px solid #f8f9fa;
   vertical-align: middle;
+  color: #2c3e50 !important; /* Force color for visibility in light mode */
 }
 
 .users-table tbody tr:hover {
@@ -144,13 +145,13 @@
 
 .user-name {
   font-weight: 600;
-  color: #495057;
+  color: #2c3e50 !important;
   margin-bottom: 0.25rem;
   font-size: 0.95rem;
 }
 
 .user-email {
-  color: #6c757d;
+  color: #5a6268 !important;
   font-size: 0.85rem;
 }
 

@@ -51,7 +51,7 @@ import { useGoogleAnalytics } from './hooks/useGoogleAnalytics';
 // Componente interno que puede usar useLocation
 function AppContent() {
   const location = useLocation();
-  const isDashboard = location.pathname === '/dashboard';
+  const isDashboard = location.pathname.startsWith('/dashboard');
   
   // Trackear cambios de página con Google Analytics
   useGoogleAnalytics();

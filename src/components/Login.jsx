@@ -166,48 +166,9 @@ const Login = () => {
                 </Form>
 
                 <div className="login-footer text-center mt-4">
-                  <p className="login-help">
-                    ¿Problemas para acceder? Contacta al administrador
+                  <p className="login-help text-muted small">
+                    ¿Problemas para acceder? Contacta al soporte técnico o al administrador del sistema.
                   </p>
-                  
-                  <div className="demo-accounts mt-3">
-                    <h6>Cuentas de demostración:</h6>
-                    <div className="demo-account">
-                      <strong>Admin:</strong> admin@codes.unlu.edu.ar / admin123
-                    </div>
-                    <div className="demo-account">
-                      <strong>Editor:</strong> editor@codes.unlu.edu.ar / editor123
-                    </div>
-                    <div className="demo-account">
-                      <strong>Miembro:</strong> miembro@codes.unlu.edu.ar / miembro123
-                    </div>
-                    
-                    <div className="demo-buttons mt-3">
-                      <Button 
-                        variant="outline-primary" 
-                        size="sm" 
-                        onClick={() => setFormData({ email: 'admin@codes.unlu.edu.ar', password: 'admin123' })}
-                        className="me-2"
-                      >
-                        Llenar Admin
-                      </Button>
-                      <Button 
-                        variant="outline-warning" 
-                        size="sm" 
-                        onClick={() => setFormData({ email: 'editor@codes.unlu.edu.ar', password: 'editor123' })}
-                        className="me-2"
-                      >
-                        Llenar Editor
-                      </Button>
-                      <Button 
-                        variant="outline-info" 
-                        size="sm" 
-                        onClick={() => setFormData({ email: 'miembro@codes.unlu.edu.ar', password: 'miembro123' })}
-                      >
-                        Llenar Miembro
-                      </Button>
-                    </div>
-                  </div>
                 </div>
               </Card.Body>
             </Card>

@@ -5,6 +5,7 @@ import NewsManagement from './NewsManagement';
 import ActivitiesManagement from './ActivitiesManagement';
 import TalksManagement from './TalksManagement';
 import UserManagement from './UserManagement';
+import WorkshopManagement from './WorkshopManagement';
 import DashboardStats from './DashboardStats';
 import DiscordLive from './DiscordLive';
 import './Dashboard.css';
@@ -70,6 +71,7 @@ const Dashboard = () => {
               {activeTab === 'activities' && 'Actividades'}
               {activeTab === 'talks' && 'Charlas'}
               {activeTab === 'users' && 'Usuarios'}
+              {activeTab === 'workshop' && 'Taller'}
               {activeTab === 'discord' && 'Discord'}
             </span>
           </div>
@@ -102,6 +104,7 @@ const Dashboard = () => {
             { id: 'activities', title: 'Actividades', icon: 'fas fa-calendar-alt', permission: 'write' },
             { id: 'talks', title: 'Charlas', icon: 'fas fa-video', permission: 'write' },
             { id: 'users', title: 'Usuarios', icon: 'fas fa-users', permission: 'manage_users' },
+            { id: 'workshop', title: 'Taller', icon: 'fas fa-laptop-code', permission: 'manage_users' },
             { id: 'discord', title: 'Discord', icon: 'fab fa-discord', permission: null }
           ].map((item) => {
             if (item.permission && !checkPermission(item.permission)) return null;
@@ -127,6 +130,7 @@ const Dashboard = () => {
         {activeTab === 'activities' && checkPermission('write') && <ActivitiesManagement />}
         {activeTab === 'talks' && checkPermission('write') && <TalksManagement />}
         {activeTab === 'users' && checkPermission('manage_users') && <UserManagement />}
+        {activeTab === 'workshop' && checkPermission('manage_users') && <WorkshopManagement />}
         {activeTab === 'discord' && <DiscordLive />}
       </div>
     </div>

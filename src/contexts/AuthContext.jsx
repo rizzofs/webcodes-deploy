@@ -19,6 +19,67 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     let mounted = true;
 
+    const fetchProfile = async (authUser) => {
+      try {
+        console.log('Auth: Intentando cargar perfil para:', authUser.email);
+        
+        // Creamos una promesa que resuelve la consulta a Supabase
+        const profilePromise = supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', authUser.id)
+          .single();
+
+        // Creamos una promesa de tiempo de espera (1.5 segundos)
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('TIMEOUT_DB')), 1500)
+        );
+
+        // Corremos ambas y vemos cual gana
+        const { data, error } = await Promise.race([profilePromise, timeoutPromise]);
+
+        if (error && error.code !== 'PGRST116') {
+          console.warn('Auth: Error controlado al cargar perfil:', error.message);
+          throw error;
+        }
+
+        console.log('Auth: Respuesta recibida de la DB:', data || 'No hay perfil');
+
+        const userData = {
+          ...authUser,
+          ...data,
+          role: data?.role || 'member'
+        };
+
+        if (mounted) {
+          setUser(userData);
+          setIsAuthenticated(true);
+          console.log('Auth: ¡Éxito! Perfil cargado y autenticado.');
+        }
+      } catch (error) {
+        console.warn('Auth: Usando perfil de respaldo (Fallback) debido a:', error.message || error);
+        
+        if (mounted) {
+          // Si es el admin principal, le damos privilegios aunque falle la DB
+          const isAdmin = authUser.email === 'presidencia@codesunlu.tech' || authUser.email === 'sistemas@codesunlu.tech';
+          
+          let fallbackUser = { 
+            ...authUser, 
+            role: isAdmin ? 'admin' : 'member' 
+          };
+          
+          setUser(fallbackUser);
+          setIsAuthenticated(true);
+          console.log('Auth: Entrando con perfil de respaldo. Rol:', fallbackUser.role);
+        }
+      } finally {
+        if (mounted) {
+          setLoading(false);
+          console.log('Auth: Finalizado proceso de carga.');
+        }
+      }
+    };
+
     // Safety timeout to prevent infinite loading
     const safetyTimeout = setTimeout(() => {
         if (mounted && loading) {
@@ -38,13 +99,11 @@ export const AuthProvider = ({ children }) => {
           console.log('Auth: Session found via getSession');
           if (mounted) await fetchProfile(session.user);
         } else {
-             // If no session, we just wait for onAuthStateChange or timeout
-             // But we can set loading false here if we want to be fast
-             // Let's rely on onAuthStateChange to confirm 'SIGNED_OUT' or similar
+          if (mounted) setLoading(false);
         }
       } catch (err) {
         console.error('Auth: Error checking session:', err);
-        // Don't kill loading here, let the listener or timeout handle it to avoid flickering
+        if (mounted) setLoading(false);
       }
     };
 
@@ -57,7 +116,6 @@ export const AuthProvider = ({ children }) => {
       if (session?.user) {
          if (mounted) {
              console.log('Auth: Session active from listener');
-             // We pass true to indicate this comes from event, to potentially debounce
              await fetchProfile(session.user);
          }
       } else {
@@ -75,74 +133,9 @@ export const AuthProvider = ({ children }) => {
       clearTimeout(safetyTimeout);
       subscription.unsubscribe();
     };
-  }, []);
+  }, []); // Re-render logic handled by Supabase listeners
 
-  const fetchProfile = async (authUser) => {
-    try {
-      console.log('Auth: Fetching profile...');
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', authUser.id)
-        .single();
-
-      if (error && error.code !== 'PGRST116') {
-        throw error;
-      }
-
-      console.log('Auth: Profile data from DB:', data);
-
-      const userData = {
-        ...authUser,
-        ...data, // This includes role from 'profiles' table
-      };
-      
-      // Explicitly ensure the role comes from the profile if available, otherwise fallback to 'member'
-      // Supabase auth user object also has a 'role' field (usually 'authenticated'), so we must be careful.
-      if (data?.role) {
-          userData.role = data.role;
-      } else {
-          userData.role = 'member'; // Default if no profile found
-      }
-
-      console.log('Auth: Final User Data with Role:', userData.role);
-
-      setUser(userData);
-      console.log('Auth: Profile loaded');
-    } catch (error) {
-      if (error.name === 'AbortError') {
-          console.log('Auth: Fetch aborted (likely unmount or network)');
-          // Emergency Override
-          if (authUser.email === 'sistemas@codesunlu.tech') {
-             console.warn('Auth: Forcing Admin due to AbortError');
-             const fallbackUser = { ...authUser, role: 'admin' };
-             setUser(fallbackUser);
-             setIsAuthenticated(true);
-             return; // Stop here
-          }
-      }
-      console.error('Error fetching profile:', error);
-      
-      // Fallback
-      let fallbackUser = { ...authUser, role: 'member' };
-      
-      // Emergency Override for generic error too
-      if (authUser.email === 'sistemas@codesunlu.tech') {
-          console.warn('Auth: Forcing Admin due to Fetch Error');
-          fallbackUser.role = 'admin';
-      }
-      
-      setUser(fallbackUser);
-      setIsAuthenticated(true);
-    } finally {
-      // Always clear loading
-      setLoading((prev) => {
-          if (prev) console.log('Auth: Loading finished');
-          return false;
-      });
-    }
-  };
-
+  // Auth functions remains in AuthProvider scope
   const login = async (email, password) => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({

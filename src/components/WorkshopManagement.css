@@ -1,0 +1,184 @@
+/* ========================================
+   WORKSHOP MANAGEMENT - ADMIN DESIGN
+   ======================================== */
+
+.workshop-management {
+  padding: 0;
+}
+
+.workshop-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.loading-spinner {
+  text-align: center;
+  color: #6c757d;
+}
+
+.loading-spinner i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #39c0c3;
+}
+
+.workshop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 15px;
+  border: 1px solid #dee2e6;
+}
+
+.header-content h2 {
+  margin: 0 0 0.5rem 0;
+  color: #2a8a8d;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.header-content p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.refresh-btn {
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #39c0c3, #2a8a8d);
+  border: none;
+  color: white;
+}
+
+.refresh-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 192, 195, 0.3);
+  background: linear-gradient(135deg, #2a8a8d, #1e6b6e);
+  color: white;
+}
+
+.workshop-table-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.workshop-table-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 15px 15px 0 0 !important;
+  padding: 1.25rem 1.5rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #495057;
+  display: flex;
+  align-items: center;
+}
+
+.workshop-table {
+  margin: 0;
+}
+
+.workshop-table thead th {
+  background: #f8f9fa;
+  border: none;
+  font-weight: 600;
+  color: #495057;
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.workshop-table tbody td {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-bottom: 1px solid #f8f9fa;
+  vertical-align: middle;
+  color: #2c3e50 !important; /* Force color for visibility */
+}
+
+.workshop-table tbody tr:hover {
+  background: rgba(57, 192, 195, 0.05);
+}
+
+.participant-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.participant-name {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.registration-date {
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.delete-btn {
+  color: #dc3545;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  color: #a71d2a;
+  transform: scale(1.1);
+}
+
+.workshop-table a {
+  color: #39c0c3;
+  transition: color 0.3s ease;
+}
+
+.workshop-table a:hover {
+  color: #2a8a8d;
+}
+
+[data-theme="dark"] .workshop-header {
+  background: linear-gradient(135deg, #3d3d3d, #2d2d2d);
+  border-color: rgba(57, 192, 195, 0.2);
+}
+
+[data-theme="dark"] .workshop-table-card {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .workshop-table thead th {
+  background: #3d3d3d;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .workshop-table tbody td {
+  border-color: rgba(57, 192, 195, 0.1);
+  color: #ffffff;
+}
