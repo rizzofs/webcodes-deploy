@@ -1,8 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Colaboradores.css';
 
 const Colaboradores = () => {
+  const localImages = import.meta.glob('../assets/*.{png,jpg,jpeg,webp,gif,svg,avif}', {
+    eager: true,
+    import: 'default',
+  });
+
+  const localImageByFileName = Object.entries(localImages).reduce((acc, [path, url]) => {
+    const fileName = path.split('/').pop();
+    if (fileName) acc[fileName] = url;
+    return acc;
+  }, {});
+
+  const [imageErrors, setImageErrors] = useState({});
+
+  const resolveImageSrc = (imagePath) => {
+    if (!imagePath) return null;
+
+    const isAbsoluteOrExternal =
+      imagePath.startsWith('/') ||
+      imagePath.startsWith('http://') ||
+      imagePath.startsWith('https://') ||
+      imagePath.startsWith('data:') ||
+      imagePath.startsWith('blob:');
+
+    if (isAbsoluteOrExternal) return imagePath;
+
+    const fileName = imagePath.split('/').pop();
+    return localImageByFileName[fileName] || imagePath;
+  };
+
+  const handleImageError = (index) => {
+    setImageErrors((prev) => ({
+      ...prev,
+      [index]: true,
+    }));
+  };
+
   const colaboradores = [
     {
       name: "Tatiana Galeano",
@@ -47,8 +83,18 @@ const Colaboradores = () => {
           {colaboradores.map((colaborador, index) => (
             <Col md={4} sm={6} className="mb-4" key={index}>
               <div className={`collaborator-card ${colaborador.isComingSoon ? 'coming-soon' : 'social-media-role'}`}>
-                <div className="role-icon">
-                  <i className={`bi ${colaborador.icon}`}></i>
+                <div className={`role-icon ${colaborador.image && !imageErrors[index] ? 'role-icon-static' : ''}`}>
+                  {colaborador.image && !imageErrors[index] ? (
+                    <img
+                      src={resolveImageSrc(colaborador.image)}
+                      alt={colaborador.name}
+                      className="role-image"
+                      loading="lazy"
+                      onError={() => handleImageError(index)}
+                    />
+                  ) : (
+                    <i className={`bi ${colaborador.icon || 'bi-image'}`}></i>
+                  )}
                 </div>
                 <div className="collaborator-info">
                   <h4>{colaborador.name}</h4>
