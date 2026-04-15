@@ -311,17 +311,6 @@ const ProyectosRealesPage = () => {
             </div>
 
             <div className="catec-form-body">
-              {submitStatus && (
-                <Alert
-                  variant={submitStatus.type === 'success' ? 'success' : 'danger'}
-                  className="catec-alert"
-                  dismissible
-                  onClose={() => setSubmitStatus(null)}
-                >
-                  <i className={`fas ${submitStatus.type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2`}></i>
-                  {submitStatus.message}
-                </Alert>
-              )}
 
               <Form onSubmit={handleSubmit} noValidate>
                 {/* Información Personal */}
@@ -594,6 +583,19 @@ const ProyectosRealesPage = () => {
                         </>
                       )}
                     </Button>
+
+                    {submitStatus && (
+                      <Alert
+                        variant={submitStatus.type === 'success' ? 'success' : 'danger'}
+                        className="catec-alert mt-3"
+                        dismissible
+                        onClose={() => setSubmitStatus(null)}
+                      >
+                        <i className={`fas ${submitStatus.type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2`}></i>
+                        {submitStatus.message}
+                      </Alert>
+                    )}
+
                     <p className="submit-hint">
                       <i className="fas fa-lock me-1"></i>
                       Tu información es confidencial. Recibirás un email de confirmación.
