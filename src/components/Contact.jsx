@@ -95,7 +95,7 @@ const Contact = () => {
                   </div>
                   <span className="social-card-label">LinkedIn</span>
                 </a>
-                <a href="https://discord.gg/fKsVT9bzSQ" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="Discord" data-network="discord">
+                <a href="https://discord.gg/2hbjvN7KDH" target="_blank" rel="noopener noreferrer" className="social-card" aria-label="Discord" data-network="discord">
                   <div className="social-card-icon">
                     <i className="fab fa-discord"></i>
                   </div>

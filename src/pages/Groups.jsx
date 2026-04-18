@@ -50,7 +50,7 @@ const Groups = () => {
                 Mientras tanto, puedes unirte a nuestro servidor de Discord:
               </p>
               <a 
-                href="https://discord.gg/fKsVT9bzSQ" 
+                href="https://discord.gg/2hbjvN7KDH" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="discord-link-btn"

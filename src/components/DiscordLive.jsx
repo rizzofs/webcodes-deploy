@@ -292,7 +292,7 @@ const DiscordLive = () => {
                   <Button 
                     variant="primary" 
                     className="action-btn"
-                    onClick={() => window.open('https://discord.gg/rDtEx4dMvD', '_blank')}
+                    onClick={() => window.open('https://discord.gg/2hbjvN7KDH', '_blank')}
                   >
                     <i className="fab fa-discord me-2"></i>
                     Unirse al Servidor
