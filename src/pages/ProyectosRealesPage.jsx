@@ -72,27 +72,62 @@ const ProyectosRealesPage = () => {
   const tecnologiasPorArea = {
     frontend: [
       { value: 'React', icon: 'fab fa-react' },
-      { value: 'Tailwind CSS', icon: 'fas fa-wind' },
+      { value: 'Next.js', icon: 'fab fa-react' },
+      { value: 'Vue.js', icon: 'fab fa-vuejs' },
+      { value: 'Nuxt.js', icon: 'fab fa-vuejs' },
+      { value: 'Svelte', icon: 'fas fa-fire' },
+      { value: 'SvelteKit', icon: 'fas fa-fire' },
+      { value: 'SolidJS', icon: 'fas fa-cube' },
+      { value: 'Astro', icon: 'fas fa-rocket' },
       { value: 'TypeScript', icon: 'fas fa-code' },
-      { value: 'Next.js', icon: 'fab fa-react' }
+      { value: 'Tailwind CSS', icon: 'fas fa-wind' },
+      { value: 'Styled Components', icon: 'fas fa-paint-brush' },
+      { value: 'Framer Motion', icon: 'fas fa-film' },
+      { value: 'Three.js', icon: 'fas fa-cube' },
+      { value: 'Vite', icon: 'fas fa-bolt' }
     ],
+
     backend: [
       { value: 'Node.js', icon: 'fab fa-node-js' },
       { value: 'Express', icon: 'fab fa-node-js' },
+      { value: 'NestJS', icon: 'fas fa-layer-group' },
+      { value: 'Fastify', icon: 'fas fa-bolt' },
+      { value: 'Django', icon: 'fab fa-python' },
+      { value: 'FastAPI', icon: 'fab fa-python' },
+      { value: 'Spring Boot', icon: 'fas fa-leaf' },
+      { value: '.NET Core', icon: 'fas fa-hashtag' },
+      { value: 'Ruby on Rails', icon: 'fas fa-gem' },
       { value: 'Supabase (PostgreSQL)', icon: 'fas fa-database' },
-      { value: 'C#', icon: 'fas fa-hashtag' },
-      { value: 'Java', icon: 'fab fa-java' }
+      { value: 'Firebase', icon: 'fas fa-fire' },
+      { value: 'MongoDB', icon: 'fas fa-leaf' },
+      { value: 'Redis', icon: 'fas fa-memory' },
+      { value: 'GraphQL', icon: 'fas fa-project-diagram' }
     ],
+
     data_analytics: [
       { value: 'Python (Pandas/NumPy)', icon: 'fab fa-python' },
       { value: 'SQL', icon: 'fas fa-database' },
       { value: 'Power BI', icon: 'fas fa-chart-pie' },
-      { value: 'Excel Avanzado', icon: 'fas fa-file-excel' }
+      { value: 'Tableau', icon: 'fas fa-chart-bar' },
+      { value: 'Looker Studio', icon: 'fas fa-chart-line' },
+      { value: 'Apache Spark', icon: 'fas fa-fire' },
+      { value: 'Apache Airflow', icon: 'fas fa-project-diagram' },
+      { value: 'dbt', icon: 'fas fa-code-branch' },
+      { value: 'Excel Avanzado', icon: 'fas fa-file-excel' },
+      { value: 'Jupyter Notebooks', icon: 'fas fa-book' },
+      { value: 'R', icon: 'fas fa-chart-area' }
     ],
+
     qa: [
       { value: 'Jest', icon: 'fas fa-vial' },
+      { value: 'Vitest', icon: 'fas fa-vial' },
       { value: 'Cypress', icon: 'fas fa-cogs' },
+      { value: 'Playwright', icon: 'fas fa-theater-masks' },
       { value: 'Selenium', icon: 'fas fa-robot' },
+      { value: 'Testing Library', icon: 'fas fa-flask' },
+      { value: 'Postman', icon: 'fas fa-paper-plane' },
+      { value: 'Insomnia', icon: 'fas fa-moon' },
+      { value: 'K6', icon: 'fas fa-tachometer-alt' },
       { value: 'Pruebas Manuales', icon: 'fas fa-clipboard-check' }
     ]
   };
@@ -266,7 +301,7 @@ const ProyectosRealesPage = () => {
               Proyectos Reales
             </h1>
             <p className="catec-hero-subtitle">
-              Accedé a proyectos reales para empresas. 
+              Accedé a proyectos reales para empresas.
               Trabaja en entornos profesionales que fortalecen tu experiencia.
             </p>
           </div>
@@ -617,8 +652,8 @@ const ProyectosRealesPage = () => {
             </div>
             <h3>¿Qué son los proyectos reales?</h3>
             <p className="info-desc">
-              Esta iniciativa vincula a estudiantes con empresas que necesitan soluciones tecnológicas. 
-              Los proyectos te permitirán <strong>adentrarte en el mercado laboral</strong> y serán 
+              Esta iniciativa vincula a estudiantes con empresas que necesitan soluciones tecnológicas.
+              Los proyectos te permitirán <strong>adentrarte en el mercado laboral</strong> y serán
               supervisados por docentes de la universidad.
             </p>
             <div className="info-items">
