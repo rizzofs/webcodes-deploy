@@ -8,6 +8,7 @@ import UserManagement from './UserManagement';
 import WorkshopManagement from './WorkshopManagement';
 import DashboardStats from './DashboardStats';
 import DiscordLive from './DiscordLive';
+import WhatsAppManagement from './WhatsAppManagement';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -70,7 +71,8 @@ const Dashboard = () => {
               {activeTab === 'news' && 'Noticias'}
               {activeTab === 'activities' && 'Actividades'}
               {activeTab === 'talks' && 'Charlas'}
-              {activeTab === 'users' && 'Usuarios'}
+               {activeTab === 'users' && 'Usuarios'}
+              {activeTab === 'community' && 'Comunidad LSI'}
               {activeTab === 'workshop' && 'Taller'}
               {activeTab === 'discord' && 'Discord'}
             </span>
@@ -103,7 +105,8 @@ const Dashboard = () => {
             { id: 'news', title: 'Noticias', icon: 'fas fa-newspaper', permission: 'manage_blog' },
             { id: 'activities', title: 'Actividades', icon: 'fas fa-calendar-alt', permission: 'write' },
             { id: 'talks', title: 'Charlas', icon: 'fas fa-video', permission: 'write' },
-            { id: 'users', title: 'Usuarios', icon: 'fas fa-users', permission: 'manage_users' },
+             { id: 'users', title: 'Usuarios', icon: 'fas fa-users', permission: 'manage_users' },
+            { id: 'community', title: 'Comunidad', icon: 'fab fa-whatsapp', permission: 'manage_users' },
             { id: 'workshop', title: 'Taller', icon: 'fas fa-laptop-code', permission: 'manage_users' },
             { id: 'discord', title: 'Discord', icon: 'fab fa-discord', permission: null }
           ].map((item) => {
@@ -129,7 +132,8 @@ const Dashboard = () => {
         {activeTab === 'news' && checkPermission('manage_blog') && <NewsManagement />}
         {activeTab === 'activities' && checkPermission('write') && <ActivitiesManagement />}
         {activeTab === 'talks' && checkPermission('write') && <TalksManagement />}
-        {activeTab === 'users' && checkPermission('manage_users') && <UserManagement />}
+         {activeTab === 'users' && checkPermission('manage_users') && <UserManagement />}
+        {activeTab === 'community' && checkPermission('manage_users') && <WhatsAppManagement />}
         {activeTab === 'workshop' && checkPermission('manage_users') && <WorkshopManagement />}
         {activeTab === 'discord' && <DiscordLive />}
       </div>

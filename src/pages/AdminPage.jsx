@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
+import WhatsAppManagement from '../components/WhatsAppManagement';
 
 const AdminPage = () => {
   const [numero, setNumero] = useState('');
@@ -169,6 +170,10 @@ const AdminPage = () => {
               </table>
             </div>
           )}
+        </div>
+
+        <div className="admin-section">
+          <WhatsAppManagement />
         </div>
 
         {/* Enlaces útiles */}

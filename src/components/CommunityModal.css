@@ -1,0 +1,128 @@
+.community-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.community-modal {
+  background: rgba(30, 30, 35, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  max-width: 500px;
+  width: 100%;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 100px rgba(112, 0, 255, 0.1);
+  animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #fff;
+}
+
+.community-modal h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #00d4ff 0%, #7000ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.rule-item {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rule-icon {
+  font-size: 1.2rem;
+  min-width: 30px;
+}
+
+.rule-text strong {
+  display: block;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.rule-text p {
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-accept {
+  background: linear-gradient(135deg, #7000ff 0%, #5500c2 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-accept:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(112, 0, 255, 0.3);
+}
+
+.btn-later {
+  background: transparent;
+  color: #888;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btn-later:hover {
+  color: #fff;
+}

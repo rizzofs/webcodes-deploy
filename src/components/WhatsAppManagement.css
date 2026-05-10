@@ -1,0 +1,200 @@
+.wa-mgmt-container {
+  padding: 10px 0;
+  color: #fff;
+}
+
+.wa-mgmt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.wa-mgmt-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.wa-mgmt-header p {
+  margin: 5px 0 0;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.refresh-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Tabs Styling */
+.wa-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  border-radius: 14px;
+  width: fit-content;
+}
+
+.wa-tab-item {
+  background: transparent;
+  border: none;
+  color: #888;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wa-tab-item.active {
+  background: rgba(112, 0, 255, 0.2);
+  color: #b070ff;
+  box-shadow: 0 4px 15px rgba(112, 0, 255, 0.1);
+}
+
+.tab-count {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.wa-tab-item.active .tab-count {
+  background: #7000ff;
+}
+
+/* Table Enhancements */
+.wa-mgmt-table-container {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.wa-mgmt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.wa-mgmt-table th {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+}
+
+.wa-mgmt-table td {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.student-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.student-meta {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.sede-badge {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.loading-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px;
+  gap: 15px;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: #7000ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.no-data {
+  padding: 80px 20px;
+  text-align: center;
+  color: #555;
+}
+
+.no-data-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  opacity: 0.5;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.btn-icon:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-view { color: #00d4ff; border-color: rgba(0, 212, 255, 0.2); }
+.btn-wa { color: #25D366; border-color: rgba(37, 211, 102, 0.2); }
+.btn-approve { color: #00ff88; border-color: rgba(0, 255, 136, 0.2); }
+.btn-reject { color: #ff4d4d; border-color: rgba(255, 77, 77, 0.2); }
+.btn-delete { color: #ff9900; border-color: rgba(255, 153, 0, 0.2); }

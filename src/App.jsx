@@ -30,6 +30,7 @@ import Dashboard from './components/Dashboard';
 import TestDashboard from './components/TestDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import ReloadPrompt from './components/ReloadPrompt';
+import CommunityModal from './components/CommunityModal';
 
 
 // Pages
@@ -44,6 +45,7 @@ import ColaborarPage from './pages/ColaborarPage';
 import ProyectosRealesPage from './pages/ProyectosRealesPage';
 import EncuestasPage from './pages/EncuestasPage';
 import CharlasPage from './pages/CharlasPage';
+import WhatsAppRegistration from './pages/WhatsAppRegistration';
 
 // Importar hook de Google Analytics
 import { useGoogleAnalytics } from './hooks/useGoogleAnalytics';
@@ -65,6 +67,7 @@ function AppContent() {
           <Logo />
           <ScrollIndicator />
           <MobileFormEnhancer />
+          {location.pathname === '/' && <CommunityModal />}
         </>
       )}
       
@@ -93,6 +96,7 @@ function AppContent() {
         <Route path="/proyectos-reales" element={<ProyectosRealesPage />} />
         <Route path="/encuestas" element={<EncuestasPage />} />
         <Route path="/charlas" element={<CharlasPage />} />
+        <Route path="/comunidad" element={<WhatsAppRegistration />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/taller" element={<WorkshopRegistration />} />
         <Route path="/login" element={<Login />} />
