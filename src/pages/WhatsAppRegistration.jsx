@@ -75,7 +75,11 @@ const WhatsAppRegistration = () => {
       setSubmitted(true);
     } catch (err) {
       console.error('Error:', err);
-      setError('Hubo un problema al enviar tu solicitud. Por favor intenta de nuevo.');
+      if (err.code === '23505') { // Código de error de Postgres para violación de unicidad
+        setError('Este número de legajo ya tiene una solicitud en curso. No es necesario anotarse dos veces.');
+      } else {
+        setError('Hubo un problema al enviar tu solicitud. Por favor intenta de nuevo.');
+      }
     } finally {
       setLoading(false);
     }
