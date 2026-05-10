@@ -107,25 +107,40 @@ const WhatsAppRegistration = () => {
 
       // Leer PDF para verificar contenido
       const pdfText = await extractPdfText(file);
-      const lowerText = pdfText.toLowerCase();
+      const lowerText = pdfText.toLowerCase().replace(/\s+/g, ' '); // Normalizar espacios
       
-      // Verificamos que tenga los elementos clave de un certificado real de la UNLu
-      const hasUniversity = lowerText.includes('universidad nacional de luján') || 
-                            lowerText.includes('universidad nacional de lujan');
+      // Verificamos que tenga los elementos clave (usamos fragmentos más cortos para mayor compatibilidad)
+      const hasUniversity = lowerText.includes('universidad nacional de lujan') || 
+                            lowerText.includes('universidad nacional de luján') ||
+                            lowerText.includes('unlu');
+                            
       const hasLegajoLabel = lowerText.includes('legajo');
-      const hasOperation = lowerText.includes('operación') || lowerText.includes('operacion');
+      
+      // Buscamos 'operaci' para evitar problemas con el tilde de 'operación'
+      const hasOperation = lowerText.includes('operaci');
+      
       const hasStatus = lowerText.includes('estudiante') || 
                         lowerText.includes('ingresante') || 
-                        lowerText.includes('regular');
+                        lowerText.includes('regular') ||
+                        lowerText.includes('alumno');
 
       const isAutomaticRejection = hasBlacklistedWord || isInvalidLegajo || !hasUniversity || !hasLegajoLabel || !hasOperation || !hasStatus;
       
+      // Debug: Guardamos un pedacito de lo que leyó para entender por qué falló
+      const textPreview = pdfText.substring(0, 200).replace(/[\r\n]/g, ' ');
+
       let rejectionReason = '';
-      if (hasBlacklistedWord) rejectionReason = 'Blacklist de palabras detectada.';
+      if (hasBlacklistedWord) rejectionReason = 'Blacklist detectada.';
       else if (isInvalidLegajo) rejectionReason = `Legajo fuera de rango (${formData.legajo}).`;
-      else if (!hasUniversity) rejectionReason = 'PDF no menciona a la Universidad Nacional de Luján.';
-      else if (!hasLegajoLabel || !hasOperation) rejectionReason = 'PDF no parece ser un certificado oficial (falta legajo u operación).';
-      else if (!hasStatus) rejectionReason = 'PDF no menciona estado de alumno o ingresante.';
+      else if (!hasUniversity) rejectionReason = 'No se detectó el nombre de la universidad.';
+      else if (!hasLegajoLabel) rejectionReason = 'No se encontró la palabra "Legajo".';
+      else if (!hasOperation) rejectionReason = 'No se encontró "Nº de operación".';
+      else if (!hasStatus) rejectionReason = 'No se encontró estado de alumno/ingresante.';
+
+      // Si fue rechazado, le sumamos el preview del texto para que el admin lo vea
+      if (isAutomaticRejection && rejectionReason) {
+        rejectionReason += ` | Texto detectado: ${textPreview}...`;
+      }
 
       // 2. Proceso de subida (Hacemos todo igual para que quede el registro)
       const sanitizePath = (str) => {
