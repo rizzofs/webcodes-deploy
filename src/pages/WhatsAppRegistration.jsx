@@ -110,8 +110,9 @@ const WhatsAppRegistration = () => {
       const lowerText = pdfText.toLowerCase().replace(/\s+/g, ' '); // Normalizar espacios
       
       // Verificamos que tenga los elementos clave (usamos fragmentos más cortos para mayor compatibilidad)
-      const hasUniversity = lowerText.includes('universidad nacional de lujan') || 
-                            lowerText.includes('universidad nacional de luján') ||
+      const hasUniversity = lowerText.includes('lujan') || 
+                            lowerText.includes('luján') ||
+                            lowerText.includes('universidad') ||
                             lowerText.includes('unlu');
                             
       const hasLegajoLabel = lowerText.includes('legajo');
