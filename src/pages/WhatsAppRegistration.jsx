@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+import * as pdfjsLib from 'pdfjs-dist';
 import './WhatsAppRegistration.css';
+
+// Configurar el worker de PDF.js
+pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const WhatsAppRegistration = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
+  const [isBurnMessage, setIsBurnMessage] = useState(false);
   const [file, setFile] = useState(null);
+  const [userIp, setUserIp] = useState('');
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -15,6 +21,14 @@ const WhatsAppRegistration = () => {
     legajo: '',
     sede: 'lujan'
   });
+
+  // Obtener IP al cargar
+  useEffect(() => {
+    fetch('https://api.ipify.org?format=json')
+      .then(res => res.json())
+      .then(data => setUserIp(data.ip))
+      .catch(err => console.error('Error obteniendo IP:', err));
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +46,27 @@ const WhatsAppRegistration = () => {
     }
   };
 
+  const extractPdfText = async (file) => {
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      let fullText = '';
+      
+      // Solo leemos las primeras 2 páginas para no tardar tanto
+      const pagesToRead = Math.min(pdf.numPages, 2);
+      for (let i = 1; i <= pagesToRead; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items.map(item => item.str).join(' ');
+        fullText += pageText + ' ';
+      }
+      return fullText;
+    } catch (err) {
+      console.error('Error extrayendo texto del PDF:', err);
+      return '';
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -41,14 +76,62 @@ const WhatsAppRegistration = () => {
 
     setLoading(true);
     setError(null);
+    setIsBurnMessage(false);
 
     try {
-      // Función para limpiar tildes del nombre del archivo
+      // 0. VERIFICAR BLOQUEO POR IP (Máximo 3 intentos rechazados)
+      if (userIp) {
+        const { count, error: countError } = await supabase
+          .from('whatsapp_requests')
+          .select('*', { count: 'exact', head: true })
+          .eq('ip_address', userIp)
+          .eq('estado', 'rechazado');
+
+        if (!countError && count >= 3) {
+          setIsBurnMessage(true);
+          setError(`IP BLOQUEADA. Se han detectado demasiados intentos fallidos desde esta conexión (${userIp}). Contactá a un administrador del Centro de Estudiantes.`);
+          setLoading(false);
+          return;
+        }
+      }
+
+      // 1. VALIDACIONES ANTI-PELOTUDOS
+      const blacklist = ['test', 'prueba', 'asdf', 'admin', 'usuario', 'demo'];
+      const fieldsToCheck = [formData.nombre, formData.apellido, formData.email];
+      const hasBlacklistedWord = fieldsToCheck.some(field => 
+        blacklist.some(word => field.toLowerCase().includes(word))
+      );
+
+      const legajoNum = parseInt(formData.legajo);
+      const isInvalidLegajo = legajoNum < 111111 || legajoNum > 300000;
+
+      // Leer PDF para verificar contenido
+      const pdfText = await extractPdfText(file);
+      const lowerText = pdfText.toLowerCase();
+      
+      // Verificamos que tenga los elementos clave de un certificado real de la UNLu
+      const hasUniversity = lowerText.includes('universidad nacional de luján') || 
+                            lowerText.includes('universidad nacional de lujan');
+      const hasLegajoLabel = lowerText.includes('legajo');
+      const hasOperation = lowerText.includes('operación') || lowerText.includes('operacion');
+      const hasStatus = lowerText.includes('estudiante') || 
+                        lowerText.includes('ingresante') || 
+                        lowerText.includes('regular');
+
+      const isAutomaticRejection = hasBlacklistedWord || isInvalidLegajo || !hasUniversity || !hasLegajoLabel || !hasOperation || !hasStatus;
+      
+      let rejectionReason = '';
+      if (hasBlacklistedWord) rejectionReason = 'Blacklist de palabras detectada.';
+      else if (isInvalidLegajo) rejectionReason = `Legajo fuera de rango (${formData.legajo}).`;
+      else if (!hasUniversity) rejectionReason = 'PDF no menciona a la Universidad Nacional de Luján.';
+      else if (!hasLegajoLabel || !hasOperation) rejectionReason = 'PDF no parece ser un certificado oficial (falta legajo u operación).';
+      else if (!hasStatus) rejectionReason = 'PDF no menciona estado de alumno o ingresante.';
+
+      // 2. Proceso de subida (Hacemos todo igual para que quede el registro)
       const sanitizePath = (str) => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "_");
       };
 
-      // 1. Subir el archivo al Storage
       const fileExt = file.name.split('.').pop();
       const cleanNombre = sanitizePath(formData.nombre);
       const cleanApellido = sanitizePath(formData.apellido);
@@ -61,7 +144,6 @@ const WhatsAppRegistration = () => {
 
       if (uploadError) throw uploadError;
 
-      // 2. Guardar datos en la tabla
       const { error: insertError } = await supabase
         .from('whatsapp_requests')
         .insert([
@@ -73,16 +155,24 @@ const WhatsAppRegistration = () => {
             legajo: formData.legajo,
             sede: formData.sede,
             certificado_url: filePath,
-            estado: 'pendiente'
+            estado: isAutomaticRejection ? 'rechazado' : 'pendiente',
+            ip_address: userIp,
+            observaciones: rejectionReason
           }
         ]);
 
       if (insertError) throw insertError;
 
-      setSubmitted(true);
+      if (isAutomaticRejection) {
+        setIsBurnMessage(true);
+        setError(`Buen intento. Te olvidaste que somos de sistemas, gracias por dejarnos tu IP: ${userIp || 'detectada'}. Si crees que esto es un error, contactanos.`);
+        setLoading(false);
+      } else {
+        setSubmitted(true);
+      }
     } catch (err) {
       console.error('Error:', err);
-      if (err.code === '23505') { // Código de error de Postgres para violación de unicidad
+      if (err.code === '23505') {
         setError('Este número de legajo ya tiene una solicitud en curso. No es necesario anotarse dos veces.');
       } else {
         setError('Hubo un problema al enviar tu solicitud. Por favor intenta de nuevo.');
@@ -134,8 +224,6 @@ const WhatsAppRegistration = () => {
                 type="text" 
                 name="nombre" 
                 required 
-                pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+"
-                title="Solo se permiten letras"
                 placeholder="Tu nombre"
                 value={formData.nombre}
                 onChange={(e) => {
@@ -150,8 +238,6 @@ const WhatsAppRegistration = () => {
                 type="text" 
                 name="apellido" 
                 required 
-                pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+"
-                title="Solo se permiten letras"
                 placeholder="Tu apellido"
                 value={formData.apellido}
                 onChange={(e) => {
@@ -168,8 +254,6 @@ const WhatsAppRegistration = () => {
               type="email" 
               name="email" 
               required 
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              title="Por favor, ingresa un correo electrónico válido (ej: nombre@dominio.com)"
               placeholder="ejemplo@mail.com"
               value={formData.email}
               onChange={(e) => {
@@ -185,8 +269,6 @@ const WhatsAppRegistration = () => {
                 type="tel" 
                 name="whatsapp" 
                 required 
-                pattern="[0-9]+"
-                title="Solo se permiten números"
                 placeholder="5491122334455"
                 value={formData.whatsapp}
                 onChange={(e) => {
@@ -202,12 +284,9 @@ const WhatsAppRegistration = () => {
                 name="legajo" 
                 required 
                 maxLength="6"
-                pattern="[0-9]{6}"
-                title="El legajo debe tener exactamente 6 números"
                 placeholder="Ej: 123456"
                 value={formData.legajo}
                 onChange={(e) => {
-                  // Solo permitir números
                   const value = e.target.value.replace(/\D/g, '');
                   setFormData(prev => ({ ...prev, legajo: value }));
                 }}
@@ -240,13 +319,18 @@ const WhatsAppRegistration = () => {
             </div>
           </div>
 
-          {error && <p style={{color: '#ff4d4d', textAlign: 'center', fontSize: '0.9rem'}}>{error}</p>}
+          {error && (
+            <div className={`error-message ${isBurnMessage ? 'burn-message' : ''}`}>
+              {isBurnMessage && <span className="burn-icon">🔥</span>}
+              <p>{error}</p>
+            </div>
+          )}
 
           <button className="submit-button" type="submit" disabled={loading}>
             {loading ? (
               <>
                 <span className="loading-spinner"></span>
-                Enviando...
+                Verificando...
               </>
             ) : (
               'Enviar Solicitud'
@@ -259,3 +343,4 @@ const WhatsAppRegistration = () => {
 };
 
 export default WhatsAppRegistration;
+

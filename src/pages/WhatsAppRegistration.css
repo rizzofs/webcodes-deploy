@@ -216,3 +216,37 @@
   color: #a0a0a0;
   line-height: 1.7;
 }
+
+.error-message {
+  background: rgba(255, 77, 77, 0.1);
+  border: 1px solid rgba(255, 77, 77, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  color: #ff4d4d;
+  font-size: 0.95rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.burn-message {
+  background: rgba(255, 120, 0, 0.15);
+  border: 1px solid rgba(255, 120, 0, 0.4);
+  color: #ff8c00;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.burn-icon {
+  font-size: 1.5rem;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}

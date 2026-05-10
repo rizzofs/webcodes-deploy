@@ -141,7 +141,8 @@ const WhatsAppManagement = () => {
                   <td>
                     <div className="student-info">
                       <span className="student-name">{req.nombre} {req.apellido}</span>
-                      <span className="student-meta">LEG: {req.legajo} | WSP: {req.whatsapp}</span>
+                      <span className="student-meta">LEG: {req.legajo} | WSP: {req.whatsapp} | IP: {req.ip_address || 'N/A'}</span>
+                      {req.observaciones && <span className="student-obs" style={{color: '#ff8c00', fontSize: '0.8rem', display: 'block', marginTop: '4px'}}>⚠️ {req.observaciones}</span>}
                     </div>
                   </td>
                   <td><span className="sede-badge">{req.sede}</span></td>
