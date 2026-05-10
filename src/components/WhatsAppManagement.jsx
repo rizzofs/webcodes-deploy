@@ -216,7 +216,7 @@ const WhatsAppManagement = () => {
         <div className="modal-overlay" onClick={() => setSelectedPdf(null)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h4>Certificado: {requests.find(r => r.id === requests.find(x => x.id))?.nombre}</h4>
+              <h4>Visor de Certificado</h4>
               <button className="btn-close" onClick={() => setSelectedPdf(null)}>&times;</button>
             </div>
             <iframe 
