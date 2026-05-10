@@ -43,12 +43,19 @@ const WhatsAppRegistration = () => {
     setError(null);
 
     try {
+      // Función para limpiar tildes del nombre del archivo
+      const sanitizePath = (str) => {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "_");
+      };
+
       // 1. Subir el archivo al Storage
       const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}_${formData.apellido}_${formData.nombre}.${fileExt}`;
+      const cleanNombre = sanitizePath(formData.nombre);
+      const cleanApellido = sanitizePath(formData.apellido);
+      const fileName = `${Date.now()}_${cleanApellido}_${cleanNombre}.${fileExt}`;
       const filePath = `solicitudes/${fileName}`;
 
-      const { error: uploadError, data: uploadData } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('certificados')
         .upload(filePath, file);
 
