@@ -3,8 +3,8 @@ import { supabase } from '../supabaseClient';
 import * as pdfjsLib from 'pdfjs-dist';
 import './WhatsAppRegistration.css';
 
-// Configurar el worker de PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+// Configurar el worker de PDF.js de forma más robusta
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
 
 const WhatsAppRegistration = () => {
   const [loading, setLoading] = useState(false);
