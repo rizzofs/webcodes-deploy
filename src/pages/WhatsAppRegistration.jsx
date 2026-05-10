@@ -107,43 +107,40 @@ const WhatsAppRegistration = () => {
 
       // Leer PDF para verificar contenido
       const pdfText = await extractPdfText(file);
-      const lowerText = pdfText.toLowerCase().replace(/\s+/g, ' '); // Normalizar espacios
+      const lowerText = pdfText.toLowerCase().trim();
       
-      // Verificamos que tenga los elementos clave (usamos fragmentos más cortos para mayor compatibilidad)
-      const hasUniversity = lowerText.includes('lujan') || 
-                            lowerText.includes('luján') ||
-                            lowerText.includes('universidad') ||
-                            lowerText.includes('unlu');
-                            
-      const hasLegajoLabel = lowerText.includes('legajo');
-      
-      // Buscamos 'operaci' para evitar problemas con el tilde de 'operación'
-      const hasOperation = lowerText.includes('operaci');
-      
-      const hasStatus = lowerText.includes('estudiante') || 
-                        lowerText.includes('ingresante') || 
-                        lowerText.includes('regular') ||
-                        lowerText.includes('alumno');
+      // Si no hay texto, puede ser un PDF "imagen". No lo rebotamos, lo mandamos a revisión manual.
+      const isUnreadable = lowerText.length < 10;
 
-      const isAutomaticRejection = hasBlacklistedWord || isInvalidLegajo || !hasUniversity || !hasLegajoLabel || !hasOperation || !hasStatus;
-      
-      // Debug: Guardamos un pedacito de lo que leyó para entender por qué falló
-      const textPreview = pdfText.substring(0, 200).replace(/[\r\n]/g, ' ');
+      // Filtros mínimos (Basta con que tenga UNA de estas palabras)
+      const hasKeywords = lowerText.includes('lujan') || 
+                          lowerText.includes('luján') ||
+                          lowerText.includes('universidad') ||
+                          lowerText.includes('legajo') ||
+                          lowerText.includes('estudiante') ||
+                          lowerText.includes('ingresante');
 
-      let rejectionReason = '';
-      if (hasBlacklistedWord) rejectionReason = 'Blacklist detectada.';
-      else if (isInvalidLegajo) rejectionReason = `Legajo fuera de rango (${formData.legajo}).`;
-      else if (!hasUniversity) rejectionReason = 'No se detectó el nombre de la universidad.';
-      else if (!hasLegajoLabel) rejectionReason = 'No se encontró la palabra "Legajo".';
-      else if (!hasOperation) rejectionReason = 'No se encontró "Nº de operación".';
-      else if (!hasStatus) rejectionReason = 'No se encontró estado de alumno/ingresante.';
-
-      // Si fue rechazado, le sumamos el preview del texto para que el admin lo vea
-      if (isAutomaticRejection && rejectionReason) {
-        rejectionReason += ` | Texto detectado: ${textPreview}...`;
+      // 1. RECHAZO DURO (Burn Message): Solo por Legajo o Blacklist
+      if (hasBlacklistedWord || isInvalidLegajo) {
+        setIsBurnMessage(true);
+        setError(`Buen intento. Te olvidaste que somos de sistemas, gracias por dejarnos tu IP: ${userIp || 'detectada'}.`);
+        setLoading(false);
+        return;
       }
 
-      // 2. Proceso de subida (Hacemos todo igual para que quede el registro)
+      // 2. RECHAZO BLANDO O REVISIÓN MANUAL
+      let status = 'pendiente';
+      let rejectionReason = '';
+
+      if (isUnreadable) {
+        rejectionReason = 'PDF ilegible (posible imagen). Requiere revisión manual.';
+      } else if (!hasKeywords) {
+        // Tiene texto pero no dice nada de Luján/Legajo -> Sospechoso, lo marcamos como rechazado
+        status = 'rechazado';
+        rejectionReason = 'PDF con texto pero sin palabras clave académicas.';
+      }
+
+      // 3. Proceso de subida
       const sanitizePath = (str) => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "_");
       };
@@ -160,6 +157,7 @@ const WhatsAppRegistration = () => {
 
       if (uploadError) throw uploadError;
 
+      // 4. Guardar en la DB
       const { error: insertError } = await supabase
         .from('whatsapp_requests')
         .insert([
@@ -171,7 +169,7 @@ const WhatsAppRegistration = () => {
             legajo: formData.legajo,
             sede: formData.sede,
             certificado_url: filePath,
-            estado: isAutomaticRejection ? 'rechazado' : 'pendiente',
+            estado: status,
             ip_address: userIp,
             observaciones: rejectionReason
           }
@@ -179,9 +177,10 @@ const WhatsAppRegistration = () => {
 
       if (insertError) throw insertError;
 
-      if (isAutomaticRejection) {
-        setIsBurnMessage(true);
-        setError(`Buen intento. Te olvidaste que somos de sistemas, gracias por dejarnos tu IP: ${userIp || 'detectada'}. Si crees que esto es un error, contactanos.`);
+      // 5. Respuesta al usuario
+      if (status === 'rechazado') {
+        // Si el texto es basura pero no es blacklist, le mostramos un error común, no el de Sistemas
+        setError('El certificado no parece ser válido. Si crees que es un error, contactanos.');
         setLoading(false);
       } else {
         setSubmitted(true);
