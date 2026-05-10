@@ -216,14 +216,24 @@ const WhatsAppManagement = () => {
         <div className="modal-overlay" onClick={() => setSelectedPdf(null)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h4>Visor de Certificado</h4>
-              <button className="btn-close" onClick={() => setSelectedPdf(null)}>&times;</button>
+              <div className="modal-title-area">
+                <h4>Visor de Certificado</h4>
+                <small>Verifica los datos del alumno antes de aprobar</small>
+              </div>
+              <div className="modal-header-actions">
+                <a href={selectedPdf} target="_blank" rel="noopener noreferrer" className="btn-icon" title="Abrir en pestaña nueva">
+                  ↗️
+                </a>
+                <button className="btn-close" onClick={() => setSelectedPdf(null)}>&times;</button>
+              </div>
             </div>
-            <iframe 
-              src={selectedPdf} 
-              className="pdf-viewer" 
-              title="Certificado PDF"
-            ></iframe>
+            <div className="pdf-container">
+              <iframe 
+                src={`${selectedPdf}#view=FitH`}
+                className="pdf-viewer" 
+                title="Certificado PDF"
+              ></iframe>
+            </div>
           </div>
         </div>
       )}

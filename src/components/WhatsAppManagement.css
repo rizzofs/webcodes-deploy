@@ -198,3 +198,77 @@
 .btn-approve { color: #00ff88; border-color: rgba(0, 255, 136, 0.2); }
 .btn-reject { color: #ff4d4d; border-color: rgba(255, 77, 77, 0.2); }
 .btn-delete { color: #ff9900; border-color: rgba(255, 153, 0, 0.2); }
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  width: 100%;
+  max-width: 1000px;
+  height: 90vh;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header {
+  padding: 20px 30px;
+  background: #252525;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title-area h4 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.modal-title-area small {
+  color: #888;
+}
+
+.modal-header-actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.btn-close:hover {
+  color: #ff4d4d;
+}
+
+.pdf-container {
+  flex: 1;
+  background: #333;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
